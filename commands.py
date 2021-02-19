@@ -1,5 +1,8 @@
 import cmd
+import game
 
 class commands(cmd.Cmd):
     def __init__(self):
-        print("lolxd")
+        """Init the object."""
+        super().__init__()
+        self.game = game.Game()
