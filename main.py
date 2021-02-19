@@ -5,3 +5,4 @@ import commands
 
 if __name__ == "__main__":
     print(__doc__)
+    commands.Commands().cmdloop()
