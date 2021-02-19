@@ -1,7 +1,8 @@
-#Pig Game
-
-[Wikipedia Article about Pig Game](https://en.wikipedia.org/wiki/Pig(dice_game))
+# Pig Game
 
 ## Commands
+```
+cheat           gives you 100 points
+roll            rolls the dice
 
-**cheat** gives you 100 points
+```
