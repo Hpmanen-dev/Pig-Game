@@ -24,4 +24,5 @@ class Commands(cmd.Cmd):
         print(msg)
     
     def do_start(self, _):
+        """Start the game."""
         self.game.start()
