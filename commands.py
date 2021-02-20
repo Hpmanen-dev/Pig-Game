@@ -49,7 +49,16 @@ class Commands(cmd.Cmd):
         self.do_hold(_)
     
     def do_cheat(self, _):
-        """Cheat for testing purposes"""
+        """Immediately wins the game."""
         print(f"{self.game.currentPlayer.get_player_name} has gained 100 points")
         self.game.currentPlayer.add_Score(100)
         self.game.Check_winner_condition()
+    
+    def do_exit(self, _):
+        """Exits the game."""
+        print("See ya later!")
+        exit()
+    
+    def do_restart(self, _):
+        """Restarts the game."""
+        self.do_start(_)

@@ -4,6 +4,7 @@ import player
 import computer
 import dice
 import random
+from time import sleep
 
 
 class Game():
@@ -33,7 +34,7 @@ class Game():
     def singleplayer(self):
         """Initiate a singleplayer game."""
         self.Player1 = player.Player(input("Enter your name: "))
-        self.Computer = computer.Computer()
+        self.Computer = computer.Computer(1)
         print(f"{self.Player1.get_name()} starts.")
         self.currentPlayer = self.Player1
         self.otherPlayer = self.Computer
@@ -82,6 +83,9 @@ class Game():
                 " To start a new game type 'start' or type 'exit' to exit.")
             print(msg)
             prev_player = None
+        if self.currentPlayer == self.Computer:
+            sleep(1)
+            self.computer_Logic()
     
     def Check_winner_condition(self):
         """Check if the current player has 100 or more points."""
@@ -92,3 +96,15 @@ class Game():
             return True
         else:
             return False
+    
+    def computer_Logic(self):
+        rolls = 0
+        intelligence = self.Computer.get_intelligence()
+        if rolls == 0:
+            self.Player_turn("roll")
+        else:
+            decision = random.randint(intelligence, 10)
+            if decision != 10:
+                self.Player_turn("roll")
+            else:
+                self.Player_turn("hold")

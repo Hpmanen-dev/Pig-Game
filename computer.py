@@ -1,15 +1,21 @@
 """This is the Computer Player."""
 
+import game
 import random
 
 class Computer():
     """This is the Computer Class."""
     Score = 0
     Name = "Computer Player"
+    the_game = None
+    intelligence = 0
 
-    def __init__(self):
+    def __init__(self, intelligence):
         """Initiate Computer."""
+        random.seed()
+        self.the_game = game.Game()
         self.Score = 0
+        self.intelligence = intelligence
 
     def get_Score(self):
         """Get Score."""
@@ -22,3 +28,9 @@ class Computer():
     def add_Score(self, Score):
         """Add to Computer's score."""
         self.Score += Score
+
+    def get_intelligence(self):
+        return self.intelligence
+    
+    def set_intelligence(self, intelligence):
+        self.intelligence = intelligence
