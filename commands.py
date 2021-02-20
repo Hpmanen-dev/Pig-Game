@@ -33,13 +33,22 @@ class Commands(cmd.Cmd):
         self.game.start()
     
     def do_roll(self, _):
+        "Roll the dice."
         self.game.Player_turn("roll")
     
     def do_r(self, _):
+        "Roll the dice."
         self.do_roll(_)
     
     def do_hold(self, _):
+        "Hold the points."
         self.game.Player_turn("hold")
     
     def do_h(self, _):
+        "Hold the points."
         self.do_hold(_)
+    
+    def do_cheat(self, _):
+        """Cheat for testing purposes"""
+        self.game.currentPlayer.add_Score(100)
+        self.game.Check_winner_condition()

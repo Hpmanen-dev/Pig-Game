@@ -25,9 +25,9 @@ class Game():
         """Ask user if he/she wants to play single or multiplayer."""
         print('Do you want to play "singleplayer" or "multiplayer"?')
         decision = input()
-        if decision in "singleplayer" "s":
+        if decision in "singleplayer" "s" "single":
             self.singleplayer()
-        elif decision in "multiplayer" "m":
+        elif decision in "multiplayer" "m" "multi":
             self.multiplayer()
     
     def singleplayer(self):
@@ -54,6 +54,7 @@ class Game():
 
     def Player_turn(self, decision):
         """Player turns."""
+        check = False
         prev_player = self.currentPlayer
         if decision in "roll":
             roll = self.Die.roll()
@@ -69,7 +70,24 @@ class Game():
             self.currentPlayer.add_Score(self.dice_score)
             print(f"{self.currentPlayer.get_player_name()} received {self.dice_score} points")
             print(f"{self.currentPlayer.get_player_name()} now have {self.currentPlayer.get_Score()} points in total!")
+            check = self.Check_winner_condition()
             self.currentPlayer = self.otherPlayer
             self.otherPlayer = prev_player
             self.dice_score = 0
-        print(f"{self.currentPlayer.get_player_name()}'s turn")
+        if check == False:
+            print(f"{self.currentPlayer.get_player_name()}'s turn")
+        else:
+            msg = (f"The game is over {prev_player.get_player_name()} won!"
+                " To start a new game type 'start' or type 'exit' to exit.")
+            print(msg)
+            prev_player = None
+    
+    def Check_winner_condition(self):
+        """Check if the current player has 100 or more points."""
+        if self.currentPlayer.get_Score() >= 100:
+            print(f"Congratulations {self.currentPlayer.get_player_name()}, You won!")
+            self.currentPlayer = None
+            self.otherPlayer = None
+            return True
+        else:
+            return False
