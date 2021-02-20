@@ -1,4 +1,4 @@
-# Pig Game
+# Pig Dice Game
 
 ## How the game works
 Each turn, a player repeatedly rolls a die until the player decides to hold or rolls a 1.
@@ -8,11 +8,13 @@ The one to get to 100 points or more first is the winner.
 
 ## Commands
 ```
-help / ?            Shows all the commands
-start               Starts the game
-rules               Shows all the rules of the game
-exit                Exit the game
-cheat               Gives you 100 points
+help / ?                Show all the commands
+rules                   Show all the rules of the game
+start                   Start the game
+roll                    Roll the dice
+hold                    Hold the points
+exit                    Exit the game
+cheat                   Gives you 100 points
 ```
 
 ## How to use
