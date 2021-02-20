@@ -5,6 +5,8 @@ import computer
 import dice
 import random
 from time import sleep
+import subprocess
+import platform
 
 
 class Game():

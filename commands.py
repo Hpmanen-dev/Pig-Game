@@ -2,7 +2,6 @@
 
 import cmd
 import game
-import player
 
 
 class Commands(cmd.Cmd):

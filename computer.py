@@ -30,7 +30,9 @@ class Computer():
         self.Score += Score
 
     def get_intelligence(self):
+        """Get intelligence."""
         return self.intelligence
     
     def set_intelligence(self, intelligence):
+        """Change intelligence"""
         self.intelligence = intelligence
