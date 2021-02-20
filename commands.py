@@ -31,3 +31,15 @@ class Commands(cmd.Cmd):
     def do_start(self, _):
         """Start the game."""
         self.game.start()
+    
+    def do_roll(self, _):
+        self.game.Player_turn("roll")
+    
+    def do_r(self, _):
+        self.do_roll(_)
+    
+    def do_hold(self, _):
+        self.game.Player_turn("hold")
+    
+    def do_h(self, _):
+        self.do_hold(_)
