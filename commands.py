@@ -1,16 +1,21 @@
+"""Commands used in the game."""
+
 import cmd
 import game
 import player
 
+
 class Commands(cmd.Cmd):
     """This is the commands class, which includes all the commands."""
+
     prompt = "(Game)"
     intro = 'Please type ? or help for a list of all the commands.'
+
     def __init__(self):
         """Init the object."""
         super().__init__()
         self.game = game.Game()
-    
+
     def do_rules(self, _):
         """Description of how the game works."""
         msg = (
@@ -22,7 +27,7 @@ class Commands(cmd.Cmd):
             " and his/her turn will end letting the other player roll."
         )
         print(msg)
-    
+
     def do_start(self, _):
         """Start the game."""
         self.game.start()

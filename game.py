@@ -1,30 +1,34 @@
-"""This is the Pig Game."""
+"""This is the Pig Dice Game."""
 
 import player
 import computer
 import dice
 import random
 
+
 class Game():
-    Dice_score = 0
+    """Game class."""
+
     Player1 = None
     Player2 = None
     Computer = None
     currentPlayer = None
     otherPlayer = None
     win_condition = 100
+    dice_score = 0
 
     def __init__(self):
         self.Die = dice.Dice()
 
     def start(self):
         """Ask user if he/she wants to play single or multiplayer."""
-        print("Do you want to play single or multiplayer?")
-        decision = input()
-        if decision == "singleplayer":
-            self.singleplayer()
-        elif decision == "multiplayer":
-            self.multiplayer()
+        while True:
+            print('Do you want to play "singleplayer" or "multiplayer"?')
+            decision = input()
+            if decision in "singleplayer" "s":
+                self.singleplayer()
+            elif decision in "multiplayer" "m":
+                self.multiplayer()
     
     def singleplayer(self):
         """Start a singleplayer game."""
@@ -56,26 +60,27 @@ class Game():
             self.currentPlayer = self.otherPlayer
             self.otherPlayer = prev_player
             self.Player_turn()
-        
-    
+        print(f"{self.currentPlayer.get_player_name()} won the game!")
+
     def Player_turn(self):
+        """Player turns."""
         turn = True
         while turn == True:
             print(f"{self.currentPlayer.get_player_name()}'s turn")
             print("Do you want to roll or hold?")
             decision = input()
-            if decision == "roll":
+            if decision in "roll" "r":
                 roll = self.Die.roll()
                 print(f"{self.currentPlayer.get_player_name()} rolled a {roll}")
                 if roll != 1:
-                    self.Dice_score += roll
+                    self.dice_score += roll
                 else:
                     print(f"{self.currentPlayer.get_player_name()} got 0 points this round")
-                    self.Dice_score = 0
+                    self.dice_score = 0
                     turn = False
-            elif decision == "hold":
-                self.currentPlayer.add_Score(self.Dice_score)
-                print(f"{self.currentPlayer.get_player_name()} received {self.Dice_score} points")
+            elif decision in "hold" "h":
+                self.currentPlayer.add_Score(self.dice_score)
+                print(f"{self.currentPlayer.get_player_name()} received {self.dice_score} points")
                 print(f"{self.currentPlayer.get_player_name()} now have {self.currentPlayer.get_Score()} points in total!")
-                self.Dice_score = 0
+                self.dice_score = 0
                 turn = False

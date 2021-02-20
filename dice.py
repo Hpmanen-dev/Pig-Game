@@ -1,3 +1,4 @@
+"""The die of the game :^)."""
 import random
 
 

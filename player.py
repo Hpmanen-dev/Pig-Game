@@ -1,4 +1,6 @@
 """This is the player."""
+
+
 class Player:
     """This is a player class."""
 
@@ -10,7 +12,7 @@ class Player:
     def get_player_name(self):
         """Get player's name."""
         return self.Name
-    
+
     def get_Score(self):
         """Get player's score."""
         return self.Score
