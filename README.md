@@ -8,8 +8,11 @@ The one to get to 100 points or more first is the winner.
 
 ## Commands
 ```
-cheat           gives you 100 points
-roll            rolls the dice
+help / ?            Shows all the commands
+start               Starts the game
+rules               Shows all the rules of the game
+exit                Exit the game
+cheat               Gives you 100 points
 ```
 
 ## How to use
