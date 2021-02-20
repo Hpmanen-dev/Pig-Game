@@ -17,6 +17,7 @@ class Game():
     otherPlayer = None
     win_condition = 100
     dice_score = 0
+    computer_rolls = 0
 
     def __init__(self):
         """Initiate the game."""
@@ -76,6 +77,7 @@ class Game():
             self.currentPlayer = self.otherPlayer
             self.otherPlayer = prev_player
             self.dice_score = 0
+            self.computer_rolls = 0
         if check == False:
             print(f"{self.currentPlayer.get_name()}'s turn")
         else:
@@ -98,13 +100,15 @@ class Game():
             return False
     
     def computer_Logic(self):
-        rolls = 0
         intelligence = self.Computer.get_intelligence()
-        if rolls == 0:
+        if self.computer_rolls == 0:
+            self.computer_rolls += 1
             self.Player_turn("roll")
         else:
-            decision = random.randint(intelligence, 10)
-            if decision != 10:
+            decision = random.randint(intelligence, 5)
+            if decision != 5:
+                self.computer_rolls += 1
                 self.Player_turn("roll")
             else:
                 self.Player_turn("hold")
+                self.computer_rolls = 0
