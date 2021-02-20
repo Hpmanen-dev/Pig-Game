@@ -50,5 +50,6 @@ class Commands(cmd.Cmd):
     
     def do_cheat(self, _):
         """Cheat for testing purposes"""
+        print(f"{self.game.currentPlayer.get_player_name} has gained 100 points")
         self.game.currentPlayer.add_Score(100)
         self.game.Check_winner_condition()

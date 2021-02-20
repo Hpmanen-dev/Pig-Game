@@ -9,7 +9,7 @@ class Player:
         self.Name = Name
         self.Score = 0
 
-    def get_player_name(self):
+    def get_name(self):
         """Get player's name."""
         return self.Name
 

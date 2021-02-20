@@ -34,7 +34,7 @@ class Game():
         """Initiate a singleplayer game."""
         self.Player1 = player.Player(input("Enter your name: "))
         self.Computer = computer.Computer()
-        print(f"{self.Player1.get_player_name()} starts.")
+        print(f"{self.Player1.get_name()} starts.")
         self.currentPlayer = self.Player1
         self.otherPlayer = self.Computer
 
@@ -49,7 +49,7 @@ class Game():
         else:
             self.currentPlayer = self.Player2
             self.otherPlayer = self.Player1
-        print(f"{self.currentPlayer.get_player_name()} starts.")
+        print(f"{self.currentPlayer.get_name()} starts.")
         print("Do you want to roll or hold?")
 
     def Player_turn(self, decision):
@@ -58,26 +58,27 @@ class Game():
         prev_player = self.currentPlayer
         if decision in "roll":
             roll = self.Die.roll()
-            print(f"{self.currentPlayer.get_player_name()} rolled a {roll}")
+            print(f"{self.currentPlayer.get_name()} rolled a {roll}")
             if roll != 1:
                 self.dice_score += roll
             else:
-                print(f"{self.currentPlayer.get_player_name()} got 0 points this round")
+                print(f"{self.currentPlayer.get_name()} got 0 points this round")
                 self.dice_score = 0
                 self.currentPlayer = self.otherPlayer
                 self.otherPlayer = prev_player
         elif decision in "hold":
             self.currentPlayer.add_Score(self.dice_score)
-            print(f"{self.currentPlayer.get_player_name()} received {self.dice_score} points")
-            print(f"{self.currentPlayer.get_player_name()} now have {self.currentPlayer.get_Score()} points in total!")
+            msg = (f"{self.currentPlayer.get_name()} received {self.dice_score} points\n"
+            f"{self.currentPlayer.get_name()} now have {self.currentPlayer.get_Score()} points in total!")
+            print(msg)
             check = self.Check_winner_condition()
             self.currentPlayer = self.otherPlayer
             self.otherPlayer = prev_player
             self.dice_score = 0
         if check == False:
-            print(f"{self.currentPlayer.get_player_name()}'s turn")
+            print(f"{self.currentPlayer.get_name()}'s turn")
         else:
-            msg = (f"The game is over {prev_player.get_player_name()} won!"
+            msg = (f"The game is over {prev_player.get_name()} won!"
                 " To start a new game type 'start' or type 'exit' to exit.")
             print(msg)
             prev_player = None
@@ -85,7 +86,7 @@ class Game():
     def Check_winner_condition(self):
         """Check if the current player has 100 or more points."""
         if self.currentPlayer.get_Score() >= 100:
-            print(f"Congratulations {self.currentPlayer.get_player_name()}, You won!")
+            print(f"Congratulations {self.currentPlayer.get_name()}, You won!")
             self.currentPlayer = None
             self.otherPlayer = None
             return True

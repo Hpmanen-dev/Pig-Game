@@ -8,7 +8,7 @@ class Dice():
     faces = 6
 
     def __init__(self):
-        """Initializes a dice with 0 rolls made."""
+        """Initiate a dice"""
         random.seed()
 
     def roll(self):
