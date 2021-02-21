@@ -13,6 +13,8 @@ class Computer():
         self.Score = 0
         self.intelligence = intelligence
         self.Name = "Computer player"
+        self.greediness = 7
+        self.rolls = 0
 
     def get_Score(self):
         """Get Score."""
@@ -31,5 +33,19 @@ class Computer():
         return self.intelligence
     
     def set_intelligence(self, intelligence):
-        """Change intelligence"""
+        """Change intelligence."""
         self.intelligence = intelligence
+    
+    def get_greediness(self):
+        """Get the greediness of the computer."""
+        return self.greediness
+    
+    def set_greediness(self, change):
+        """Change greediness."""
+        self.greediness = change
+    
+    def get_rolls(self):
+        return self.rolls
+
+    def set_rolls(self, change):
+        self.rolls = change

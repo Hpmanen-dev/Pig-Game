@@ -17,9 +17,9 @@ class Game():
     Computer = None
     currentPlayer = None
     otherPlayer = None
+    Winner = None
     win_condition = 100
     dice_score = 0
-    computer_rolls = 0
 
     def __init__(self):
         """Initiate the game."""
@@ -64,7 +64,6 @@ class Game():
     def Player_turn(self, decision):
         """Player turns."""
         check = False
-        prev_player = self.currentPlayer
         if decision in "roll":
             roll = self.Die.roll()
             print(f"{self.currentPlayer.get_name()} rolled a {roll}")
@@ -72,10 +71,9 @@ class Game():
                 self.dice_score += roll
             else:
                 print(f"{self.currentPlayer.get_name()} got 0 points this round")
-                self.dice_score = 0
-                self.currentPlayer = self.otherPlayer
-                self.otherPlayer = prev_player
-                self.computer_rolls = 0
+                self.Switch_player()
+                self.Computer.set_rolls(0)
+                self.Computer.set_greediness(7)
         elif decision in "hold":
             self.currentPlayer.add_Score(self.dice_score)
             msg = (f"{self.currentPlayer.get_name()} decided to hold\n"
@@ -83,16 +81,13 @@ class Game():
             f"{self.currentPlayer.get_name()} now have {self.currentPlayer.get_Score()} points in total!")
             print(msg)
             check = self.Check_winner_condition()
-            self.currentPlayer = self.otherPlayer
-            self.otherPlayer = prev_player
-            self.dice_score = 0
+            self.Switch_player()
         if check == False:
             print(f"{self.currentPlayer.get_name()}'s turn")
         else:
-            msg = (f"The game is over {prev_player.get_name()} won!"
+            msg = (f"The game is over {self.Winner} won!"
                 " To start a new game type 'start' or type 'exit' to exit.")
             print(msg)
-            prev_player = None
             return
         if self.currentPlayer == self.Computer:
             sleep(1)
@@ -102,6 +97,7 @@ class Game():
         """Check if the current player has 100 or more points."""
         if self.currentPlayer.get_Score() >= 100:
             print(f"Congratulations {self.currentPlayer.get_name()}, You won!")
+            self.Winner = self.currentPlayer.get_name()
             self.currentPlayer = None
             self.otherPlayer = None
             return True
@@ -110,17 +106,30 @@ class Game():
 
     def Computer_logic(self):
         intelligence = self.Computer.get_intelligence()
-        safety = 7
-        if self.computer_rolls == 0:
-            self.computer_rolls += 1
+        greediness = self.Computer.get_greediness()
+        rolls = self.Computer.get_rolls()
+        if rolls == 0:
+            add_roll = rolls + 1
+            self.Computer.set_rolls(add_roll)
             self.Player_turn("roll")
         elif self.currentPlayer.get_Score() + self.dice_score >= 100:
             self.Player_turn("hold")
         else:
-            decision = random.randint(intelligence, safety)
+            decision = random.randint(intelligence, greediness)
             if decision != intelligence:
-                safety -= 1
+                add_roll = rolls +  1
+                self.Computer.set_rolls(add_roll)
+                change = greediness - 1
+                self.Computer.set_greediness(change)
                 self.Player_turn("roll")
             else:
-                safety = 7
+                self.Computer.set_greediness(7)
+                self.Computer.set_rolls(0)
                 self.Player_turn("hold")
+    
+    def Switch_player(self):
+        """Changes player turn."""
+        prev_player = self.currentPlayer
+        self.currentPlayer = self.otherPlayer
+        self.otherPlayer = prev_player
+        self.dice_score = 0
