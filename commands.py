@@ -18,12 +18,13 @@ class Commands(cmd.Cmd):
         self.computer = computer.Computer(1)
 
     def do_rules(self, _):
-        """Description of how the game works."""
+        """Show how the game works."""
         msg = (
             "Each turn, a player repeatedly rolls a die until the player"
             " decides to hold or rolls a 1.\n"
             "If the player decides to hold he/she will add the total sum"
-            " of all the dice he/she has rolled during that turn to his/her total points.\n"
+            " of all the dice he/she has rolled during that turn to his/her"
+            "total points.\n"
             "If the dice shows a 1 the player will not receive any points"
             " and his/her turn will end letting the other player roll."
         )
@@ -73,7 +74,9 @@ class Commands(cmd.Cmd):
     def do_cheat(self, _):
         """Immediately wins the game."""
         try:
-            print(f"{self.game.currentPlayer.get_name()} has gained 100 points")
+            msg = (f"{self.game.currentPlayer.get_name()}"
+                   "has gained 100 points")
+            print(msg)
             self.game.currentPlayer.add_Score(100)
             self.game.Check_winner_condition()
 

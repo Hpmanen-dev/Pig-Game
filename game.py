@@ -59,7 +59,7 @@ class Game():
         print("Do you want to roll or hold?")
 
     def Player_turn(self, decision):
-        """Player turns."""
+        """Player turn."""
         check = False
         if decision in "roll":
             roll = self.Die.roll()
@@ -67,15 +67,19 @@ class Game():
             if roll != 1:
                 self.dice_score += roll
             else:
-                print(f"{self.currentPlayer.get_name()} got 0 points this round")
+                msg = (f"{self.currentPlayer.get_name()}"
+                       "got 0 points this round")
+                print(msg)
                 self.Switch_player()
                 self.Computer.set_rolls(0)
                 self.Computer.set_greediness(7)
         elif decision in "hold":
             self.currentPlayer.add_Score(self.dice_score)
             msg = (f"{self.currentPlayer.get_name()} decided to hold\n"
-                   f"{self.currentPlayer.get_name()} received {self.dice_score} points\n"
-                   f"{self.currentPlayer.get_name()} now have {self.currentPlayer.get_Score()} points in total!")
+                   f"{self.currentPlayer.get_name()} received"
+                   f"{self.dice_score} points\n"
+                   f"{self.currentPlayer.get_name()} now have"
+                   "{self.currentPlayer.get_Score()} points in total!")
             print(msg)
             check = self.Check_winner_condition()
             self.Switch_player()
@@ -83,7 +87,7 @@ class Game():
             print(f"{self.currentPlayer.get_name()}'s turn")
         else:
             msg = (f"The game is over {self.Winner} won!"
-                    "To start a new game type 'start' or type 'exit' to exit.")
+                   "To start a new game type 'start' or type 'exit' to exit.")
             print(msg)
             return
         if self.currentPlayer == self.Computer:
@@ -102,7 +106,7 @@ class Game():
             return False
 
     def Computer_logic(self):
-        """The computer Player."""
+        """How the computer works."""
         intelligence = self.Computer.get_intelligence()
         greediness = self.Computer.get_greediness()
         rolls = self.Computer.get_rolls()
