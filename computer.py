@@ -1,16 +1,10 @@
 """This is the Computer Player."""
 
-import game
-import random
-
-
 class Computer():
     """This is the Computer Class."""
 
     def __init__(self, intelligence):
         """Initiate Computer."""
-        random.seed()
-        self.the_game = game.Game()
         self.Score = 0
         self.intelligence = intelligence
         self.Name = "Computer player"
