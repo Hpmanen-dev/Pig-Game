@@ -27,6 +27,7 @@ if it is not the same as its intelligence number it will roll.
 We have also made sure that it must roll atleast once every turn just like a human would.
 It also calculates if the dice score + its own score is equals to 100 or more,
 this means it will decide to hold if the dice score + its own score is equals to 100 or more.
+The computer will also be more likely to hold for every roll it makes.
 
 The intelligence setting will change the greedyness of the computer,
 there are 3 intelligence settings: 1, 2 or 3.

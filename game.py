@@ -88,7 +88,7 @@ class Game():
             print(f"{self.currentPlayer.get_name()}'s turn")
         else:
             msg = (f"The game is over {self.Winner} won!"
-                   "To start a new game type 'start' or type 'exit' to exit.")
+                   " To start a new game type 'start' or type 'exit' to exit.")
             print(msg)
             return
         if self.currentPlayer == self.Computer:
@@ -118,6 +118,7 @@ class Game():
         elif self.currentPlayer.get_Score() + self.dice_score >= 100:
             self.Player_turn("hold")
         else:
+            random.seed()
             decision = random.randint(intelligence, greediness)
             if decision != intelligence:
                 add_roll = rolls + 1
