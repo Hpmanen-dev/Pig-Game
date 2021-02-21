@@ -43,6 +43,7 @@ class Game():
         print(f"{self.Player1.get_name()} starts.")
         self.currentPlayer = self.Player1
         self.otherPlayer = self.Computer
+        self.Computer.set_Score(0)
 
     def Multiplayer(self):
         """Initiate a multiplayer game."""
@@ -67,7 +68,7 @@ class Game():
             if roll != 1:
                 self.dice_score += roll
             else:
-                msg = (f"{self.currentPlayer.get_name()}"
+                msg = (f"{self.currentPlayer.get_name()} "
                        "got 0 points this round")
                 print(msg)
                 self.Switch_player()
@@ -76,10 +77,10 @@ class Game():
         elif decision in "hold":
             self.currentPlayer.add_Score(self.dice_score)
             msg = (f"{self.currentPlayer.get_name()} decided to hold\n"
-                   f"{self.currentPlayer.get_name()} received"
+                   f"{self.currentPlayer.get_name()} received "
                    f"{self.dice_score} points\n"
-                   f"{self.currentPlayer.get_name()} now have"
-                   "{self.currentPlayer.get_Score()} points in total!")
+                   f"{self.currentPlayer.get_name()} now have "
+                   f"{self.currentPlayer.get_Score()} points in total!")
             print(msg)
             check = self.Check_winner_condition()
             self.Switch_player()

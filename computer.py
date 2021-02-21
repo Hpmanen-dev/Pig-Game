@@ -28,6 +28,10 @@ class Computer():
     def add_Score(self, Score):
         """Add to Computer's score."""
         self.Score += Score
+    
+    def set_Score(self, Score):
+        """Set Computer's score."""
+        self.Score = Score
 
     def get_intelligence(self):
         """Get intelligence."""

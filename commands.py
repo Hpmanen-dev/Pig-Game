@@ -96,5 +96,15 @@ class Commands(cmd.Cmd):
 
     def do_intelligence(self, arg):
         """Change the intelligence of the computer."""
-        print(f"Set the computer intelligence to {arg}")
-        self.computer.set_intelligence(arg)
+        try:
+            int_arg = int(arg)
+        except ValueError:
+            print("Please enter an integer")
+            return
+        if not arg:
+            print("Please enter an intelligence setting between 1-3")
+        elif int_arg < 1 or int_arg > 3:
+            print("The intelligence can only be between 1-3")
+        else:
+            print(f"Set the computer's intelligence to {int_arg}")
+            self.computer.set_intelligence(int_arg)
