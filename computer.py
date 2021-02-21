@@ -3,6 +3,7 @@
 import game
 import random
 
+
 class Computer():
     """This is the Computer Class."""
 
@@ -19,11 +20,11 @@ class Computer():
     def get_Score(self):
         """Get Score."""
         return self.Score
-    
+
     def get_name(self):
         """Get Computer Name."""
         return self.Name
-    
+
     def add_Score(self, Score):
         """Add to Computer's score."""
         self.Score += Score
@@ -31,21 +32,23 @@ class Computer():
     def get_intelligence(self):
         """Get intelligence."""
         return self.intelligence
-    
+
     def set_intelligence(self, intelligence):
         """Change intelligence."""
         self.intelligence = intelligence
-    
+
     def get_greediness(self):
         """Get the greediness of the computer."""
         return self.greediness
-    
+
     def set_greediness(self, change):
         """Change greediness."""
         self.greediness = change
-    
+
     def get_rolls(self):
+        """Get the rolls."""
         return self.rolls
 
     def set_rolls(self, change):
+        """Set the rolls."""
         self.rolls = change

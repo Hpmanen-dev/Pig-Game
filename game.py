@@ -1,12 +1,9 @@
 """This is the Pig Dice Game."""
 
 import player
-import computer
 import dice
 import random
 from time import sleep
-import subprocess
-import platform
 
 
 class Game():
@@ -77,16 +74,16 @@ class Game():
         elif decision in "hold":
             self.currentPlayer.add_Score(self.dice_score)
             msg = (f"{self.currentPlayer.get_name()} decided to hold\n"
-                f"{self.currentPlayer.get_name()} received {self.dice_score} points\n"
-            f"{self.currentPlayer.get_name()} now have {self.currentPlayer.get_Score()} points in total!")
+                   f"{self.currentPlayer.get_name()} received {self.dice_score} points\n"
+                   f"{self.currentPlayer.get_name()} now have {self.currentPlayer.get_Score()} points in total!")
             print(msg)
             check = self.Check_winner_condition()
             self.Switch_player()
-        if check == False:
+        if check is False:
             print(f"{self.currentPlayer.get_name()}'s turn")
         else:
             msg = (f"The game is over {self.Winner} won!"
-                " To start a new game type 'start' or type 'exit' to exit.")
+                    "To start a new game type 'start' or type 'exit' to exit.")
             print(msg)
             return
         if self.currentPlayer == self.Computer:
@@ -105,6 +102,7 @@ class Game():
             return False
 
     def Computer_logic(self):
+        """The computer Player."""
         intelligence = self.Computer.get_intelligence()
         greediness = self.Computer.get_greediness()
         rolls = self.Computer.get_rolls()
@@ -117,7 +115,7 @@ class Game():
         else:
             decision = random.randint(intelligence, greediness)
             if decision != intelligence:
-                add_roll = rolls +  1
+                add_roll = rolls + 1
                 self.Computer.set_rolls(add_roll)
                 change = greediness - 1
                 self.Computer.set_greediness(change)
@@ -126,9 +124,9 @@ class Game():
                 self.Computer.set_greediness(7)
                 self.Computer.set_rolls(0)
                 self.Player_turn("hold")
-    
+
     def Switch_player(self):
-        """Changes player turn."""
+        """Change player turn."""
         prev_player = self.currentPlayer
         self.currentPlayer = self.otherPlayer
         self.otherPlayer = prev_player

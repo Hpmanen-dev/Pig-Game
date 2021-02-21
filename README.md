@@ -8,26 +8,19 @@ The one to get to 100 points or more first is the winner.
 
 ## Commands
 ```
-help / ?                Show all the commands
-rules                   Show all the rules of the game
-start                   Start the game
-restart                 Restarts the game
-roll                    Roll the dice
-hold                    Hold the points
-exit                    Exit the game
-cheat                   Gives you 100 points
-```
-
-## How to use
-```
-git clone https://github.com/Hpmanen-dev/Pig-Game
-cd Pig-Game
-py -m pip install -r requirements.txt
-py main.py
+help | ?                    Show all the commands
+rules                       Show all the rules of the game
+start                       Start the game
+singleplayer | s            Play against the computer
+multiplayer | m             Play against a friend
+restart                     Restarts the game
+roll | r                    Roll the dice
+hold | h                    Hold the points
+exit                        Exit the game
+cheat                       Gives you 100 points
 ```
 
 ## Computer Logic
-```
 The Computer is built in a way which it rolls a random number 
 and if that number is the same as its intelligence number it will choose to hold
 if it is not the same as its intelligence number it will roll.
@@ -40,4 +33,11 @@ there are 3 intelligence settings: 1, 2 or 3.
 In our case higher intelligence means to play more safe so it will decide to hold more often.
 Since this is a completely luck based game more safe does not always mean better but it made
 more sense in this case since it wouldn't risk getting 1's.
+
+## How to use
+```
+git clone https://github.com/Hpmanen-dev/Pig-Game
+cd Pig-Game
+py -m pip install -r requirements.txt
+py main.py
 ```

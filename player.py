@@ -5,7 +5,7 @@ class Player:
     """This is a player class."""
 
     def __init__(self, Name):
-        """Initiating the player."""
+        """Initiate the player."""
         self.Name = Name
         self.Score = 0
 
