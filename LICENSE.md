@@ -1,6 +1,5 @@
 The MIT License
 
-Copyright (c) 2021 Hampus Nilsson, Kristian Åkerblom and Anton Thereström
 Copyright (c) 2021 Hampus Nilsson, Kristian Åkerblom och Anton Thereström
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
