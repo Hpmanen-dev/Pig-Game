@@ -29,7 +29,7 @@ class Commands(cmd.Cmd):
 
     def do_start(self, _):
         """Start the game."""
-        self.game.start()
+        self.game.Start()
     
     def do_roll(self, _):
         "Roll the dice."
@@ -49,7 +49,7 @@ class Commands(cmd.Cmd):
     
     def do_cheat(self, _):
         """Immediately wins the game."""
-        print(f"{self.game.currentPlayer.get_player_name} has gained 100 points")
+        print(f"{self.game.currentPlayer.get_name()} has gained 100 points")
         self.game.currentPlayer.add_Score(100)
         self.game.Check_winner_condition()
     
