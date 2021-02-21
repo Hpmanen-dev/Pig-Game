@@ -32,26 +32,51 @@ class Commands(cmd.Cmd):
         self.game.Start()
     
     def do_roll(self, _):
-        "Roll the dice."
-        self.game.Player_turn("roll")
+        """Roll the dice."""
+        try:
+            self.game.Player_turn("roll")
+        except AttributeError:
+            msg =  ("You need to start before you can play.\n"
+            "Please type 'Start' to start the game.")
+            print(msg)
     
     def do_r(self, _):
-        "Roll the dice."
-        self.do_roll(_)
+        """Roll the dice."""
+        try:
+            self.game.Player_turn("roll")
+        except AttributeError:
+            msg =  ("You need to start before you can play.\n"
+            "Please type 'start' to start the game.")
+            print(msg)
     
     def do_hold(self, _):
-        "Hold the points."
-        self.game.Player_turn("hold")
+        """Hold the points."""
+        try:
+            self.game.Player_turn("hold")
+        except AttributeError:
+            msg =  ("You need to start before you can play.\n"
+            "Please type 'start' to start the game.")
+            print(msg)
     
     def do_h(self, _):
-        "Hold the points."
-        self.do_hold(_)
+        """Hold the points."""
+        try:
+            self.game.Player_turn("hold")
+        except AttributeError:
+            msg =  ("You need to start before you can play.\n"
+            "Please type 'start' to start the game.")
+            print(msg)
     
     def do_cheat(self, _):
         """Immediately wins the game."""
-        print(f"{self.game.currentPlayer.get_name()} has gained 100 points")
-        self.game.currentPlayer.add_Score(100)
-        self.game.Check_winner_condition()
+        try:
+            print(f"{self.game.currentPlayer.get_name()} has gained 100 points")
+            self.game.currentPlayer.add_Score(100)
+            self.game.Check_winner_condition()
+        except:
+            msg = ("You need to start the game before you can cheat!\n"
+            "Please type 'start' to start the game.")
+            print(msg)
     
     def do_exit(self, _):
         """Exits the game."""

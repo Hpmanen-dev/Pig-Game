@@ -5,10 +5,6 @@ import random
 
 class Computer():
     """This is the Computer Class."""
-    Score = 0
-    Name = "Computer Player"
-    the_game = None
-    intelligence = 0
 
     def __init__(self, intelligence):
         """Initiate Computer."""
@@ -16,6 +12,7 @@ class Computer():
         self.the_game = game.Game()
         self.Score = 0
         self.intelligence = intelligence
+        self.Name = "Computer player"
 
     def get_Score(self):
         """Get Score."""

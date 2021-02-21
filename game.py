@@ -28,11 +28,16 @@ class Game():
     def Start(self):
         """Ask user if he/she wants to play single or multiplayer."""
         print('Do you want to play "singleplayer" or "multiplayer"?')
-        decision = input()
-        if decision in "singleplayer" "s" "single":
-            self.Singleplayer()
-        elif decision in "multiplayer" "m" "multi":
-            self.Multiplayer()
+        while True:
+            decision = input()
+            if decision in "singleplayer":
+                self.Singleplayer()
+                break
+            elif decision in "multiplayer":
+                self.Multiplayer()
+                break
+            else:
+                print("Choose either 'singleplayer' or 'multiplayer'")
 
     def Singleplayer(self):
         """Initiate a singleplayer game."""

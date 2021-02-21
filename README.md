@@ -11,6 +11,7 @@ The one to get to 100 points or more first is the winner.
 help / ?                Show all the commands
 rules                   Show all the rules of the game
 start                   Start the game
+restart                 Restarts the game
 roll                    Roll the dice
 hold                    Hold the points
 exit                    Exit the game
