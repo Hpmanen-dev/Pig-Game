@@ -60,14 +60,6 @@ class Game():
         """Player turns."""
         check = False
         prev_player = self.currentPlayer
-        if check == False:
-            print(f"{self.currentPlayer.get_name()}'s turn")
-        else:
-            msg = (f"The game is over {prev_player.get_name()} won!"
-                " To start a new game type 'start' or type 'exit' to exit.")
-            print(msg)
-            prev_player = None
-            return
         if decision in "roll":
             roll = self.Die.roll()
             print(f"{self.currentPlayer.get_name()} rolled a {roll}")
@@ -78,6 +70,7 @@ class Game():
                 self.dice_score = 0
                 self.currentPlayer = self.otherPlayer
                 self.otherPlayer = prev_player
+                self.computer_rolls = 0
         elif decision in "hold":
             self.currentPlayer.add_Score(self.dice_score)
             msg = (f"{self.currentPlayer.get_name()} decided to hold\n"
@@ -88,7 +81,14 @@ class Game():
             self.currentPlayer = self.otherPlayer
             self.otherPlayer = prev_player
             self.dice_score = 0
-            self.computer_rolls = 0
+        if check == False:
+            print(f"{self.currentPlayer.get_name()}'s turn")
+        else:
+            msg = (f"The game is over {prev_player.get_name()} won!"
+                " To start a new game type 'start' or type 'exit' to exit.")
+            print(msg)
+            prev_player = None
+            return
         if self.currentPlayer == self.Computer:
             sleep(1)
             self.Computer_logic()
@@ -105,16 +105,17 @@ class Game():
 
     def Computer_logic(self):
         intelligence = self.Computer.get_intelligence()
+        safety = 7
         if self.computer_rolls == 0:
             self.computer_rolls += 1
             self.Player_turn("roll")
         elif self.currentPlayer.get_Score() + self.dice_score >= 100:
             self.Player_turn("hold")
         else:
-            decision = random.randint(self.computer_rolls, 7)
-            if decision != 7:
-                self.computer_rolls += 1
+            decision = random.randint(intelligence, safety)
+            if decision != intelligence:
+                safety -= 1
                 self.Player_turn("roll")
             else:
+                safety = 7
                 self.Player_turn("hold")
-                self.computer_rolls = 0
