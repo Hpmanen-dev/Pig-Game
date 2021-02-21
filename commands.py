@@ -2,6 +2,7 @@
 
 import cmd
 import game
+import computer
 
 
 class Commands(cmd.Cmd):
@@ -14,6 +15,7 @@ class Commands(cmd.Cmd):
         """Init the object."""
         super().__init__()
         self.game = game.Game()
+        self.computer = computer.Computer(1)
 
     def do_rules(self, _):
         """Description of how the game works."""
@@ -29,7 +31,7 @@ class Commands(cmd.Cmd):
 
     def do_start(self, _):
         """Start the game."""
-        self.game.Start()
+        self.game.Start(self.computer)
     
     def do_roll(self, _):
         """Roll the dice."""
@@ -86,3 +88,9 @@ class Commands(cmd.Cmd):
     def do_restart(self, _):
         """Restarts the game."""
         self.do_start(_)
+    
+    def do_intelligence(self, arg):
+        """Changes the intelligence of the computer."""
+        print(f"Set the computer intelligence to {arg}")
+        self.computer.set_intelligence(arg)
+

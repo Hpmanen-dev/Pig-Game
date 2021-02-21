@@ -25,13 +25,13 @@ class Game():
         """Initiate the game."""
         self.Die = dice.Dice()
 
-    def Start(self):
+    def Start(self, Computer):
         """Ask user if he/she wants to play single or multiplayer."""
         print('Do you want to play "singleplayer" or "multiplayer"?')
         while True:
             decision = input()
             if decision in "singleplayer":
-                self.Singleplayer()
+                self.Singleplayer(Computer)
                 break
             elif decision in "multiplayer":
                 self.Multiplayer()
@@ -39,10 +39,10 @@ class Game():
             else:
                 print("Choose either 'singleplayer' or 'multiplayer'")
 
-    def Singleplayer(self):
+    def Singleplayer(self, Computer):
         """Initiate a singleplayer game."""
         self.Player1 = player.Player(input("Enter your name: "))
-        self.Computer = computer.Computer(1)
+        self.Computer = Computer
         print(f"{self.Player1.get_name()} starts.")
         self.currentPlayer = self.Player1
         self.otherPlayer = self.Computer
