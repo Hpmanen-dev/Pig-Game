@@ -47,6 +47,7 @@ class Game():
         self.currentPlayer = self.Player1
         self.otherPlayer = self.Computer
         self.Computer.set_Score(0)
+        print("Do you want to roll or hold?")
 
     def Multiplayer(self):
         """Initiate a multiplayer game."""
@@ -76,8 +77,6 @@ class Game():
                        "got 0 points this round")
                 print(msg)
                 self.Switch_player()
-                self.Computer.set_rolls(0)
-                self.Computer.set_greediness(7)
         elif decision in "hold":
             self.currentPlayer.add_Score(self.dice_score)
             msg = (f"{self.currentPlayer.get_name()} decided to hold\n"
@@ -120,6 +119,7 @@ class Game():
             add_roll = rolls + 1
             self.Computer.set_rolls(add_roll)
             self.Player_turn("roll")
+            self.Computer.set_rolls(0)
         elif self.currentPlayer.get_Score() + self.dice_score >= 100:
             self.Player_turn("hold")
         else:
@@ -131,6 +131,8 @@ class Game():
                 change = greediness - 1
                 self.Computer.set_greediness(change)
                 self.Player_turn("roll")
+                self.Computer.set_greediness(7)
+                self.Computer.set_rolls(0)
             else:
                 self.Computer.set_greediness(7)
                 self.Computer.set_rolls(0)

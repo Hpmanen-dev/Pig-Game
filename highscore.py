@@ -5,7 +5,7 @@ def updateHighscore(Player1, Player2, Winner):
     with open("log.txt", "a+") as file:
         file.seek(0)
         lines = file.readlines()
-        if (f'Name: {Player1.get_name()}\n') not in lines:
+        if (f'\nName: {Player1.get_name()}\n') not in lines:
             file.write(f"Name: {Player1.get_name()}")
             file.write("\nGames: 1\n")
             if(Player1 == Winner):
