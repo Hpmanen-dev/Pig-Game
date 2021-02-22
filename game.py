@@ -91,7 +91,7 @@ class Game():
         if check is False:
             print(f"{self.currentPlayer.get_name()}'s turn")
         else:
-            msg = (f"The game is over {self.Winner} won!"
+            msg = (f"The game is over {self.Winner.get_name()} won!"
                    " To start a new game type 'start' or type 'exit' to exit.")
             print(msg)
             return
@@ -103,7 +103,8 @@ class Game():
         """Check if the current player has 100 or more points."""
         if self.currentPlayer.get_Score() >= 100:
             print(f"Congratulations {self.currentPlayer.get_name()}, You won!")
-            self.Winner = self.currentPlayer.get_name()
+            self.Winner = self.currentPlayer
+            self.add_newHighscore()
             self.currentPlayer = None
             self.otherPlayer = None
             return True
@@ -144,10 +145,10 @@ class Game():
     
     def add_newHighscore(self):
         try:
-            if self.mode == "Singleplayer":
-                highscore.updateHighscore(self.Player1, self.Computer)
-            if self.mode == "Multiplayer":
-                highscore.updateHighscore(self.Player1, self.Player2)
+            win = self.Winner
+            Pl1 = self.currentPlayer
+            Pl2 = self.otherPlayer
+            highscore.updateHighscore(Pl1, Pl2, win)
         except AttributeError as error:
             print(error)
             return
