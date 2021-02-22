@@ -23,7 +23,6 @@ class Game():
     def __init__(self):
         """Initiate the game."""
         self.Die = dice.Dice()
-        self.Highscore = highscore.Highscore()
 
     def Start(self, Computer):
         """Ask user if he/she wants to play single or multiplayer."""
@@ -146,9 +145,9 @@ class Game():
     def add_newHighscore(self):
         try:
             if self.mode == "Singleplayer":
-                self.Highscore.updateHighscore(self.Player1, self.Computer)
+                highscore.updateHighscore(self.Player1, self.Computer)
             if self.mode == "Multiplayer":
-                self.Highscore.updateHighscore(self.Player1, self.Player2)
+                highscore.updateHighscore(self.Player1, self.Player2)
         except AttributeError as error:
             print(error)
             return

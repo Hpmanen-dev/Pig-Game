@@ -17,7 +17,6 @@ class Commands(cmd.Cmd):
         super().__init__()
         self.game = game.Game()
         self.computer = computer.Computer(1)
-        self.highscore = highscore.Highscore()
 
     def do_rules(self, _):
         """Show how the game works."""
