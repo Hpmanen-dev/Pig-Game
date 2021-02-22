@@ -1,5 +1,6 @@
 """This is the Pig Dice Game."""
 
+import highscore
 import player
 import dice
 import random
@@ -17,10 +18,12 @@ class Game():
     Winner = None
     win_condition = 100
     dice_score = 0
+    mode = None
 
     def __init__(self):
         """Initiate the game."""
         self.Die = dice.Dice()
+        self.Highscore = highscore.Highscore()
 
     def Start(self, Computer):
         """Ask user if he/she wants to play single or multiplayer."""
@@ -38,6 +41,7 @@ class Game():
 
     def Singleplayer(self, Computer):
         """Initiate a singleplayer game."""
+        self.mode = "Singleplayer"
         self.Player1 = player.Player(input("Enter your name: "))
         self.Computer = Computer
         print(f"{self.Player1.get_name()} starts.")
@@ -47,6 +51,7 @@ class Game():
 
     def Multiplayer(self):
         """Initiate a multiplayer game."""
+        self.mode = "Multiplayer"
         self.Player1 = player.Player(input("Enter your name: "))
         self.Player2 = player.Player(input("Enter your name: "))
         select_player = random.randint(1, 2)
@@ -137,3 +142,14 @@ class Game():
         self.currentPlayer = self.otherPlayer
         self.otherPlayer = prev_player
         self.dice_score = 0
+    
+    def add_newHighscore(self):
+        try:
+            if self.mode == "Singleplayer":
+                self.Highscore.updateHighscore(self.Player1, self.Computer)
+            if self.mode == "Multiplayer":
+                self.Highscore.updateHighscore(self.Player1, self.Player2)
+        except AttributeError as error:
+            print(error)
+            return
+        

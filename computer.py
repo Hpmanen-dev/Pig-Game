@@ -7,7 +7,7 @@ class Computer():
         """Initiate Computer."""
         self.Score = 0
         self.intelligence = intelligence
-        self.Name = "Computer player"
+        self.Name = "CPU"
         self.greediness = 7
         self.rolls = 0
 

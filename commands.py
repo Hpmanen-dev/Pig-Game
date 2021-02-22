@@ -3,6 +3,7 @@
 import cmd
 import game
 import computer
+import highscore
 
 
 class Commands(cmd.Cmd):
@@ -16,6 +17,7 @@ class Commands(cmd.Cmd):
         super().__init__()
         self.game = game.Game()
         self.computer = computer.Computer(1)
+        self.highscore = highscore.Highscore()
 
     def do_rules(self, _):
         """Show how the game works."""
@@ -108,3 +110,7 @@ class Commands(cmd.Cmd):
         else:
             print(f"Set the computer's intelligence to {int_arg}")
             self.computer.set_intelligence(int_arg)
+    
+    def do_highscore(self, _):
+        self.game.add_newHighscore()
+
