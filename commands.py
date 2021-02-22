@@ -40,19 +40,19 @@ class Commands(cmd.Cmd):
         try:
             self.game.Player_turn("roll")
 
-        except AttributeError as error:
+        except AttributeError:
             msg = ("You need to start before you can play.\n"
                    "Please type 'Start' to start the game.")
-            print(error)
+            print(msg)
 
     def do_r(self, _):
         """Roll the dice."""
         try:
             self.game.Player_turn("roll")
-        except AttributeError as error:
+        except AttributeError:
             msg = ("You need to start before you can play.\n"
                    "Please type 'start' to start the game.")
-            print(error)
+            print(msg)
 
     def do_hold(self, _):
         """Hold the points."""
