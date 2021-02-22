@@ -32,7 +32,7 @@ The computer will also be more likely to hold for every roll it makes.
 The intelligence setting will change the greedyness of the computer,
 there are 3 intelligence settings: 1, 2 or 3.
 In our case higher intelligence means to play more safe so it will decide to hold more often.
-Since this is a completely luck based game more safe does not always mean better but it made
+Since this is a completely luck based game, being more safe does not always mean better but it made
 more sense in this case since it wouldn't risk getting 1's.
 
 ## How to use
