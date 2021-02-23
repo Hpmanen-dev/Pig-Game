@@ -1,5 +1,7 @@
 """Save the highscore of all players."""
 
+from tabulate import tabulate
+
 
 def updateHighscore(Player1, Player2, Winner):
     """Update the txt file."""
@@ -45,7 +47,12 @@ def updateHighscore(Player1, Player2, Winner):
 
 def showHighscore():
     """Display the txt file."""
+    table = []
     with open("log.txt", "r") as file:
-        lines = file.readlines()
-        for line in lines:
-            print(line)
+        for line in file:
+            typen, name = line.rstrip("/n").split(":")
+            typeg, games = file.readline().rstrip("\n").split(":")
+            typew, wins = file.readline().rstrip("\n").split(":")
+            table.append([name, games, wins])
+
+    print(tabulate(table, headers=[typen, typeg, typew]))
