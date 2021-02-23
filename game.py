@@ -76,6 +76,8 @@ class Game():
                 msg = (f"{self.currentPlayer.get_name()} "
                        "got 0 points this round")
                 print(msg)
+                self.Computer.set_greediness(7)
+                self.Computer.set_rolls(0)
                 self.Switch_player()
         elif decision in "hold":
             self.currentPlayer.add_Score(self.dice_score)
@@ -131,8 +133,6 @@ class Game():
                 change = greediness - 1
                 self.Computer.set_greediness(change)
                 self.Player_turn("roll")
-                self.Computer.set_greediness(7)
-                self.Computer.set_rolls(0)
             else:
                 self.Computer.set_greediness(7)
                 self.Computer.set_rolls(0)
