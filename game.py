@@ -152,6 +152,6 @@ class Game():
             Pl1 = self.currentPlayer
             Pl2 = self.otherPlayer
             highscore.updateHighscore(Pl1, Pl2, win)
-        except AttributeError as error:
-            print(error)
+        except AttributeError:
+            print("Something went wrong, could not update logfile.")
             return

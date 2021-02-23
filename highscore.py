@@ -17,7 +17,7 @@ def updateHighscore(Player1, Player2, Winner):
             else:
                 file.write("Wins: 0\n")
         if (f'Name: {Player2.get_name()}\n') not in lines:
-            file.write(f"\nName: {Player2.get_name()}")
+            file.write(f"Name: {Player2.get_name()}")
             file.write("\nGames: 1\n")
             if(Player2 == Winner):
                 file.write("Wins: 1")

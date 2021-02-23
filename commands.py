@@ -112,4 +112,7 @@ class Commands(cmd.Cmd):
 
     def do_highscore(self, _):
         """Display highscore."""
-        highscore.showHighscore()
+        try:
+            highscore.showHighscore()
+        except (ValueError, UnboundLocalError):
+            print("You have not played any games yet!")
