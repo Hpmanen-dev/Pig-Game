@@ -11,8 +11,6 @@ The one to get to 100 points or more first is the winner.
 help | ?                    Show all the commands
 rules                       Show all the rules of the game
 start                       Start the game
-singleplayer | s            Play against the computer
-multiplayer | m             Play against a friend
 restart                     Restarts the game
 roll | r                    Roll the dice
 hold | h                    Hold the points
