@@ -109,7 +109,7 @@ class Commands(cmd.Cmd):
         else:
             print(f"Set the computer's intelligence to {int_arg}")
             self.computer.set_intelligence(int_arg)
-    
-    def do_highscore(self, _):
-        highscore.showHighscore()
 
+    def do_highscore(self, _):
+        """Display highscore"""
+        highscore.showHighscore()
