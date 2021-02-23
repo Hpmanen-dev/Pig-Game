@@ -1,6 +1,6 @@
 """This is the Pig Dice Game."""
 
-import highscore
+import leaderboard
 import player
 import dice
 import random
@@ -106,7 +106,7 @@ class Game():
         if self.currentPlayer.get_Score() >= 100:
             print(f"Congratulations {self.currentPlayer.get_name()}, You won!")
             self.Winner = self.currentPlayer
-            self.add_newHighscore()
+            self.add_newLeaderboard()
             self.currentPlayer = None
             self.otherPlayer = None
             return True
@@ -146,12 +146,12 @@ class Game():
         self.otherPlayer = prev_player
         self.dice_score = 0
 
-    def add_newHighscore(self):
+    def add_newLeaderboard(self):
         try:
             win = self.Winner
             Pl1 = self.currentPlayer
             Pl2 = self.otherPlayer
-            highscore.updateHighscore(Pl1, Pl2, win)
+            leaderboard.updateLeaderboard(Pl1, Pl2, win)
         except AttributeError:
             print("Something went wrong, could not update logfile.")
             return

@@ -3,7 +3,7 @@
 import cmd
 import game
 import computer
-import highscore
+import leaderboard
 
 
 class Commands(cmd.Cmd):
@@ -110,9 +110,9 @@ class Commands(cmd.Cmd):
             print(f"Set the computer's intelligence to {int_arg}")
             self.computer.set_intelligence(int_arg)
 
-    def do_highscore(self, _):
-        """Display highscore."""
+    def do_leaderboard(self, _):
+        """Display leaderboard."""
         try:
-            highscore.showHighscore()
+            leaderboard.showLeaderboard()
         except (ValueError, UnboundLocalError):
             print("You have not played any games yet!")

@@ -3,7 +3,7 @@
 from tabulate import tabulate
 
 
-def updateHighscore(Player1, Player2, Winner):
+def updateLeaderboard(Player1, Player2, Winner):
     """Update the txt file."""
     count = 0
     with open("log.txt", "a+") as file:
@@ -45,7 +45,7 @@ def updateHighscore(Player1, Player2, Winner):
             count += 1
 
 
-def showHighscore():
+def showLeaderboard():
     """Display the txt file."""
     table = []
     with open("log.txt", "r") as file:
