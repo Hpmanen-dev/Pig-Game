@@ -1,6 +1,8 @@
 """Save the highscore of all players."""
 
+
 def updateHighscore(Player1, Player2, Winner):
+    """Update the txt file."""
     count = 0
     with open("log.txt", "a+") as file:
         file.seek(0)
@@ -42,9 +44,8 @@ def updateHighscore(Player1, Player2, Winner):
 
 
 def showHighscore():
+    """Display the txt file."""
     with open("log.txt", "r") as file:
         lines = file.readlines()
         for line in lines:
             print(line)
-
-    

@@ -76,8 +76,9 @@ class Game():
                 msg = (f"{self.currentPlayer.get_name()} "
                        "got 0 points this round")
                 print(msg)
-                self.Computer.set_greediness(7)
-                self.Computer.set_rolls(0)
+                if self.currentPlayer == self.Computer:
+                    self.Computer.set_greediness(7)
+                    self.Computer.set_rolls(0)
                 self.Switch_player()
         elif decision in "hold":
             self.currentPlayer.add_Score(self.dice_score)
@@ -144,7 +145,7 @@ class Game():
         self.currentPlayer = self.otherPlayer
         self.otherPlayer = prev_player
         self.dice_score = 0
-    
+
     def add_newHighscore(self):
         try:
             win = self.Winner
@@ -154,4 +155,3 @@ class Game():
         except AttributeError as error:
             print(error)
             return
-        
