@@ -111,5 +111,5 @@ class Commands(cmd.Cmd):
             self.computer.set_intelligence(int_arg)
 
     def do_highscore(self, _):
-        """Display highscore"""
+        """Display highscore."""
         highscore.showHighscore()
