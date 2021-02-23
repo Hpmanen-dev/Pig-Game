@@ -54,5 +54,5 @@ def showLeaderboard():
             typeg, games = file.readline().rstrip("\n").split(":")
             typew, wins = file.readline().rstrip("\n").split(":")
             table.append([name, games, wins])
-
+    table.sort(key=lambda x: x[2], reverse=True)
     print(tabulate(table, headers=[typen, typeg, typew]))
