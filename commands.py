@@ -1,5 +1,6 @@
 """Commands used in the game."""
 
+import sys
 import cmd
 import game
 import computer
@@ -19,6 +20,7 @@ class Commands(cmd.Cmd):
         self.computer = computer.Computer(1)
 
     def do_rules(self, _):
+        # pylint: disable=no-self-use
         """Show how the game works."""
         msg = (
             "Each turn, a player repeatedly rolls a die until the player"
@@ -87,9 +89,10 @@ class Commands(cmd.Cmd):
             print(msg)
 
     def do_exit(self, _):
+        # pylint: disable=no-self-use
         """Exit the game."""
         print("See ya later!")
-        exit()
+        sys.exit()
 
     def do_restart(self, _):
         """Restart the game."""
@@ -111,6 +114,7 @@ class Commands(cmd.Cmd):
             self.computer.set_intelligence(int_arg)
 
     def do_leaderboard(self, _):
+        # pylint: disable=no-self-use
         """Display leaderboard."""
         try:
             leaderboard.showLeaderboard()

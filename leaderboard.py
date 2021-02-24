@@ -3,49 +3,48 @@
 from tabulate import tabulate
 
 
-def updateLeaderboard(Player1, Player2, Winner):
+def update_leaderboard(player1, player2, winner):
     """Update the txt file."""
     count = 0
     with open("log.txt", "a+") as file:
         file.seek(0)
         lines = file.readlines()
-        if (f'Name: {Player1.get_name()}\n') not in lines:
-            file.write(f"Name: {Player1.get_name()}")
+        if (f'Name: {player1.get_name()}\n') not in lines:
+            file.write(f"Name: {player1.get_name()}")
             file.write("\nGames: 1\n")
-            if(Player1 == Winner):
+            if player1 == winner:
                 file.write("Wins: 1\n")
             else:
                 file.write("Wins: 0\n")
-        if (f'Name: {Player2.get_name()}\n') not in lines:
-            file.write(f"Name: {Player2.get_name()}")
+        if (f'Name: {player2.get_name()}\n') not in lines:
+            file.write(f"Name: {player2.get_name()}")
             file.write("\nGames: 1\n")
-            if(Player2 == Winner):
+            if player2 == winner:
                 file.write("Wins: 1")
             else:
                 file.write("Wins: 0\n")
         for line in lines:
             if line.startswith("Name"):
-                type, name = line.split()
-                if name == Player1.get_name() or name == Player2.get_name():
-                    if name == Player1.get_name():
-                        currentPlayer = Player1
-                    elif name == Player2.get_name():
-                        currentPlayer = Player2
-                    type, game = lines[count+1].split()
+                typen, name = line.split()
+                if name == player1.get_name() or name == player2.get_name():
+                    if name == player1.get_name():
+                        currentplayer = player1
+                    elif name == player2.get_name():
+                        currentplayer = player2
+                    typeg, game = lines[count+1].split()
                     game = int(game)
-                    new = game + 1
-                    if currentPlayer == Winner:
+                    if currentplayer == winner:
                         typew, win = lines[count+2].split()
                         win = int(win)
                         lines[count+2] = (f"{typew} {win+1}\n")
                     with open("log.txt", 'w') as file1:
-                        lines[count+1] = (f"{type} {new}\n")
-                        for line in lines:
-                            file1.write(line)
+                        lines[count+1] = (f"{typeg} {game+1}\n")
+                        for line1 in lines:
+                            file1.write(line1)
             count += 1
 
 
-def showLeaderboard():
+def show_leaderboard():
     """Display the txt file."""
     table = []
     with open("log.txt", "r") as file:

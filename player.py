@@ -4,19 +4,19 @@
 class Player:
     """This is a player class."""
 
-    def __init__(self, Name):
+    def __init__(self, name):
         """Initiate the player."""
-        self.Name = Name
-        self.Score = 0
+        self.name = name
+        self.score = 0
 
     def get_name(self):
         """Get player's name."""
-        return self.Name
+        return self.name
 
-    def get_Score(self):
+    def get_score(self):
         """Get player's score."""
-        return self.Score
+        return self.score
 
-    def add_Score(self, Score):
+    def add_score(self, score):
         """Add to player's score."""
-        self.Score += Score
+        self.score += score

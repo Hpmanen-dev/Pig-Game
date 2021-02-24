@@ -5,27 +5,27 @@ class Computer():
 
     def __init__(self, intelligence):
         """Initiate Computer."""
-        self.Score = 0
+        self.score = 0
         self.intelligence = intelligence
-        self.Name = "CPU"
+        self.name = "CPU"
         self.greediness = 7
         self.rolls = 0
 
-    def get_Score(self):
+    def get_score(self):
         """Get Score."""
-        return self.Score
+        return self.score
 
     def get_name(self):
         """Get Computer Name."""
-        return self.Name
+        return self.name
 
-    def add_Score(self, Score):
+    def add_score(self, score):
         """Add to Computer's score."""
-        self.Score += Score
-    
-    def set_Score(self, Score):
+        self.score += score
+
+    def set_score(self, score):
         """Set Computer's score."""
-        self.Score = Score
+        self.score = score
 
     def get_intelligence(self):
         """Get intelligence."""

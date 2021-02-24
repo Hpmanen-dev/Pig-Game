@@ -14,3 +14,7 @@ class Dice():
     def roll(self):
         """Roll the dice and return the number."""
         return random.randint(1, self.sides)
+
+    def get_sides(self):
+        """Get sides of the die"""
+        return self.sides
