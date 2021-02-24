@@ -35,12 +35,12 @@ class Commands(cmd.Cmd):
 
     def do_start(self, _):
         """Start the game."""
-        self.game.Start(self.computer)
+        self.game.start(self.computer)
 
     def do_roll(self, _):
         """Roll the dice."""
         try:
-            self.game.Player_turn("roll")
+            self.game.player_turn("roll")
 
         except AttributeError:
             msg = ("You need to start before you can play.\n"
@@ -50,7 +50,7 @@ class Commands(cmd.Cmd):
     def do_r(self, _):
         """Roll the dice."""
         try:
-            self.game.Player_turn("roll")
+            self.game.player_turn("roll")
         except AttributeError:
             msg = ("You need to start before you can play.\n"
                    "Please type 'start' to start the game.")
@@ -59,7 +59,7 @@ class Commands(cmd.Cmd):
     def do_hold(self, _):
         """Hold the points."""
         try:
-            self.game.Player_turn("hold")
+            self.game.player_turn("hold")
         except AttributeError:
             msg = ("You need to start before you can play.\n"
                    "Please type 'start' to start the game.")
@@ -68,7 +68,7 @@ class Commands(cmd.Cmd):
     def do_h(self, _):
         """Hold the points."""
         try:
-            self.game.Player_turn("hold")
+            self.game.player_turn("hold")
         except AttributeError:
             msg = ("You need to start before you can play.\n"
                    "Please type 'start' to start the game.")
@@ -80,7 +80,7 @@ class Commands(cmd.Cmd):
             msg = (f"{self.game.currentPlayer.get_name()}"
                    " has gained 100 points")
             print(msg)
-            self.game.currentPlayer.add_Score(100)
+            self.game.currentPlayer.add_score(100)
             self.game.Check_winner_condition()
 
         except AttributeError:
@@ -117,6 +117,6 @@ class Commands(cmd.Cmd):
         # pylint: disable=no-self-use
         """Display leaderboard."""
         try:
-            leaderboard.showLeaderboard()
+            leaderboard.show_leaderboard()
         except (ValueError, UnboundLocalError):
             print("You have not played any games yet!")
