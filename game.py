@@ -147,6 +147,7 @@ class Game():
         self.dice_score = 0
 
     def update_leaderboard(self):
+        """Update leaderboard."""
         try:
             win = self.winner
             pl1 = self.currentplayer
