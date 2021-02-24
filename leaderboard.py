@@ -6,18 +6,21 @@ from tabulate import tabulate
 def update_leaderboard(player1, player2, winner):
     """Update the txt file."""
     count = 0
+    name1 = player1.get_name()
+    name2 = player2.get_name()
+    winner = winner.get_name()
     with open("log.txt", "a+") as file:
         file.seek(0)
         lines = file.readlines()
-        if (f'Name: {player1.get_name()}\n') not in lines:
-            file.write(f"Name: {player1.get_name()}")
+        if (f'Name: {name1}\n') not in lines:
+            file.write(f"Name: {name1}")
             file.write("\nGames: 1\n")
             if player1 == winner:
                 file.write("Wins: 1\n")
             else:
                 file.write("Wins: 0\n")
-        if (f'Name: {player2.get_name()}\n') not in lines:
-            file.write(f"Name: {player2.get_name()}")
+        if (f'Name: {name2}\n') not in lines:
+            file.write(f"Name: {name2}")
             file.write("\nGames: 1\n")
             if player2 == winner:
                 file.write("Wins: 1")
@@ -25,22 +28,18 @@ def update_leaderboard(player1, player2, winner):
                 file.write("Wins: 0\n")
         for line in lines:
             if line.startswith("Name"):
-                typen, name = line.split()
-                if name == player1.get_name() or name == player2.get_name():
-                    if name == player1.get_name():
-                        currentplayer = player1
-                    elif name == player2.get_name():
-                        currentplayer = player2
-                    typeg, game = lines[count+1].split()
-                    game = int(game)
-                    if currentplayer == winner:
-                        typew, win = lines[count+2].split()
-                        win = int(win)
-                        lines[count+2] = (f"{typew} {win+1}\n")
-                    with open("log.txt", 'w') as file1:
-                        lines[count+1] = (f"{typeg} {game+1}\n")
-                        for line1 in lines:
-                            file1.write(line1)
+                name = line.split()[1]
+                currentplayer = name
+                game = lines[count+1].split()[1]
+                game = int(game)
+                if currentplayer == winner:
+                    win = lines[count+2].split()[1]
+                    win = int(win)
+                    lines[count+2] = (f"Wins: {win+1}\n")
+                with open("log.txt", 'w') as file1:
+                    lines[count+1] = (f"Games: {game+1}\n")
+                    for line1 in lines:
+                        file1.write(line1)
             count += 1
 
 
@@ -49,9 +48,9 @@ def show_leaderboard():
     table = []
     with open("log.txt", "r") as file:
         for line in file:
-            typen, name = line.rstrip("/n").split(":")
-            typeg, games = file.readline().rstrip("\n").split(":")
-            typew, wins = file.readline().rstrip("\n").split(":")
+            name = line.rstrip("/n").split(":")[1]
+            games = file.readline().rstrip("\n").split(":")[1]
+            wins = file.readline().rstrip("\n").split(":")[1]
             table.append([name, games, wins])
     table.sort(key=lambda x: x[2], reverse=True)
-    print(tabulate(table, headers=[typen, typeg, typew]))
+    print(tabulate(table, headers=["Name", "Games", "Wins"]))

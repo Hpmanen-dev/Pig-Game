@@ -77,11 +77,11 @@ class Commands(cmd.Cmd):
     def do_cheat(self, _):
         """Immediately wins the game."""
         try:
-            msg = (f"{self.game.currentPlayer.get_name()}"
+            msg = (f"{self.game.currentplayer.get_name()}"
                    " has gained 100 points")
             print(msg)
-            self.game.currentPlayer.add_score(100)
-            self.game.Check_winner_condition()
+            self.game.currentplayer.add_score(100)
+            self.game.check_winner_condition()
 
         except AttributeError:
             msg = ("You need to start the game before you can cheat!\n"
