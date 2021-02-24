@@ -76,7 +76,7 @@ class Commands(cmd.Cmd):
         """Immediately wins the game."""
         try:
             msg = (f"{self.game.currentPlayer.get_name()}"
-                   "has gained 100 points")
+                   " has gained 100 points")
             print(msg)
             self.game.currentPlayer.add_Score(100)
             self.game.Check_winner_condition()

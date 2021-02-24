@@ -54,6 +54,9 @@ class Game():
         self.mode = "Multiplayer"
         self.Player1 = player.Player(input("Enter your name: "))
         self.Player2 = player.Player(input("Enter your name: "))
+        while self.Player2.get_name() == self.Player1.get_name():
+            print("Can't have the same name as player one!")
+            self.Player2 = player.Player(input("Enter a new valid name: "))
         select_player = random.randint(1, 2)
         if select_player == 1:
             self.currentPlayer = self.Player1
@@ -63,7 +66,7 @@ class Game():
             self.otherPlayer = self.Player1
         print(f"{self.currentPlayer.get_name()} starts.")
         print("Do you want to roll or hold?")
-
+        
     def Player_turn(self, decision):
         """Player turn."""
         check = False
