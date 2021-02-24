@@ -19,17 +19,18 @@ def update_leaderboard(player1, player2, winner):
         for line in lines:
             if line.startswith("Name"):
                 name = line.split()[1]
-                currentplayer = name
-                games = lines[count+1].split()[1]
-                games = int(games)
-                if currentplayer == winner:
-                    wins = lines[count+2].split()[1]
-                    wins = int(wins)
-                    lines[count+2] = (f"Wins: {wins+1}\n")
-                with open("log.txt", 'w') as file1:
-                    lines[count+1] = (f"Games: {games+1}\n")
-                    for line1 in lines:
-                        file1.write(line1)
+                if name == name1 or name == name2:
+                    currentplayer = name
+                    games = lines[count+1].split()[1]
+                    games = int(games)
+                    if currentplayer == winner:
+                        wins = lines[count+2].split()[1]
+                        wins = int(wins)
+                        lines[count+2] = (f"Wins: {wins+1}\n")
+                    with open("log.txt", 'w') as file1:
+                        lines[count+1] = (f"Games: {games+1}\n")
+                        for line1 in lines:
+                            file1.write(line1)
             count += 1
 
 
