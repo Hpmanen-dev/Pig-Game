@@ -106,7 +106,7 @@ class Game():
         if self.currentPlayer.get_Score() >= 100:
             print(f"Congratulations {self.currentPlayer.get_name()}, You won!")
             self.Winner = self.currentPlayer
-            self.add_newLeaderboard()
+            self.update_Leaderboard()
             self.currentPlayer = None
             self.otherPlayer = None
             return True
@@ -146,7 +146,7 @@ class Game():
         self.otherPlayer = prev_player
         self.dice_score = 0
 
-    def add_newLeaderboard(self):
+    def update_Leaderboard(self):
         try:
             win = self.Winner
             Pl1 = self.currentPlayer
