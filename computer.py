@@ -1,5 +1,6 @@
 """This is the Computer Player."""
 
+
 class Computer():
     """This is the Computer Class."""
 

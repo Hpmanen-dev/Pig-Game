@@ -16,5 +16,5 @@ class Dice():
         return random.randint(1, self.sides)
 
     def get_sides(self):
-        """Get sides of the die"""
+        """Get sides of the die."""
         return self.sides

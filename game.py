@@ -15,13 +15,10 @@ class Game():
     computer = None
     currentplayer = None
     otherplayer = None
-    winner = None
-    mode = None
 
     def __init__(self):
         """Initiate the game."""
         self.die = dice.Dice()
-        self.win_condition = 100
         self.dice_score = 0
 
     def start(self, computer):
@@ -41,7 +38,6 @@ class Game():
 
     def singleplayer(self, computer):
         """Initiate a singleplayer game."""
-        self.mode = "Singleplayer"
         self.player1 = player.Player(input("Enter your name: "))
         self.computer = computer
         print(f"{self.player1.get_name()} starts.")
@@ -52,7 +48,6 @@ class Game():
 
     def multiplayer(self):
         """Initiate a multiplayer game."""
-        self.mode = "Multiplayer"
         self.player1 = player.Player(input("Enter your name: "))
         self.player2 = player.Player(input("Enter your name: "))
         while self.player2.get_name() == self.player1.get_name():
@@ -70,7 +65,7 @@ class Game():
 
     def player_turn(self, decision):
         """Player turn."""
-        check = False
+        winner = None
         if decision in "roll":
             roll = self.die.roll()
             print(f"{self.currentplayer.get_name()} rolled a {roll}")
@@ -92,12 +87,12 @@ class Game():
                    f"{self.currentplayer.get_name()} now have "
                    f"{self.currentplayer.get_score()} points in total!")
             print(msg)
-            check = self.check_winner_condition()
+            winner = self.check_winner_condition()
             self.switch_player()
-        if check is False:
+        if winner is None:
             print(f"{self.currentplayer.get_name()}'s turn")
         else:
-            msg = (f"The game is over {self.winner.get_name()} won!"
+            msg = (f"The game is over {winner.get_name()} won!"
                    " To start a new game type 'start' or type 'exit' to exit.")
             print(msg)
             return
@@ -109,12 +104,12 @@ class Game():
         """Check if the current player has 100 or more points."""
         if self.currentplayer.get_score() >= 100:
             print(f"Congratulations {self.currentplayer.get_name()}, You won!")
-            self.winner = self.currentplayer
-            self.update_leaderboard()
+            winner = self.currentplayer
+            self.update_leaderboard(winner)
             self.currentplayer = None
             self.otherplayer = None
-            return True
-        return False
+            return winner
+        return None
 
     def computer_logic(self):
         """How the computer works."""
@@ -149,10 +144,10 @@ class Game():
         self.otherplayer = prev_player
         self.dice_score = 0
 
-    def update_leaderboard(self):
+    def update_leaderboard(self, winner):
         """Update leaderboard."""
         try:
-            win = self.winner
+            win = winner
             pl1 = self.currentplayer
             pl2 = self.otherplayer
             leaderboard.update_leaderboard(pl1, pl2, win)
