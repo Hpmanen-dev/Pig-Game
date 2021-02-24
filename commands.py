@@ -49,12 +49,7 @@ class Commands(cmd.Cmd):
 
     def do_r(self, _):
         """Roll the dice."""
-        try:
-            self.game.player_turn("roll")
-        except AttributeError:
-            msg = ("You need to start before you can play.\n"
-                   "Please type 'start' to start the game.")
-            print(msg)
+        self.do_roll(_)
 
     def do_hold(self, _):
         """Hold the points."""
@@ -67,18 +62,13 @@ class Commands(cmd.Cmd):
 
     def do_h(self, _):
         """Hold the points."""
-        try:
-            self.game.player_turn("hold")
-        except AttributeError:
-            msg = ("You need to start before you can play.\n"
-                   "Please type 'start' to start the game.")
-            print(msg)
+        self.do_hold(_)
 
     def do_cheat(self, _):
         """Immediately wins the game."""
         try:
             msg = (f"{self.game.currentplayer.get_name()}"
-                   " has gained 100 points")
+                   " has gained 100 points from cheating!")
             print(msg)
             self.game.currentplayer.add_score(100)
             self.game.check_winner_condition()
@@ -106,11 +96,11 @@ class Commands(cmd.Cmd):
             print("Please enter an integer")
             return
         if not arg:
-            print("Please enter an intelligence setting between 1-3")
+            print("Try to type 'intelligence (number)'")
         elif int_arg < 1 or int_arg > 3:
             print("The intelligence can only be between 1-3")
         else:
-            print(f"Set the computer's intelligence to {int_arg}")
+            print(f"The computer's intelligence is now set to {int_arg}")
             self.computer.set_intelligence(int_arg)
 
     def do_leaderboard(self, _):
