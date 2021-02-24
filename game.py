@@ -65,7 +65,7 @@ class Game():
         print("Do you want to roll or hold?")
 
     def player_turn(self, decision):
-        """player turn."""
+        """Player turn."""
         check = False
         if decision in "roll":
             roll = self.die.roll()
