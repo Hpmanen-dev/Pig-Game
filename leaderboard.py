@@ -18,8 +18,8 @@ def update_leaderboard(player1, player2, winner):
             add_new_user(name2, winner, file)
         for line in lines:
             if line.startswith("Name"):
-                name = line.split()[1]
-                if name == name1 or name == name2:
+                name = line.split(":")[1].strip("\n").strip(" ")
+                if name in (name1, name2):
                     currentplayer = name
                     games = lines[count+1].split()[1]
                     games = int(games)
