@@ -54,6 +54,9 @@ class Game():
         self.mode = "Multiplayer"
         self.player1 = player.Player(input("Enter your name: "))
         self.player2 = player.Player(input("Enter your name: "))
+        while self.player2.get_name() == self.player1.get_name():
+            print("Can't have the same name as player one!")
+            self.Player2 = player.Player(input("Enter a new valid name: "))
         select_player = random.randint(1, 2)
         if select_player == 1:
             self.currentplayer = self.player1
