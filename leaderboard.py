@@ -13,34 +13,34 @@ def update_leaderboard(player1, player2, winner):
         file.seek(0)
         lines = file.readlines()
         if (f'Name: {name1}\n') not in lines:
-            file.write(f"Name: {name1}")
-            file.write("\nGames: 1\n")
-            if player1 == winner:
-                file.write("Wins: 1\n")
-            else:
-                file.write("Wins: 0\n")
+            add_new_user(name1, winner, file)
         if (f'Name: {name2}\n') not in lines:
-            file.write(f"Name: {name2}")
-            file.write("\nGames: 1\n")
-            if player2 == winner:
-                file.write("Wins: 1")
-            else:
-                file.write("Wins: 0\n")
+            add_new_user(name2, winner, file)
         for line in lines:
             if line.startswith("Name"):
                 name = line.split()[1]
                 currentplayer = name
-                game = lines[count+1].split()[1]
-                game = int(game)
+                games = lines[count+1].split()[1]
+                games = int(games)
                 if currentplayer == winner:
-                    win = lines[count+2].split()[1]
-                    win = int(win)
-                    lines[count+2] = (f"Wins: {win+1}\n")
+                    wins = lines[count+2].split()[1]
+                    wins = int(wins)
+                    lines[count+2] = (f"Wins: {wins+1}\n")
                 with open("log.txt", 'w') as file1:
-                    lines[count+1] = (f"Games: {game+1}\n")
+                    lines[count+1] = (f"Games: {games+1}\n")
                     for line1 in lines:
                         file1.write(line1)
             count += 1
+
+
+def add_new_user(name, winner, file):
+    """Add new user to leaderboard."""
+    file.write(f"Name: {name}")
+    file.write("\nGames: 1\n")
+    if name == winner:
+        file.write("Wins: 1\n")
+    else:
+        file.write("Wins: 0\n")
 
 
 def show_leaderboard():
