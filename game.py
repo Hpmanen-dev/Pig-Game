@@ -67,6 +67,7 @@ class Game():
                 self.computer_logic()
             return roll
         else:
+            print("lol")
             msg = (f"{self.currentplayer.get_name()} "
                     "got 0 points this round")
             print(msg)
@@ -74,6 +75,7 @@ class Game():
                 self.computer.set_greediness(7)
                 self.computer.set_rolls(0)
             self.switch_player()
+            return None
     
 
     def hold(self):
