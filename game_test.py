@@ -17,13 +17,19 @@ class TestGameClass(unittest.TestCase):
     def test_start(self):
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['singleplayer', 'name1']):
-            assert the_game.start() == "singleplayer"
+            res = the_game.start()
+            exp = "singleplayer"
+            self.assertEqual(res, exp)
 
         with mock.patch('builtins.input', side_effect=['multiplayer', 'name1', 'name2']):
-            assert the_game.start() == "multiplayer"
+            res = the_game.start()
+            exp = "multiplayer"
+            self.assertEqual(res, exp)
 
         with mock.patch('builtins.input', return_value='something'):
-            assert the_game.start() == "Choose either 'singleplayer' or 'multiplayer'"
+            res = the_game.start()
+            exp = ("Choose either 'singleplayer' or 'multiplayer'")
+            self.assertEqual(res, exp)
 
     @patch('random.randint')
     def test_roll(self, mocked_randint):
@@ -31,9 +37,6 @@ class TestGameClass(unittest.TestCase):
         with mock.patch('builtins.input', side_effect=['multiplayer', 'name1', 'name2']):
             the_game.start()
             mocked_randint.return_value = 1
-        assert the_game.roll() is None
-        mocked_randint.return_value = 5
-        assert the_game.roll() == 5
-    
-    def test_hold(self):
-        
+            self.assertIsNone(the_game.roll())
+            mocked_randint.return_value = 5
+            self.assertEqual(the_game.roll(), 5)
