@@ -28,9 +28,12 @@ class TestGameClass(unittest.TestCase):
     @patch('random.randint')
     def test_roll(self, mocked_randint):
         the_game = game.Game()
-        with mock.patch('builtins.input', side_effect=['singleplayer', 'name1']):
+        with mock.patch('builtins.input', side_effect=['multiplayer', 'name1', 'name2']):
             the_game.start()
             mocked_randint.return_value = 1
         assert the_game.roll() is None
         mocked_randint.return_value = 5
         assert the_game.roll() == 5
+    
+    def test_hold(self):
+        
