@@ -35,12 +35,12 @@ class Commands(cmd.Cmd):
 
     def do_start(self, _):
         """Start the game."""
-        self.game.start(self.computer)
+        self.game.start()
 
     def do_roll(self, _):
         """Roll the dice."""
         try:
-            self.game.player_turn("roll")
+            self.game.game_loop("roll")
 
         except AttributeError:
             msg = ("You need to start before you can play.\n"
@@ -54,7 +54,7 @@ class Commands(cmd.Cmd):
     def do_hold(self, _):
         """Hold the points."""
         try:
-            self.game.player_turn("hold")
+            self.game.game_loop("hold")
         except AttributeError:
             msg = ("You need to start before you can play.\n"
                    "Please type 'start' to start the game.")

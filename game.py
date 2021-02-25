@@ -5,6 +5,7 @@ import random
 import leaderboard
 import player
 import dice
+import computer
 
 
 class Game():
@@ -21,49 +22,42 @@ class Game():
         self.die = dice.Dice()
         self.dice_score = 0
 
-    def start(self, computer):
-        """Ask user if he/she wants to play single or multiplayer."""
-        print('Do you want to play "singleplayer" or "multiplayer"?')
+    def start(self):
+        """Decide gamemode, single or multiplayer."""
         loop = True
         while loop:
+            print("Do you want to play singleplayer or multiplayer?")
             decision = input()
             if decision in "singleplayer":
-                self.singleplayer(computer)
-                loop = False
+                self.player1 = player.Player(input("Enter your name: "))
+                self.computer = computer.Computer(1)
+                print(f"{self.player1.get_name()} starts.")
+                self.currentplayer = self.player1
+                self.otherplayer = self.computer
+                self.computer.set_score(0)
+                return "singleplayer"
             elif decision in "multiplayer":
-                self.multiplayer()
-                loop = False
-            else:
-                print("Choose either 'singleplayer' or 'multiplayer'")
+                self.player1 = player.Player(input("Enter your name: "))
+                self.player2 = player.Player(input("Enter your name: "))
+                while self.player2.get_name() == self.player1.get_name():
+                    msg = ("Can't have the same name as player one!")
+                    print(msg)
+                    self.player2 = player.Player(input("Enter a new valid name: "))
+                select_player = random.randint(1, 2)
+                if select_player == 1:
+                    self.currentplayer = self.player1
+                    self.otherplayer = self.player2
+                else:
+                    self.currentplayer = self.player2
+                    self.otherplayer = self.player1
+                print(f"{self.currentplayer.get_name()} starts.")
+                return "multiplayer"
+            if decision not in ("singleplayer", "multiplayer"):
+                msg = ("Choose either 'singleplayer' or 'multiplayer'")
+                print(msg)
+                return msg
 
-    def singleplayer(self, computer):
-        """Initiate a singleplayer game."""
-        self.player1 = player.Player(input("Enter your name: "))
-        self.computer = computer
-        print(f"{self.player1.get_name()} starts.")
-        self.currentplayer = self.player1
-        self.otherplayer = self.computer
-        self.computer.set_score(0)
-        print("Do you want to roll or hold?")
-
-    def multiplayer(self):
-        """Initiate a multiplayer game."""
-        self.player1 = player.Player(input("Enter your name: "))
-        self.player2 = player.Player(input("Enter your name: "))
-        while self.player2.get_name() == self.player1.get_name():
-            print("Can't have the same name as player one!")
-            self.player2 = player.Player(input("Enter a new valid name: "))
-        select_player = random.randint(1, 2)
-        if select_player == 1:
-            self.currentplayer = self.player1
-            self.otherplayer = self.player2
-        else:
-            self.currentplayer = self.player2
-            self.otherplayer = self.player1
-        print(f"{self.currentplayer.get_name()} starts.")
-        print("Do you want to roll or hold?")
-
-    def player_turn(self, decision):
+    def game_loop(self, decision):
         """Player turn."""
         winner = None
         if decision in "roll":
@@ -119,10 +113,10 @@ class Game():
         if rolls == 0:
             add_roll = rolls + 1
             self.computer.set_rolls(add_roll)
-            self.player_turn("roll")
+            self.game_loop("roll")
             self.computer.set_rolls(0)
         elif self.currentplayer.get_score() + self.dice_score >= 100:
-            self.player_turn("hold")
+            self.game_loop("hold")
         else:
             random.seed()
             decision = random.randint(intelligence, greediness)
@@ -131,11 +125,11 @@ class Game():
                 self.computer.set_rolls(add_roll)
                 change = greediness - 1
                 self.computer.set_greediness(change)
-                self.player_turn("roll")
+                self.game_loop("roll")
             else:
                 self.computer.set_greediness(7)
                 self.computer.set_rolls(0)
-                self.player_turn("hold")
+                self.game_loop("hold")
 
     def switch_player(self):
         """Change player turn."""
