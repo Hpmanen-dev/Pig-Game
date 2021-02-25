@@ -40,7 +40,7 @@ class Commands(cmd.Cmd):
     def do_roll(self, _):
         """Roll the dice."""
         try:
-            self.game.game_loop("roll")
+            self.game.roll()
 
         except AttributeError:
             msg = ("You need to start before you can play.\n"
@@ -54,7 +54,7 @@ class Commands(cmd.Cmd):
     def do_hold(self, _):
         """Hold the points."""
         try:
-            self.game.game_loop("hold")
+            self.game.hold()
         except AttributeError:
             msg = ("You need to start before you can play.\n"
                    "Please type 'start' to start the game.")
@@ -67,11 +67,7 @@ class Commands(cmd.Cmd):
     def do_cheat(self, _):
         """Immediately wins the game."""
         try:
-            msg = (f"{self.game.currentplayer.get_name()}"
-                   " has gained 100 points from cheating!")
-            print(msg)
-            self.game.currentplayer.add_score(100)
-            self.game.check_winner_condition()
+            self.game.cheat()
 
         except AttributeError:
             msg = ("You need to start the game before you can cheat!\n"

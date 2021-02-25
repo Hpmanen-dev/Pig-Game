@@ -57,42 +57,45 @@ class Game():
                 print(msg)
                 return msg
 
-    def game_loop(self, decision):
-        """Player turn."""
-        winner = None
-        if decision in "roll":
-            roll = self.die.roll()
-            print(f"{self.currentplayer.get_name()} rolled a {roll}")
-            if roll != 1:
-                self.dice_score += roll
-            else:
-                msg = (f"{self.currentplayer.get_name()} "
-                       "got 0 points this round")
-                print(msg)
-                if self.currentplayer == self.computer:
-                    self.computer.set_greediness(7)
-                    self.computer.set_rolls(0)
-                self.switch_player()
-        elif decision in "hold":
-            self.currentplayer.add_score(self.dice_score)
-            msg = (f"{self.currentplayer.get_name()} decided to hold\n"
-                   f"{self.currentplayer.get_name()} received "
-                   f"{self.dice_score} points\n"
-                   f"{self.currentplayer.get_name()} now have "
-                   f"{self.currentplayer.get_score()} points in total!")
-            print(msg)
-            winner = self.check_winner_condition()
-            self.switch_player()
-        if winner is None:
-            print(f"{self.currentplayer.get_name()}'s turn")
+    def roll(self):
+        roll = self.die.roll()
+        print(f"{self.currentplayer.get_name()} rolled a {roll}")
+        if roll != 1:
+            self.dice_score += roll
+            if self.currentplayer == self.computer:
+                sleep(1)
+                self.computer_logic()
+            return roll
         else:
-            msg = (f"The game is over {winner.get_name()} won!"
-                   " To start a new game type 'start' or type 'exit' to exit.")
+            msg = (f"{self.currentplayer.get_name()} "
+                    "got 0 points this round")
             print(msg)
-            return
-        if self.currentplayer == self.computer:
-            sleep(1)
-            self.computer_logic()
+            if self.currentplayer == self.computer:
+                self.computer.set_greediness(7)
+                self.computer.set_rolls(0)
+            self.switch_player()
+    
+
+    def hold(self):
+        self.currentplayer.add_score(self.dice_score)
+        msg = (f"{self.currentplayer.get_name()} decided to hold\n"
+                f"{self.currentplayer.get_name()} received "
+                f"{self.dice_score} points\n"
+                f"{self.currentplayer.get_name()} now have "
+                f"{self.currentplayer.get_score()} points in total!")
+        print(msg)
+        winner = self.check_winner_condition()
+        self.switch_player()
+        return winner
+    
+
+    def cheat(self):
+        msg = (f"{self.currentplayer.get_name()}"
+            " has gained 100 points from cheating!")
+        print(msg)
+        self.currentplayer.add_score(100)
+        self.check_winner_condition()
+
 
     def check_winner_condition(self):
         """Check if the current player has 100 or more points."""
@@ -113,10 +116,10 @@ class Game():
         if rolls == 0:
             add_roll = rolls + 1
             self.computer.set_rolls(add_roll)
-            self.game_loop("roll")
+            self.roll()
             self.computer.set_rolls(0)
         elif self.currentplayer.get_score() + self.dice_score >= 100:
-            self.game_loop("hold")
+            self.hold()
         else:
             random.seed()
             decision = random.randint(intelligence, greediness)
@@ -125,11 +128,9 @@ class Game():
                 self.computer.set_rolls(add_roll)
                 change = greediness - 1
                 self.computer.set_greediness(change)
-                self.game_loop("roll")
+                self.roll()
             else:
-                self.computer.set_greediness(7)
-                self.computer.set_rolls(0)
-                self.game_loop("hold")
+                self.hold()
 
     def switch_player(self):
         """Change player turn."""
@@ -137,6 +138,9 @@ class Game():
         self.currentplayer = self.otherplayer
         self.otherplayer = prev_player
         self.dice_score = 0
+        if self.currentplayer == self.computer:
+            sleep(1)
+            self.computer_logic()
 
     def update_leaderboard(self, winner):
         """Update leaderboard."""
