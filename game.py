@@ -25,17 +25,18 @@ class Game():
     def start(self):
         """Decide gamemode, single or multiplayer."""
         loop = True
+        print("Do you want to play singleplayer or multiplayer?")
         while loop:
-            print("Do you want to play singleplayer or multiplayer?")
             decision = input()
             if decision in "singleplayer":
                 self.player1 = player.Player(input("Enter your name: "))
                 self.computer = computer.Computer(1)
-                print(f"{self.player1.get_name()} starts.")
                 self.currentplayer = self.player1
                 self.otherplayer = self.computer
                 self.computer.set_score(0)
-                return "singleplayer"
+                msg = "You chose to play singleplayer!"
+                loop = False
+
             elif decision in "multiplayer":
                 self.player1 = player.Player(input("Enter your name: "))
                 self.player2 = player.Player(input("Enter your name: "))
@@ -50,12 +51,17 @@ class Game():
                 else:
                     self.currentplayer = self.player2
                     self.otherplayer = self.player1
-                print(f"{self.currentplayer.get_name()} starts.")
-                return "multiplayer"
-            if decision not in ("singleplayer", "multiplayer"):
+                msg = "You chose to play multiplayer!"
+                loop = False
+            elif decision not in ("singleplayer", "multiplayer"):
                 msg = ("Choose either 'singleplayer' or 'multiplayer'")
                 print(msg)
-                return msg
+        print(f"{msg}\n")
+        print(f"{self.currentplayer.get_name()} starts.")
+        print("Do you want to roll or hold?")
+        return msg
+
+        
 
     def roll(self):
         roll = self.die.roll()
@@ -67,7 +73,6 @@ class Game():
                 self.computer_logic()
             return roll
         else:
-            print("lol")
             msg = (f"{self.currentplayer.get_name()} "
                     "got 0 points this round")
             print(msg)
@@ -143,6 +148,10 @@ class Game():
         if self.currentplayer == self.computer:
             sleep(1)
             self.computer_logic()
+        msg = (f"It is {self.currentplayer.get_name()}'s turn.")
+        print(msg)
+        print("Do you want to roll or hold?")
+        return msg
 
     def update_leaderboard(self, winner):
         """Update leaderboard."""

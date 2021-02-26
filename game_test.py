@@ -18,17 +18,17 @@ class TestGameClass(unittest.TestCase):
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['singleplayer', 'name1']):
             res = the_game.start()
-            exp = "singleplayer"
+            exp = "You chose to play singleplayer!"
             self.assertEqual(res, exp)
 
         with mock.patch('builtins.input', side_effect=['multiplayer', 'name1', 'name2']):
             res = the_game.start()
-            exp = "multiplayer"
+            exp = "You chose to play multiplayer!"
             self.assertEqual(res, exp)
 
-        with mock.patch('builtins.input', return_value='something'):
+        with mock.patch('builtins.input', side_effect=['test', 'singleplayer', 'name']):
             res = the_game.start()
-            exp = ("Choose either 'singleplayer' or 'multiplayer'")
+            exp = "You chose to play singleplayer!"
             self.assertEqual(res, exp)
 
     @patch('random.randint')
