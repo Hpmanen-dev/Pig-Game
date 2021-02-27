@@ -13,9 +13,10 @@ def update_leaderboard(player1, player2, winner):
         file.seek(0)
         lines = file.readlines()
         if (f'Name: {name1}\n') not in lines:
-            add_new_user(name1, winner)
+            add_new_user(name1, winner, file)
+        print(str((f'Name: {name2}\n') not in lines))
         if (f'Name: {name2}\n') not in lines:
-            add_new_user(name2, winner)
+            add_new_user(name2, winner, file)
         for line in lines:
             if line.startswith("Name"):
                 name = line.split(":")[1].strip("\n").strip(" ")
@@ -35,15 +36,14 @@ def update_leaderboard(player1, player2, winner):
     return 'Updated'
 
 
-def add_new_user(name, winner):
+def add_new_user(name, winner, file):
     """Add new user to leaderboard."""
-    with open("log.txt", "a+") as file:
-        file.write(f"Name: {name}")
-        file.write("\nGames: 1\n")
-        if name == winner:
-            file.write("Wins: 1\n")
-        else:
-            file.write("Wins: 0\n")
+    file.write(f"Name: {name}")
+    file.write("\nGames: 1\n")
+    if name == winner:
+        file.write("Wins: 1\n")
+    else:
+        file.write("Wins: 0\n")
     return 'done'
 
 

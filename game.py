@@ -91,16 +91,19 @@ class Game():
                 f"{self.currentplayer.get_name()} now have "
                 f"{self.currentplayer.get_score()} points in total!")
         print(msg)
-        winner = self.check_winner_condition()
+        if self.currentplayer == self.computer:
+            self.computer.set_greediness(7)
+            self.computer.set_rolls(0)
+        self.check_winner_condition()
         self.switch_player()
-        return winner
+        return self.dice_score
     
 
     def cheat(self):
+        self.currentplayer.add_score(100)
         msg = (f"{self.currentplayer.get_name()}"
             " has gained 100 points from cheating!")
         print(msg)
-        self.currentplayer.add_score(100)
         self.check_winner_condition()
         return 'cheater'
 
@@ -114,6 +117,7 @@ class Game():
             self.currentplayer = None
             self.otherplayer = None
             return winner
+        return None
 
     def computer_logic(self):
         """How the computer works."""
