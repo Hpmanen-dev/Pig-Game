@@ -86,8 +86,12 @@ class Commands(cmd.Cmd):
         """Change the intelligence of the computer."""
         try:
             int_arg = int(arg)
+            self.game.computer.set_intelligence(int_arg)
         except ValueError:
             print("Please enter an integer")
+            return
+        except AttributeError:
+            print("You have to start a singleplayer game first.")
             return
         if not arg:
             print("Try to type 'intelligence (number)'")
