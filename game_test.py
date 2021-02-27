@@ -40,3 +40,18 @@ class TestGameClass(unittest.TestCase):
             self.assertIsNone(the_game.roll())
             mocked_randint.return_value = 5
             self.assertEqual(the_game.roll(), 5)
+
+    def test_computer(self):
+        the_game = game.Game()
+        with mock.patch('builtins.input', side_effect=['singleplayer', 'name']):
+            with mock.patch('random.randint', return_value = 1):
+                the_game.start()
+                the_game.hold()
+                self.assertEqual(the_game.computer_logic(), "auto roll")
+
+    def test_cheat(self):
+        the_game = game.Game()
+        with mock.patch('builtins.input', side_effect=['singleplayer', 'name']):
+            the_game.start()
+        self.assertEqual(the_game.cheat(), 'cheater')
+

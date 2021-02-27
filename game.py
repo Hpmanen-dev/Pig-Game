@@ -102,6 +102,7 @@ class Game():
         print(msg)
         self.currentplayer.add_score(100)
         self.check_winner_condition()
+        return 'cheater'
 
 
     def check_winner_condition(self):
@@ -113,7 +114,6 @@ class Game():
             self.currentplayer = None
             self.otherplayer = None
             return winner
-        return None
 
     def computer_logic(self):
         """How the computer works."""
@@ -124,9 +124,10 @@ class Game():
             add_roll = rolls + 1
             self.computer.set_rolls(add_roll)
             self.roll()
-            self.computer.set_rolls(0)
+            return 'auto roll'
         elif self.currentplayer.get_score() + self.dice_score >= 100:
             self.hold()
+            return 'Calculated'
         else:
             random.seed()
             decision = random.randint(intelligence, greediness)
@@ -136,8 +137,10 @@ class Game():
                 change = greediness - 1
                 self.computer.set_greediness(change)
                 self.roll()
+                return "rolled"
             else:
                 self.hold()
+                return "hold"
 
     def switch_player(self):
         """Change player turn."""
@@ -145,21 +148,17 @@ class Game():
         self.currentplayer = self.otherplayer
         self.otherplayer = prev_player
         self.dice_score = 0
-        if self.currentplayer == self.computer:
-            sleep(1)
-            self.computer_logic()
         msg = (f"It is {self.currentplayer.get_name()}'s turn.")
         print(msg)
         print("Do you want to roll or hold?")
-        return msg
+        if self.currentplayer == self.computer:
+            sleep(1)
+            self.computer_logic()
+        return 'Player switched'
 
     def update_leaderboard(self, winner):
         """Update leaderboard."""
-        try:
-            win = winner
-            pl1 = self.currentplayer
-            pl2 = self.otherplayer
-            leaderboard.update_leaderboard(pl1, pl2, win)
-        except AttributeError:
-            print("Something went wrong, could not update logfile.")
-            return
+        win = winner
+        pl1 = self.currentplayer
+        pl2 = self.otherplayer
+        leaderboard.update_leaderboard(pl1, pl2, win)

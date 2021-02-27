@@ -3,7 +3,6 @@
 import sys
 import cmd
 import game
-import computer
 import leaderboard
 
 
@@ -17,7 +16,6 @@ class Commands(cmd.Cmd):
         """Init the object."""
         super().__init__()
         self.game = game.Game()
-        self.computer = computer.Computer(1)
 
     def do_rules(self, _):
         # pylint: disable=no-self-use
@@ -97,7 +95,6 @@ class Commands(cmd.Cmd):
             print("The intelligence can only be between 1-3")
         else:
             print(f"The computer's intelligence is now set to {int_arg}")
-            self.computer.set_intelligence(int_arg)
 
     def do_leaderboard(self, _):
         # pylint: disable=no-self-use
