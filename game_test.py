@@ -15,6 +15,12 @@ class TestGameClass(unittest.TestCase):
         self.assertIsInstance(the_game, exp)
     
     def test_start(self):
+        """
+        Test what happens if player chooses singleplayer,
+        Test what happpens if player chooses multiplayer,
+        Test what happens if player writes a wrong input and then a correct one,
+        Test what happens if player2 tries to name themselves the same as player1.
+        """
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['singleplayer', 'name1']):
             res = the_game.start()
@@ -30,18 +36,33 @@ class TestGameClass(unittest.TestCase):
             res = the_game.start()
             exp = "You chose to play singleplayer!"
             self.assertEqual(res, exp)
+        
+        with mock.patch('builtins.input', side_effect=["multiplayer", "name1", "name1", "name2"]):
+            res = the_game.start()
+            exp = "You chose to play multiplayer!"
+            self.assertEqual(res, exp)
 
     @patch('random.randint')
     def test_roll(self, mocked_randint):
+        """
+        Test rolling a 1,
+        Test rolling something other than 1.
+        """
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['multiplayer', 'name1', 'name2']):
             the_game.start()
             mocked_randint.return_value = 1
-            self.assertIsNone(the_game.roll())
+            res = the_game.roll()
+            exp = (f"{the_game.otherplayer.get_name()} "
+                   "got 0 points this round")
+            self.assertEqual(res, exp)
             mocked_randint.return_value = 5
-            self.assertEqual(the_game.roll(), 5)
+            res = the_game.roll()
+            exp = (f"{the_game.currentplayer.get_name()} rolled a 5")
+            self.assertEqual(res, exp)
 
     def test_computer(self):
+        """Test computer logic."""
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['singleplayer', 'name']):
             with mock.patch('random.randint', return_value = 1):
@@ -50,6 +71,7 @@ class TestGameClass(unittest.TestCase):
                 self.assertEqual(the_game.computer_logic(), "auto roll")
 
     def test_cheat(self):
+        """Test cheat command."""
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['singleplayer', 'name']):
             the_game.start()

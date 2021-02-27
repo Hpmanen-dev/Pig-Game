@@ -65,13 +65,13 @@ class Game():
 
     def roll(self):
         roll = self.die.roll()
-        print(f"{self.currentplayer.get_name()} rolled a {roll}")
+        msg = (f"{self.currentplayer.get_name()} rolled a {roll}")
+        print(msg)
         if roll != 1:
             self.dice_score += roll
             if self.currentplayer == self.computer:
                 sleep(1)
                 self.computer_logic()
-            return roll
         else:
             msg = (f"{self.currentplayer.get_name()} "
                     "got 0 points this round")
@@ -80,7 +80,7 @@ class Game():
                 self.computer.set_greediness(7)
                 self.computer.set_rolls(0)
             self.switch_player()
-            return None
+        return msg
     
 
     def hold(self):
