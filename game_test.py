@@ -13,7 +13,7 @@ class TestGameClass(unittest.TestCase):
         the_game = game.Game()
         exp = game.Game
         self.assertIsInstance(the_game, exp)
-    
+
     def test_start(self):
         """
         Test what happens if player chooses singleplayer,
@@ -36,7 +36,7 @@ class TestGameClass(unittest.TestCase):
             res = the_game.start()
             exp = "You chose to play singleplayer!"
             self.assertEqual(res, exp)
-        
+
         with mock.patch('builtins.input', side_effect=["multiplayer", "name1", "name1", "name2"]):
             res = the_game.start()
             exp = "You chose to play multiplayer!"
@@ -65,10 +65,18 @@ class TestGameClass(unittest.TestCase):
         """Test computer logic."""
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['singleplayer', 'name']):
+            the_game.start()
+            the_game.hold()
+
+            self.assertEqual(the_game.computer_logic(), "auto roll")
+
+            with mock.patch('random.randint', return_value = 2):
+                the_game.computer.set_rolls(1)
+                self.assertEqual(the_game.computer_logic(), "rolled")
+
             with mock.patch('random.randint', return_value = 1):
-                the_game.start()
-                the_game.hold()
-                self.assertEqual(the_game.computer_logic(), "auto roll")
+                the_game.computer.set_rolls(1)
+                self.assertEqual(the_game.computer_logic(), "hold")
 
     def test_cheat(self):
         """Test cheat command."""

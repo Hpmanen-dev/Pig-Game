@@ -14,7 +14,6 @@ def update_leaderboard(player1, player2, winner):
         lines = file.readlines()
         if (f'Name: {name1}\n') not in lines:
             add_new_user(name1, winner, file)
-        print(str((f'Name: {name2}\n') not in lines))
         if (f'Name: {name2}\n') not in lines:
             add_new_user(name2, winner, file)
         for line in lines:

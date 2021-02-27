@@ -24,6 +24,7 @@ class Game():
 
     def start(self):
         """Decide gamemode, single or multiplayer."""
+        self.dice_score = 0
         loop = True
         print("Do you want to play singleplayer or multiplayer?")
         while loop:
@@ -128,10 +129,9 @@ class Game():
             add_roll = rolls + 1
             self.computer.set_rolls(add_roll)
             self.roll()
-            return 'auto roll'
+            msg = "auto roll"
         elif self.currentplayer.get_score() + self.dice_score >= 100:
-            self.hold()
-            return 'Calculated'
+            msg = 'Calculated'
         else:
             random.seed()
             decision = random.randint(intelligence, greediness)
@@ -141,10 +141,11 @@ class Game():
                 change = greediness - 1
                 self.computer.set_greediness(change)
                 self.roll()
-                return "rolled"
+                msg = "rolled"
             else:
                 self.hold()
-                return "hold"
+                msg = "hold"
+        return msg
 
     def switch_player(self):
         """Change player turn."""
