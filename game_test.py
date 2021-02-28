@@ -61,8 +61,21 @@ class TestGameClass(unittest.TestCase):
             exp = (f"{the_game.currentplayer.get_name()} rolled a 5")
             self.assertEqual(res, exp)
 
+    def test_hold(self):
+        """Test if player can hold to get points."""
+        with mock.patch('builtins.input', side_effect=['singleplayer', 'name1']):
+            the_game = game.Game()
+            the_game.start()
+            res = the_game.hold()
+            exp = the_game.dice_score
+            self.assertEqual(res, exp)
+
     def test_computer(self):
-        """Test computer logic."""
+        """
+        Test if the computer auto roll works.
+        Test if the computer normal roll works.
+        Test if the computer hold works.
+        """
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['singleplayer', 'name']):
             the_game.start()

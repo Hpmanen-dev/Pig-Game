@@ -131,6 +131,7 @@ class Game():
             self.roll()
             msg = "auto roll"
         elif self.currentplayer.get_score() + self.dice_score >= 100:
+            self.hold()
             msg = 'Calculated'
         else:
             random.seed()
