@@ -12,7 +12,6 @@ class Computer:
         self.greediness = 7
         self.rolls = 0
 
-
     def get_score(self):
         """Get Score."""
         return self.score

@@ -11,16 +11,13 @@ import computer
 class Game():
     """Game class."""
 
-    player1 = None
-    player2 = None
-    computer = None
-    currentplayer = None
-    otherplayer = None
-
     def __init__(self):
         """Initiate the game."""
         self.die = dice.Dice()
         self.dice_score = 0
+        self.curplayer = None
+        self.otherplayer = None
+        self.computer = computer.Computer(1)
 
     def start(self):
         """Decide gamemode, singleplayer or multiplayer."""
@@ -30,95 +27,88 @@ class Game():
         while loop:
             decision = input()
             if decision in "singleplayer":
-                self.player1 = player.Player(input("Enter your name: "))
-                self.computer = computer.Computer(1)
-                self.currentplayer = self.player1
+                self.curplayer = player.Player(input("Enter your name: "))
                 self.otherplayer = self.computer
-                self.computer._score = 0
+                self.otherplayer.score = 0
                 msg = "You chose to play singleplayer!"
                 loop = False
 
             elif decision in "multiplayer":
-                self.player1 = player.Player(input("Enter your name: "))
-                self.player2 = player.Player(input("Enter your name: "))
-                while self.player2.get_name() == self.player1.get_name():
+                player1 = input("Enter your name: ")
+                player2 = input("Enter your name: ")
+                while player2 == player1:
                     msg = ("Can't have the same name as player one!")
                     print(msg)
-                    self.player2 = player.Player(input("Enter a new valid name: "))
+                    player2 = input("Enter a new valid input: ")
                 select_player = random.randint(1, 2)
                 if select_player == 1:
-                    self.currentplayer = self.player1
-                    self.otherplayer = self.player2
+                    self.curplayer = player.Player(player1)
+                    self.otherplayer = player.Player(player2)
                 else:
-                    self.currentplayer = self.player2
-                    self.otherplayer = self.player1
+                    self.curplayer = player.Player(player2)
+                    self.otherplayer = player.Player(player1)
                 msg = "You chose to play multiplayer!"
                 loop = False
             elif decision not in ("singleplayer", "multiplayer"):
                 msg = ("Choose either 'singleplayer' or 'multiplayer'")
                 print(msg)
         print(f"{msg}\n")
-        print(f"{self.currentplayer.get_name()} starts.")
+        print(f"{self.curplayer.get_name()} starts.")
         print("Do you want to roll or hold?")
         return msg
-
-        
 
     def roll(self):
         """Player rolls a die and adds the number to the dice score."""
         roll = self.die.roll()
-        msg = (f"{self.currentplayer.get_name()} rolled a {roll}")
+        msg = (f"{self.curplayer.get_name()} rolled a {roll}")
         print(msg)
         if roll != 1:
             self.dice_score += roll
-            if self.currentplayer == self.computer:
+            if isinstance(self.curplayer, computer.Computer):
                 sleep(1)
                 self.computer_logic()
         else:
-            msg = (f"{self.currentplayer.get_name()} "
-                    "got 0 points this round")
+            msg = (f"{self.curplayer.get_name()} "
+                   "got 0 points this round")
             print(msg)
-            if self.currentplayer == self.computer:
-                self.computer.set_greediness(7)
-                self.computer.set_rolls(0)
+            if isinstance(self.curplayer, computer.Computer):
+                self.curplayer.set_greediness(7)
+                self.curplayer.set_rolls(0)
             self.switch_player()
         return msg
-    
 
     def hold(self):
-        """The player decides to hold and receive the dice score."""
-        self.currentplayer.add_score(self.dice_score)
-        msg = (f"{self.currentplayer.get_name()} decided to hold\n"
-                f"{self.currentplayer.get_name()} received "
-                f"{self.dice_score} points\n"
-                f"{self.currentplayer.get_name()} now have "
-                f"{self.currentplayer.get_score()} points in total!")
+        """Hold and add the dice score to players total score."""
+        self.curplayer.add_score(self.dice_score)
+        msg = (f"{self.curplayer.get_name()} decided to hold\n"
+               f"{self.curplayer.get_name()} received "
+               f"{self.dice_score} points\n"
+               f"{self.curplayer.get_name()} now have "
+               f"{self.curplayer.get_score()} points in total!")
         print(msg)
-        if self.currentplayer == self.computer:
-            self.computer.set_greediness(7)
-            self.computer.set_rolls(0)
+        if isinstance(self.curplayer, computer.Computer):
+            self.curplayer.set_greediness(7)
+            self.curplayer.set_rolls(0)
         self.check_winner_condition()
         self.switch_player()
         return self.dice_score
-    
 
     def cheat(self):
         """Give the player 100 points to win the game."""
-        self.currentplayer.add_score(100)
-        msg = (f"{self.currentplayer.get_name()}"
-            " has gained 100 points from cheating!")
+        self.curplayer.add_score(100)
+        msg = (f"{self.curplayer.get_name()}"
+               " has gained 100 points from cheating!")
         print(msg)
         self.check_winner_condition()
         return 'cheater'
 
-
     def check_winner_condition(self):
-        """Check if the current player has 100 or more points."""
-        if self.currentplayer.get_score() >= 100:
-            print(f"Congratulations {self.currentplayer.get_name()}, You won!")
-            winner = self.currentplayer
+        """Check if the cur player has 100 or more points."""
+        if self.curplayer.get_score() >= 100:
+            print(f"Congratulations {self.curplayer.get_name()}, You won!")
+            winner = self.curplayer
             self.update_leaderboard(winner)
-            self.currentplayer = None
+            self.curplayer = None
             self.otherplayer = None
             return winner
         return None
@@ -133,7 +123,7 @@ class Game():
             self.computer.set_rolls(add_roll)
             self.roll()
             msg = "auto roll"
-        elif self.currentplayer.get_score() + self.dice_score >= 100:
+        elif self.computer.get_score() + self.dice_score >= 100:
             self.hold()
             msg = 'Calculated'
         else:
@@ -153,14 +143,12 @@ class Game():
 
     def switch_player(self):
         """Change player turn."""
-        prev_player = self.currentplayer
-        self.currentplayer = self.otherplayer
-        self.otherplayer = prev_player
+        self.curplayer, self.otherplayer = self.otherplayer, self.curplayer
         self.dice_score = 0
-        msg = (f"It is {self.currentplayer.get_name()}'s turn.")
+        msg = (f"It is {self.curplayer.get_name()}'s turn.")
         print(msg)
         print("Do you want to roll or hold?")
-        if self.currentplayer == self.computer:
+        if isinstance(self.curplayer, computer.Computer):
             sleep(1)
             self.computer_logic()
         return 'Player switched'
@@ -168,6 +156,6 @@ class Game():
     def update_leaderboard(self, winner):
         """Update leaderboard."""
         win = winner
-        pl1 = self.currentplayer
+        pl1 = self.curplayer
         pl2 = self.otherplayer
         leaderboard.update_leaderboard(pl1, pl2, win)

@@ -1,7 +1,10 @@
+"""Test dice."""
 import unittest
 import dice
 
-class dice_test(unittest.TestCase):
+
+class TestDiceClass(unittest.TestCase):
+    """Test game class."""
 
     def test_init(self):
         """Test initiating the die."""
@@ -9,7 +12,7 @@ class dice_test(unittest.TestCase):
         exp = dice.Dice
 
         self.assertIsInstance(res, exp)
-        
+
     def test_roll(self):
         """Test if the die rolls correctly."""
         die = dice.Dice()
@@ -17,11 +20,12 @@ class dice_test(unittest.TestCase):
         self.assertTrue(res)
 
     def test_sides(self):
-        """Test if the die have the specified amount of sides"""
+        """Test if the die have the specified amount of sides."""
         die = dice.Dice()
         side = die.get_sides()
         exp = 6
         self.assertEqual(side, exp)
+
 
 if __name__ == '__main__':
     unittest.main()

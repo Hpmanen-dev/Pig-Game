@@ -1,4 +1,5 @@
-""".                      
+"""Runs the program.
+
 How the game works:
 
 Each turn, a player repeatedly rolls a die until
@@ -9,8 +10,8 @@ If the dice shows a 1 the player will not receive any points and his/her turn
 will end letting the other player roll.
 The one to get to 100 points or more first is the winner.
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 """
+
 import commands
 
 if __name__ == "__main__":
