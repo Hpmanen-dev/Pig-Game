@@ -1,7 +1,7 @@
 """This is the Computer Player."""
 
 
-class Computer():
+class Computer:
     """This is the Computer Class."""
 
     def __init__(self, intelligence):
@@ -12,21 +12,18 @@ class Computer():
         self.greediness = 7
         self.rolls = 0
 
+
     def get_score(self):
         """Get Score."""
         return self.score
-
-    def get_name(self):
-        """Get Computer Name."""
-        return self.name
 
     def add_score(self, score):
         """Add to Computer's score."""
         self.score += score
 
-    def set_score(self, score):
-        """Set Computer's score."""
-        self.score = score
+    def get_name(self):
+        """Get Computer Name."""
+        return self.name
 
     def get_intelligence(self):
         """Get intelligence."""

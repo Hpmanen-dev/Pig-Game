@@ -79,7 +79,6 @@ class TestGameClass(unittest.TestCase):
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['singleplayer', 'name']):
             the_game.start()
-            the_game.hold()
 
             self.assertEqual(the_game.computer_logic(), "auto roll")
 
@@ -98,3 +97,6 @@ class TestGameClass(unittest.TestCase):
             the_game.start()
         self.assertEqual(the_game.cheat(), 'cheater')
 
+
+if __name__ == '__main__':
+    unittest.main()

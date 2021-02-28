@@ -23,7 +23,7 @@ class Game():
         self.dice_score = 0
 
     def start(self):
-        """Decide gamemode, single or multiplayer."""
+        """Decide gamemode, singleplayer or multiplayer."""
         self.dice_score = 0
         loop = True
         print("Do you want to play singleplayer or multiplayer?")
@@ -34,7 +34,7 @@ class Game():
                 self.computer = computer.Computer(1)
                 self.currentplayer = self.player1
                 self.otherplayer = self.computer
-                self.computer.set_score(0)
+                self.computer._score = 0
                 msg = "You chose to play singleplayer!"
                 loop = False
 
@@ -65,6 +65,7 @@ class Game():
         
 
     def roll(self):
+        """Player rolls a die and adds the number to the dice score."""
         roll = self.die.roll()
         msg = (f"{self.currentplayer.get_name()} rolled a {roll}")
         print(msg)
@@ -85,6 +86,7 @@ class Game():
     
 
     def hold(self):
+        """The player decides to hold and receive the dice score."""
         self.currentplayer.add_score(self.dice_score)
         msg = (f"{self.currentplayer.get_name()} decided to hold\n"
                 f"{self.currentplayer.get_name()} received "
@@ -101,6 +103,7 @@ class Game():
     
 
     def cheat(self):
+        """Give the player 100 points to win the game."""
         self.currentplayer.add_score(100)
         msg = (f"{self.currentplayer.get_name()}"
             " has gained 100 points from cheating!")
