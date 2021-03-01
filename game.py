@@ -61,17 +61,17 @@ class Game():
         """Player rolls a die and adds the number to the dice score."""
         roll = self.die.roll()
         msg = (f"{self.curplayer.get_name()} rolled a {roll}")
-        print(msg)
         if roll != 1:
             self.dice_score += roll
             if isinstance(self.curplayer, computer.Computer):
+                print(msg)
                 sleep(1)
                 self.computer_logic()
         else:
             msg = (f"{self.curplayer.get_name()} "
                    "got 0 points this round")
-            print(msg)
             if isinstance(self.curplayer, computer.Computer):
+                print(msg)
                 self.curplayer.set_greediness(7)
                 self.curplayer.set_rolls(0)
             self.switch_player()
@@ -85,13 +85,13 @@ class Game():
                f"{self.dice_score} points\n"
                f"{self.curplayer.get_name()} now have "
                f"{self.curplayer.get_score()} points in total!")
-        print(msg)
         if isinstance(self.curplayer, computer.Computer):
+            print(msg)
             self.curplayer.set_greediness(7)
             self.curplayer.set_rolls(0)
-        self.check_winner_condition()
         self.switch_player()
-        return self.dice_score
+        self.check_winner_condition()
+        return msg
 
     def cheat(self):
         """Give the player 100 points to win the game."""
@@ -121,11 +121,11 @@ class Game():
         if rolls == 0:
             add_roll = rolls + 1
             self.computer.set_rolls(add_roll)
-            self.roll()
-            msg = "auto roll"
+            print(self.roll())
+            return "auto roll"
         elif self.computer.get_score() + self.dice_score >= 100:
             self.hold()
-            msg = 'Calculated'
+            return "calculated"
         else:
             random.seed()
             decision = random.randint(intelligence, greediness)
@@ -134,12 +134,11 @@ class Game():
                 self.computer.set_rolls(add_roll)
                 change = greediness - 1
                 self.computer.set_greediness(change)
-                self.roll()
-                msg = "rolled"
+                print(self.roll())
+                return "rolled"
             else:
                 self.hold()
-                msg = "hold"
-        return msg
+                return "hold"
 
     def switch_player(self):
         """Change player turn."""

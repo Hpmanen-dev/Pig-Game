@@ -3,8 +3,7 @@
 ## v0.5 
 2021-02-23
 
-* Added a leaderboard to the game.
-
+* Highscore is now called leaderboard and is now sorted by the number of wins.
 
 ## v0.4 
 2021-02-22
@@ -15,7 +14,7 @@
 ## v0.3 
 2021-02-22
 
-* Added a license
+* Bugfixes and added license.
 
 
 ## v0.2 

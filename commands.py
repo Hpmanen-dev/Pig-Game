@@ -38,8 +38,7 @@ class Commands(cmd.Cmd):
     def do_roll(self, _):
         """Roll the dice."""
         try:
-            self.game.roll()
-
+            print(self.game.roll())
         except AttributeError:
             msg = ("You need to start before you can play.\n"
                    "Please type 'Start' to start the game.")

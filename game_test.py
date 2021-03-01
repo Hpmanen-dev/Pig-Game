@@ -72,7 +72,11 @@ class TestGameClass(unittest.TestCase):
             the_game = game.Game()
             the_game.start()
             res = the_game.hold()
-            exp = the_game.dice_score
+            exp = (f"{the_game.curplayer.get_name()} decided to hold\n"
+                   f"{the_game.curplayer.get_name()} received "
+                   f"{the_game.dice_score} points\n"
+                   f"{the_game.curplayer.get_name()} now have "
+                   f"{the_game.curplayer.get_score()} points in total!")
             self.assertEqual(res, exp)
 
     def test_computer(self):
@@ -95,6 +99,10 @@ class TestGameClass(unittest.TestCase):
             with mock.patch('random.randint', return_value=1):
                 the_game.computer.set_rolls(1)
                 self.assertEqual(the_game.computer_logic(), "hold")
+
+            the_game.computer.set_rolls(1)
+            the_game.computer.add_score(100)
+            self.assertEqual(the_game.computer_logic(), "calculated")
 
     def test_cheat(self):
         """Test cheat command."""

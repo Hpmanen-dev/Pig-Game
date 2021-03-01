@@ -40,3 +40,6 @@ cd Pig-Game
 py -m pip install -r requirements.txt
 py main.py
 ```
+
+## How to make documentation
+Use the command 'make doc' in the terminal to generate html documentation.
