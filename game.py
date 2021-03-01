@@ -154,7 +154,7 @@ class Game():
 
     def update_leaderboard(self, winner):
         """Update leaderboard."""
-        win = winner
-        pl1 = self.curplayer
-        pl2 = self.otherplayer
+        win = winner.get_name()
+        pl1 = self.curplayer.get_name()
+        pl2 = self.otherplayer.get_name()
         leaderboard.update_leaderboard(pl1, pl2, win)

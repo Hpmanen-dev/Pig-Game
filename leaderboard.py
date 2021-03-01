@@ -6,9 +6,9 @@ from tabulate import tabulate
 def update_leaderboard(player1, player2, winner):
     """Update the txt file."""
     count = 0
-    name1 = player1.get_name()
-    name2 = player2.get_name()
-    winner = winner.get_name()
+    name1 = player1
+    name2 = player2
+    winner = winner
     with open("log.txt", "a+") as file:
         file.seek(0)
         lines = file.readlines()
@@ -57,3 +57,4 @@ def show_leaderboard():
             table.append([name, games, wins])
     table.sort(key=lambda x: x[2], reverse=True)
     print(tabulate(table, headers=["Name", "Games", "Wins"]))
+    return 'done'
