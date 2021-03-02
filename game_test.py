@@ -4,6 +4,7 @@ from unittest.mock import patch
 from unittest import mock
 import unittest
 import game
+import player
 
 
 class TestGameClass(unittest.TestCase):
@@ -85,6 +86,7 @@ class TestGameClass(unittest.TestCase):
         Test if the computer auto roll works.
         Test if the computer normal roll works.
         Test if the computer hold works.
+        Test if the computer calculated works.
         """
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['single', 'n1']):
@@ -95,8 +97,12 @@ class TestGameClass(unittest.TestCase):
             with mock.patch('random.randint', return_value=2):
                 the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), "rolled")
-            computer_int = the_game.computer.get_intelligence()
 
+            with mock.patch('random.randint', return_value=1):
+                the_game.computer.set_rolls(0)
+                self.assertEqual(the_game.computer_logic(), "auto roll")
+
+            computer_int = the_game.computer.get_intelligence()
             with mock.patch('random.randint', return_value=computer_int):
                 the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), "hold")
@@ -111,3 +117,20 @@ class TestGameClass(unittest.TestCase):
         with mock.patch('builtins.input', side_effect=['single', 'n1']):
             the_game.start()
         self.assertEqual(the_game.cheat(), 'cheater')
+
+    @patch('random.randint')
+    def test_choose_starter(self, mocked_randint):
+        """Test chosing which player starts."""
+        the_game = game.Game()
+        player1 = player.Player("Test1")
+        player2 = player.Player("Test2")
+
+        mocked_randint.return_value = 1
+        res = the_game.choose_starter(player1, player2)
+        exp = "Player 1 starts"
+        self.assertEqual(res, exp)
+
+        mocked_randint.return_value = 2
+        res = the_game.choose_starter(player1, player2)
+        exp = "Player 2 starts"
+        self.assertEqual(res, exp)

@@ -21,6 +21,7 @@ class Game():
 
     def start(self):
         """Decide gamemode, singleplayer or multiplayer."""
+        self.computer.score = 0
         self.dice_score = 0
         loop = True
         print("Do you want to play singleplayer or multiplayer?")
@@ -29,7 +30,6 @@ class Game():
             if decision in "singleplayer":
                 self.curplayer = player.Player(input("Enter your name: "))
                 self.otherplayer = self.computer
-                self.otherplayer.score = 0
                 msg = "You chose to play singleplayer!"
                 loop = False
 
@@ -40,13 +40,7 @@ class Game():
                     msg = ("Can't have the same name as player one!")
                     print(msg)
                     player2 = input("Enter a new valid input: ")
-                select_player = random.randint(1, 2)
-                if select_player == 1:
-                    self.curplayer = player.Player(player1)
-                    self.otherplayer = player.Player(player2)
-                else:
-                    self.curplayer = player.Player(player2)
-                    self.otherplayer = player.Player(player1)
+                self.choose_starter(player1, player2)
                 msg = "You chose to play multiplayer!"
                 loop = False
             elif decision not in ("singleplayer", "multiplayer"):
@@ -56,6 +50,19 @@ class Game():
         print(f"{self.curplayer.get_name()} starts.")
         print("Do you want to roll or hold?")
         return msg
+
+    def choose_starter(self, player1, player2):
+        """Choose which player starts."""
+        select_player = random.randint(1, 2)
+        if select_player == 1:
+            self.curplayer = player.Player(player1)
+            self.otherplayer = player.Player(player2)
+            return_msg = "Player 1 starts"
+        else:
+            self.curplayer = player.Player(player2)
+            self.otherplayer = player.Player(player1)
+            return_msg = "Player 2 starts"
+        return return_msg
 
     def roll(self):
         """Player rolls a die and adds the number to the dice score."""
@@ -69,9 +76,9 @@ class Game():
             msg = (f"{self.curplayer.get_name()} rolled a 1 and "
                    "got 0 points this round!")
             print(msg)
-            self.switch_player()
             if isinstance(self.curplayer, computer.Computer):
                 self.curplayer.reset_computer()
+            self.switch_player()
         return msg
 
     def hold(self):

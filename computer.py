@@ -49,6 +49,10 @@ class Computer:
         """Get the rolls."""
         return self.rolls
 
+    def set_rolls(self, rolls):
+        """Set the amount of rolls."""
+        self.rolls = rolls
+
     def inc_rolls(self):
         """Increase rolls by one."""
         self.rolls += 1

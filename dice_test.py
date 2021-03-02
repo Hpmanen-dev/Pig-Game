@@ -24,4 +24,3 @@ class TestDiceClass(unittest.TestCase):
         side = die.get_sides()
         exp = 6
         self.assertEqual(side, exp)
-
