@@ -10,7 +10,6 @@ class TestDiceClass(unittest.TestCase):
         """Test initiating the die."""
         res = dice.Dice()
         exp = dice.Dice
-
         self.assertIsInstance(res, exp)
 
     def test_roll(self):
