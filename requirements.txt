@@ -3,6 +3,7 @@ coverage
 
 # Code analysis
 bandit
+
 # Syntax check
 flake8
 flake8-docstrings
@@ -13,3 +14,6 @@ radon
 # Documentation
 pdoc3
 sphinx
+
+# Required for some functions in the game.
+tabulate

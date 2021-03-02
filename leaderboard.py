@@ -8,7 +8,6 @@ def update_leaderboard(player1, player2, winner):
     count = 0
     name1 = player1
     name2 = player2
-    winner = winner
     with open("log.txt", "a+") as file:
         file.seek(0)
         lines = file.readlines()

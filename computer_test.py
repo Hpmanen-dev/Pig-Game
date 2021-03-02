@@ -1,4 +1,4 @@
-""" Test Computer."""
+"""Test Computer."""
 import unittest
 import computer
 
@@ -50,7 +50,7 @@ class TestComputerClass(unittest.TestCase):
 
     def test_set_intelligence(self):
         """Test computers intelligence is set correctly."""
-        computer1 =  computer.Computer(1)
+        computer1 = computer.Computer(1)
         computer1.set_intelligence(2)
         res = computer1.get_intelligence()
         exp = 2
@@ -62,7 +62,3 @@ class TestComputerClass(unittest.TestCase):
         res = computer1.get_greediness()
         exp = 7
         self.assertEqual(res, exp)
-
-
-if __name__ == '__main__':
-    unittest.main()

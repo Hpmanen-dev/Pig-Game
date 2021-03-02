@@ -25,6 +25,3 @@ class TestDiceClass(unittest.TestCase):
         exp = 6
         self.assertEqual(side, exp)
 
-
-if __name__ == '__main__':
-    unittest.main()

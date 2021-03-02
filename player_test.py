@@ -34,7 +34,3 @@ class TestPlayerClass(unittest.TestCase):
         res = player1.get_score()
         exp = 10
         self.assertEqual(res, exp)
-
-
-if __name__ == '__main__':
-    unittest.main()

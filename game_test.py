@@ -93,14 +93,15 @@ class TestGameClass(unittest.TestCase):
             self.assertEqual(the_game.computer_logic(), "auto roll")
 
             with mock.patch('random.randint', return_value=2):
-                the_game.computer.set_rolls(1)
+                the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), "rolled")
             computer_int = the_game.computer.get_intelligence()
+
             with mock.patch('random.randint', return_value=computer_int):
-                the_game.computer.set_rolls(1)
+                the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), "hold")
 
-            the_game.computer.set_rolls(1)
+            the_game.computer.inc_rolls()
             the_game.computer.add_score(100)
             self.assertEqual(the_game.computer_logic(), "calculated")
 
@@ -110,7 +111,3 @@ class TestGameClass(unittest.TestCase):
         with mock.patch('builtins.input', side_effect=['single', 'n1']):
             the_game.start()
         self.assertEqual(the_game.cheat(), 'cheater')
-
-
-if __name__ == '__main__':
-    unittest.main()

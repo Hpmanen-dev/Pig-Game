@@ -29,7 +29,3 @@ class TestDiceClass(unittest.TestCase):
         exp = 'done'
 
         self.assertEqual(res, exp)
-
-
-if __name__ == '__main__':
-    unittest.main()

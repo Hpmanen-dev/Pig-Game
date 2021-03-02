@@ -12,6 +12,11 @@ class Computer:
         self.greediness = 7
         self.rolls = 0
 
+    def reset_computer(self):
+        """Reset the computer rolls and greediness."""
+        self.greediness = 7
+        self.rolls = 0
+
     def get_score(self):
         """Get Score."""
         return self.score
@@ -36,14 +41,14 @@ class Computer:
         """Get the greediness of the computer."""
         return self.greediness
 
-    def set_greediness(self, change):
-        """Change greediness."""
-        self.greediness = change
+    def dec_greediness(self):
+        """Decrease greediness by 1."""
+        self.greediness -= 1
 
     def get_rolls(self):
         """Get the rolls."""
         return self.rolls
 
-    def set_rolls(self, change):
-        """Set the rolls."""
-        self.rolls = change
+    def inc_rolls(self):
+        """Increase rolls by one."""
+        self.rolls += 1

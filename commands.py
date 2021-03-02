@@ -104,5 +104,5 @@ class Commands(cmd.Cmd):
         """Display leaderboard."""
         try:
             leaderboard.show_leaderboard()
-        except (FileNotFoundError):
+        except FileNotFoundError:
             print("You have not played any games yet!")
