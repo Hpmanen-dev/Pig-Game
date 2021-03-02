@@ -38,7 +38,7 @@ class Commands(cmd.Cmd):
     def do_roll(self, _):
         """Roll the dice."""
         try:
-            print(self.game.roll())
+            self.game.roll()
         except AttributeError:
             msg = ("You need to start before you can play.\n"
                    "Please type 'Start' to start the game.")
@@ -104,5 +104,5 @@ class Commands(cmd.Cmd):
         """Display leaderboard."""
         try:
             leaderboard.show_leaderboard()
-        except (ValueError, UnboundLocalError):
+        except (FileNotFoundError):
             print("You have not played any games yet!")

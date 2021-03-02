@@ -60,22 +60,25 @@ class Game():
     def roll(self):
         """Player rolls a die and adds the number to the dice score."""
         roll = self.die.roll()
-        msg = (f"{self.curplayer.get_name()} rolled a {roll}")
         if roll != 1:
+            msg = (f"{self.curplayer.get_name()} rolled a {roll}")
             self.dice_score += roll
+            print(msg)
             if isinstance(self.curplayer, computer.Computer):
-                print(msg)
                 sleep(1)
                 self.computer_logic()
+            return msg
         else:
-            msg = (f"{self.curplayer.get_name()} "
-                   "got 0 points this round")
+            msg = (f"{self.curplayer.get_name()} rolled a 1 and "
+                   "got 0 points this round!")
             if isinstance(self.curplayer, computer.Computer):
                 print(msg)
                 self.curplayer.set_greediness(7)
                 self.curplayer.set_rolls(0)
-            self.switch_player()
-        return msg
+            try:
+                self.switch_player()
+            finally:
+                return msg
 
     def hold(self):
         """Hold and add the dice score to players total score."""
@@ -121,7 +124,7 @@ class Game():
         if rolls == 0:
             add_roll = rolls + 1
             self.computer.set_rolls(add_roll)
-            print(self.roll())
+            self.roll()
             return "auto roll"
         elif self.computer.get_score() + self.dice_score >= 100:
             self.hold()
@@ -134,7 +137,7 @@ class Game():
                 self.computer.set_rolls(add_roll)
                 change = greediness - 1
                 self.computer.set_greediness(change)
-                print(self.roll())
+                self.roll()
                 return "rolled"
             else:
                 self.hold()
