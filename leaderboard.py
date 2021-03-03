@@ -4,7 +4,7 @@ from tabulate import tabulate
 
 
 def update_leaderboard(player1, player2, winner):
-    """Update the txt file."""
+    """Update the leaderboard."""
     count = 0
     name1 = player1
     name2 = player2
@@ -46,7 +46,7 @@ def add_new_user(name, winner, file):
 
 
 def show_leaderboard():
-    """Display the txt file."""
+    """Display the leaderboard."""
     table = []
     with open("log.txt", "r") as file:
         for line in file:

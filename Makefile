@@ -21,6 +21,7 @@ clean:
 	rm -f .coverage *.pyc
 	rm -rf __pycache__
 	rm -rf htmlcov
+	rm -rf doc
 
 clean-doc:
 	rm -rf doc
@@ -53,13 +54,13 @@ pdoc:
 
 doc: pdoc #pydoc sphinx
 
-pyreverse:
-	install -d doc/pyreverse
+uml:
+	install -d doc/uml
 	pyreverse *.py
-	dot -Tpng classes.dot -o doc/pyreverse/classes.png
-	dot -Tpng packages.dot -o doc/pyreverse/packages.png
+	dot -Tpng classes.dot -o doc/uml/classes.png
+	dot -Tpng packages.dot -o doc/uml/packages.png
 	rm -f classes.dot packages.dot
-	ls -l doc/pyreverse
+	ls -l doc/uml
 
 radon-cc:
 	radon cc . -a

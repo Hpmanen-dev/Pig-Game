@@ -44,5 +44,8 @@ py main.py
 ## How to make documentation
 Use the command 'make doc' in the terminal to generate html documentation. If this does not work using Visual Studio Code or CMD in windows we suggest doing it on GitBash.
 
+## Generate UML diagrams
+Use the command 'make uml' to regenerate the UML diagrams from our code. Again we suggest using Gitbash if this does not work in your usual terminal.
+
 ## How to run our tests
-Just use the command 'make unittest' to just run the tests and use 'make coverage' to get the coverage report of the tests.
+Just use the command 'make unittest' in the terminal to just run the tests and use 'make coverage' to get the coverage report of the tests.
