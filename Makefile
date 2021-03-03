@@ -44,13 +44,13 @@ flake8:
 	flake8
 
 pydoc:
-	install -d doc/pydoc
+	install -d doc/api
 	pydoc -w $(PWD)
-	mv *.html doc/pydoc
+	mv *.html doc/api
 
 pdoc:
-	rm -rf doc/pdoc
-	pdoc --html -o doc/pdoc .
+	rm -rf doc/api
+	pdoc --html -o doc/api .
 
 doc: pdoc #pydoc sphinx
 

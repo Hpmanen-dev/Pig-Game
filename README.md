@@ -48,4 +48,5 @@ Use the command 'make doc' in the terminal to generate html documentation. If th
 Use the command 'make uml' to regenerate the UML diagrams from our code. Again we suggest using Gitbash if this does not work in your usual terminal.
 
 ## How to run our tests
-Just use the command 'make unittest' in the terminal to just run the tests and use 'make coverage' to get the coverage report of the tests.
+Just use the command 'make unittest' in the terminal to just run the tests and use 'make coverage' to get the coverage report of the tests. 
+You can also do 'make test' to run a full test which will both do a coverage test and lint test on the code.
