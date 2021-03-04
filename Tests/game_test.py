@@ -98,10 +98,6 @@ class TestGameClass(unittest.TestCase):
                 the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), "rolled")
 
-            with mock.patch('random.randint', return_value=1):
-                the_game.computer.set_rolls(0)
-                self.assertEqual(the_game.computer_logic(), "auto roll")
-
             computer_int = the_game.computer.get_intelligence()
             with mock.patch('random.randint', return_value=computer_int):
                 the_game.computer.inc_rolls()

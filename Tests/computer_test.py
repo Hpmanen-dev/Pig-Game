@@ -62,3 +62,12 @@ class TestComputerClass(unittest.TestCase):
         res = computer1.get_greediness()
         exp = 7
         self.assertEqual(res, exp)
+
+    def test_set_rolls(self):
+        """Test if computers rolls is set correctly."""
+        computer1 = computer.Computer(1)
+        computer1.set_rolls(5)
+
+        res = computer1.get_rolls()
+        exp = 5
+        self.assertEqual(res, exp)
