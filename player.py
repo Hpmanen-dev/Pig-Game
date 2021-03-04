@@ -6,17 +6,17 @@ class Player:
 
     def __init__(self, name):
         """Initiate the player."""
-        self.name = name
-        self.score = 0
+        self._name = name
+        self._score = 0
 
     def get_name(self):
         """Get player's name."""
-        return self.name
+        return self._name
 
     def get_score(self):
         """Get player's score."""
-        return self.score
+        return self._score
 
     def add_score(self, score):
         """Add to player's score."""
-        self.score += score
+        self._score += score

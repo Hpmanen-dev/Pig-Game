@@ -5,16 +5,15 @@ import random
 class Dice():
     """Create a six-sided dice."""
 
-    sides = 6
-
     def __init__(self):
-        """Initiate a dice."""
+        """Initiate the dice."""
+        self._sides = 6
         random.seed()
 
     def roll(self):
         """Roll the dice and return the number."""
-        return random.randint(1, self.sides)
+        return random.randint(1, self._sides)
 
     def get_sides(self):
         """Get sides of the die."""
-        return self.sides
+        return self._sides
