@@ -51,6 +51,11 @@ class TestComputerClass(unittest.TestCase):
     def test_set_intelligence(self):
         """Test computers intelligence is set correctly."""
         computer1 = computer.Computer(1)
+        computer1.intelligence = 4
+        exp = 1
+        res = computer1.intelligence
+        self.assertEqual(res, exp)
+
         computer1.intelligence = 2
         res = computer1.intelligence
         exp = 2

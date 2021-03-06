@@ -83,6 +83,8 @@ class Commands(cmd.Cmd):
 
     def do_intelligence(self, arg):
         """Change the intelligence of the computer."""
+        if not arg:
+            print("Try to type 'intelligence (number)'")
         try:
             int_arg = int(arg)
             self.game.computer.intelligence = int_arg
@@ -92,12 +94,6 @@ class Commands(cmd.Cmd):
         except AttributeError:
             print("You have to start a singleplayer game first.")
             return
-        if not arg:
-            print("Try to type 'intelligence (number)'")
-        elif int_arg < 1 or int_arg > 3:
-            print("The intelligence can only be between 1-3")
-        else:
-            print(f"The computer's intelligence is now set to {int_arg}")
 
     def do_leaderboard(self, _):
         # pylint: disable=no-self-use
