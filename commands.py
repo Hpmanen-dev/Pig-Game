@@ -85,7 +85,7 @@ class Commands(cmd.Cmd):
         """Change the intelligence of the computer."""
         try:
             int_arg = int(arg)
-            self.game.computer.set_intelligence(int_arg)
+            self.game.computer.intelligence = int_arg
         except ValueError:
             print("Please enter an integer")
             return

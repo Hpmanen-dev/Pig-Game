@@ -130,3 +130,37 @@ class TestGameClass(unittest.TestCase):
         res = the_game.choose_starter(player1, player2)
         exp = "Player 2 starts"
         self.assertEqual(res, exp)
+
+    def test_check_winner(self):
+        """Test checking for a winner."""
+        the_game = game.Game()
+        with mock.patch('builtins.input', side_effect=['single', 'n1']):
+            the_game.start()
+            res = the_game.check_winner_condition()
+            self.assertIsNone(res)
+
+            the_game.curplayer.add_score(100)
+            res = the_game.check_winner_condition()
+            exp = "n1"
+            self.assertEqual(res, exp)
+
+    def test_switch_player(self):
+        """Test switching player turn."""
+        the_game = game.Game()
+
+        with mock.patch('builtins.input', side_effect=['multi', 'n1', 'n2']):
+            the_game.start()
+            second_player = the_game.otherplayer.name
+            the_game.switch_player()
+            res = second_player
+            exp = the_game.curplayer.name
+            self.assertEqual(res, exp)
+
+    def test_check_computer_turn(self):
+        """Test checking if it is computers turn."""
+        the_game = game.Game()
+
+        with mock.patch('builtins.input', side_effect=['single', 'n1']):
+            the_game.start()
+            res = the_game.check_computer_turn()
+            self.assertIsNone(res)

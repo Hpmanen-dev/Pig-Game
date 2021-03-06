@@ -91,8 +91,8 @@ class Game():
                f"{self.curplayer.name} now have "
                f"{self.curplayer.score} points in total!")
         print(msg)
-        self.switch_player()
         self.check_winner_condition()
+        self.switch_player()
         return msg
 
     def cheat(self):
@@ -101,7 +101,7 @@ class Game():
         msg = (f"{self.curplayer.name}"
                " has gained 100 points from cheating!")
         print(msg)
-        self.check_winner_condition()
+        self.hold()
         return 'cheater'
 
     def check_winner_condition(self):
@@ -112,7 +112,7 @@ class Game():
             self.update_leaderboard(winner)
             self.curplayer = None
             self.otherplayer = None
-            return winner
+            return winner.name
         return None
 
     def computer_logic(self):
@@ -145,17 +145,19 @@ class Game():
         """Change player turn."""
         self.curplayer, self.otherplayer = self.otherplayer, self.curplayer
         self.dice_score = 0
-        msg = (f"It is {self.curplayer.name}'s turn.")
-        print(msg)
-        print("Do you want to roll or hold?")
-        self.check_computer_turn()
-        return 'Player switched'
+        if self.curplayer is not None:
+            msg = (f"It is {self.curplayer.name}'s turn.")
+            print(msg)
+            print("Do you want to roll or hold?")
+            self.check_computer_turn()
 
     def check_computer_turn(self):
         """Check if it is computers turn."""
         if isinstance(self.curplayer, computer.Computer):
             sleep(1)
             self.computer_logic()
+            return "Computer turn"
+        return None
 
     def update_leaderboard(self, winner):
         """Update leaderboard."""
