@@ -21,6 +21,6 @@ class TestDiceClass(unittest.TestCase):
     def test_sides(self):
         """Test if the die have the specified amount of sides."""
         die = dice.Dice()
-        side = die.get_sides()
+        res = die.sides
         exp = 6
-        self.assertEqual(side, exp)
+        self.assertEqual(res, exp)

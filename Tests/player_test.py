@@ -16,14 +16,14 @@ class TestPlayerClass(unittest.TestCase):
     def test_name(self):
         """Test creating a player and check players name."""
         player1 = player.Player("name")
-        res = player1.get_name()
+        res = player1.name
         exp = "name"
         self.assertEqual(res, exp)
 
     def test_getscore(self):
         """Test if player score works."""
         player1 = player.Player("name")
-        res = player1.get_score()
+        res = player1.score
         exp = 0
         self.assertEqual(res, exp)
 
@@ -31,6 +31,6 @@ class TestPlayerClass(unittest.TestCase):
         """Test if adding score works."""
         player1 = player.Player("name")
         player1.add_score(10)
-        res = player1.get_score()
+        res = player1.score
         exp = 10
         self.assertEqual(res, exp)

@@ -17,27 +17,37 @@ class Computer:
         self._greediness = 7
         self._rolls = 0
 
-    def get_score(self):
+    @property
+    def score(self):
         """Get Score."""
         return self._score
+
+    @score.setter
+    def score(self, score):
+        """Set Score."""
+        self._score = score
 
     def add_score(self, score):
         """Add to Computer's score."""
         self._score += score
 
-    def get_name(self):
+    @property
+    def name(self):
         """Get Computer Name."""
         return self._name
 
-    def get_intelligence(self):
+    @property
+    def intelligence(self):
         """Get intelligence."""
         return self._intelligence
 
-    def set_intelligence(self, intelligence):
+    @intelligence.setter
+    def intelligence(self, intelligence):
         """Change intelligence."""
         self._intelligence = intelligence
 
-    def get_greediness(self):
+    @property
+    def greediness(self):
         """Get the greediness of the computer."""
         return self._greediness
 
@@ -45,11 +55,13 @@ class Computer:
         """Decrease greediness by 1."""
         self._greediness -= 1
 
-    def get_rolls(self):
+    @property
+    def rolls(self):
         """Get the rolls."""
         return self._rolls
 
-    def set_rolls(self, rolls):
+    @rolls.setter
+    def rolls(self, rolls):
         """Set the amount of rolls."""
         self._rolls = rolls
 

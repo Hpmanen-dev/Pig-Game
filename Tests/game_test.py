@@ -59,12 +59,12 @@ class TestGameClass(unittest.TestCase):
             the_game.start()
             mocked_randint.return_value = 1
             res = the_game.roll()
-            exp = (f"{the_game.otherplayer.get_name()} rolled a 1 and "
+            exp = (f"{the_game.otherplayer.name} rolled a 1 and "
                    "got 0 points this round!")
             self.assertEqual(res, exp)
             mocked_randint.return_value = 5
             res = the_game.roll()
-            exp = (f"{the_game.curplayer.get_name()} rolled a 5")
+            exp = (f"{the_game.curplayer.name} rolled a 5")
             self.assertEqual(res, exp)
 
     def test_hold(self):
@@ -73,11 +73,11 @@ class TestGameClass(unittest.TestCase):
             the_game = game.Game()
             the_game.start()
             res = the_game.hold()
-            exp = (f"{the_game.curplayer.get_name()} decided to hold\n"
-                   f"{the_game.curplayer.get_name()} received "
+            exp = (f"{the_game.curplayer.name} decided to hold\n"
+                   f"{the_game.curplayer.name} received "
                    f"{the_game.dice_score} points\n"
-                   f"{the_game.curplayer.get_name()} now have "
-                   f"{the_game.curplayer.get_score()} points in total!")
+                   f"{the_game.curplayer.name} now have "
+                   f"{the_game.curplayer.score} points in total!")
             self.assertEqual(res, exp)
 
     def test_computer(self):
@@ -98,7 +98,7 @@ class TestGameClass(unittest.TestCase):
                 the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), "rolled")
 
-            computer_int = the_game.computer.get_intelligence()
+            computer_int = the_game.computer.intelligence
             with mock.patch('random.randint', return_value=computer_int):
                 the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), "hold")

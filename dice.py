@@ -14,6 +14,7 @@ class Dice():
         """Roll the dice and return the number."""
         return random.randint(1, self._sides)
 
-    def get_sides(self):
+    @property
+    def sides(self):
         """Get sides of the die."""
         return self._sides

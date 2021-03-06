@@ -9,14 +9,16 @@ class Player:
         self._name = name
         self._score = 0
 
-    def get_name(self):
+    @property
+    def name(self):
         """Get player's name."""
         return self._name
 
-    def get_score(self):
+    @property
+    def score(self):
         """Get player's score."""
         return self._score
 
-    def add_score(self, score):
+    def add_score(self, add):
         """Add to player's score."""
-        self._score += score
+        self._score += add
