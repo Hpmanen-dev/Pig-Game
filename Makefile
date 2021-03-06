@@ -1,6 +1,6 @@
 #!/usr/bin/env make
 
-PYTHON = python
+PYTHON = py
 
 .PHONY: pydoc
 

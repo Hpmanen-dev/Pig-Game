@@ -35,6 +35,8 @@ more sense in this case since it wouldn't risk getting 1's.
 
 ## How to use
 ```
+Download git at https://git-scm.com/downloads
+Use command:
 git clone https://github.com/Hpmanen-dev/Pig-Game
 cd Pig-Game
 py -m pip install -r requirements.txt
