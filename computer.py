@@ -45,12 +45,14 @@ class Computer:
     def intelligence(self, intelligence):
         """Change intelligence."""
         if 1 <= intelligence <= 3:
-            print("Intelligence has been set to 3")
-            self._intelligence = intelligence
-        else:
-            msg = ("Intelligence can only be set between 1 - 3")
+            msg = (f"Intelligence has been set to {intelligence}")
             print(msg)
-            return msg
+            self._intelligence = intelligence
+            return intelligence
+
+        msg = ("Intelligence can only be set between 1 - 3")
+        print(msg)
+        return msg
 
     @property
     def greediness(self):
