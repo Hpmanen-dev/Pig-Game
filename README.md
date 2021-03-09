@@ -39,9 +39,16 @@ Download git at https://git-scm.com/downloads
 Use command:
 git clone https://github.com/Hpmanen-dev/Pig-Game
 cd Pig-Game
-py -m pip install -r requirements.txt
+'py -m pip install -r requirements.txt' or 'make install'
 py main.py
 ```
+
+## Install Make
+To generate docs, uml and coverage from our code you will need to use 'Make' to get access to the make command on an windows computer,
+you can install it with chocolatey, to get access to chocolatey follow these instructions: https://chocolatey.org/install
+
+When you do have access to chocolatey you can run the command: 'choco install make'
+Note that you need to run the terminal as administrator for it to work.
 
 ## How to make documentation
 Use the command 'make doc' in the terminal to generate html documentation. If this does not work using Visual Studio Code or CMD in windows we suggest doing it on GitBash.
@@ -52,10 +59,10 @@ First you need to make sure you have Graphviz installed.
 Install Graphviz by chocolatey, to get access to chocolatey follow the instructions here: https://chocolatey.org/install
 
 When you have access to chocolatey you can run the command: 'choco install graphviz'
-Note that you need to run the terminal in administrator for it to work.
+Note that you need to run the terminal as administrator for it to work.
 
 Use the command 'make uml' to regenerate the UML diagrams from our code. Again we suggest using Gitbash if this does not work in your usual terminal.
 
 ## How to run our tests
 Just use the command 'make unittest' in the terminal to just run the tests and use 'make coverage' to get the coverage report of the tests. 
-You can also do 'make test' to run a full test which will both do a coverage test and lint test on the code.
+You can also do 'make test' to run a full test which will both do a coverage test and lint test on the code. This should work on any terminal, given you are in the correct directory. However if it does not work on your usual terminal we again suggest using Gitbash.
