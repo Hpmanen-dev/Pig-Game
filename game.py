@@ -74,8 +74,8 @@ class Game():
             print(msg)
             self.check_computer_turn()
         else:
-            msg = (f"{self.curplayer.name} rolled a 1 and "
-                   "got 0 points this round!")
+            msg = (f"\n{self.curplayer.name} rolled a 1 and "
+                   "got 0 points this round!\n")
             print(msg)
             if isinstance(self.curplayer, computer.Computer):
                 self.curplayer.reset_computer()
@@ -85,11 +85,11 @@ class Game():
     def hold(self):
         """Hold and add the dice score to players total score."""
         self.curplayer.add_score(self.dice_score)
-        msg = (f"{self.curplayer.name} decided to hold\n"
+        msg = (f"\n{self.curplayer.name} decided to hold\n"
                f"{self.curplayer.name} received "
                f"{self.dice_score} points\n"
                f"{self.curplayer.name} now have "
-               f"{self.curplayer.score} points in total!")
+               f"{self.curplayer.score} points in total!\n")
         print(msg)
         self.check_winner_condition()
         self.switch_player()
@@ -122,6 +122,7 @@ class Game():
         rolls = self.computer.rolls
         if rolls == 0:
             self.computer.inc_rolls()
+            self.computer.dec_greediness()
             self.roll()
             return_msg = "auto roll"
         elif self.computer.score + self.dice_score >= 100:

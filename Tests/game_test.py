@@ -59,8 +59,8 @@ class TestGameClass(unittest.TestCase):
             the_game.start()
             mocked_randint.return_value = 1
             res = the_game.roll()
-            exp = (f"{the_game.otherplayer.name} rolled a 1 and "
-                   "got 0 points this round!")
+            exp = (f"\n{the_game.otherplayer.name} rolled a 1 and "
+                   "got 0 points this round!\n")
             self.assertEqual(res, exp)
             mocked_randint.return_value = 5
             res = the_game.roll()
@@ -73,11 +73,11 @@ class TestGameClass(unittest.TestCase):
             the_game = game.Game()
             the_game.start()
             res = the_game.hold()
-            exp = (f"{the_game.curplayer.name} decided to hold\n"
+            exp = (f"\n{the_game.curplayer.name} decided to hold\n"
                    f"{the_game.curplayer.name} received "
                    f"{the_game.dice_score} points\n"
                    f"{the_game.curplayer.name} now have "
-                   f"{the_game.curplayer.score} points in total!")
+                   f"{the_game.curplayer.score} points in total!\n")
             self.assertEqual(res, exp)
 
     def test_computer(self):
