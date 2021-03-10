@@ -108,6 +108,7 @@ class Game():
         """Check if the current player has 100 or more points."""
         if self.curplayer.score >= 100:
             print(f"Congratulations {self.curplayer.name}, You won!")
+            print("Type 'restart' to play again!")
             winner = self.curplayer
             self.update_leaderboard(winner)
             self.curplayer = None

@@ -1,5 +1,8 @@
 # Pig Dice Game
 
+Application made by:
+Kristian Åkerblom, Hampus Nilsson, Anton Thereström
+
 ## How the game works
 Each turn, a player repeatedly rolls a die until the player decides to hold or rolls a 1.
 If the player decides to hold he/she will add the total sum of all the dice he/she has rolled during that turn to his/her total points.
@@ -15,7 +18,9 @@ restart                     Restarts the game
 roll | r                    Roll the dice
 hold | h                    Hold the points
 exit                        Exit the game
-cheat                       Gives you 100 points
+cheat                       Gives you 100 points and you win the game immediately
+intelligence (number)       Changes the intelligence of the computer (Only numbers between 1 - 3 will work.)
+leaderboard                 Shows the leaderboard/highscore
 ```
 
 ## Computer Logic
@@ -51,9 +56,10 @@ When you do have access to chocolatey you can run the command: 'choco install ma
 Note that you need to run the terminal as administrator for it to work.
 
 ## How to make documentation
-Use the command 'make doc' in the terminal to generate html documentation. If this does not work using Visual Studio Code or CMD in windows we suggest doing it on GitBash.
+Use the command 'make doc' in the terminal to generate html documentation.
 
 ## Generate UML diagrams
+```
 First you need to make sure you have Graphviz installed.
 
 Install Graphviz by chocolatey, to get access to chocolatey follow the instructions here: https://chocolatey.org/install
@@ -62,7 +68,11 @@ When you have access to chocolatey you can run the command: 'choco install graph
 Note that you need to run the terminal as administrator for it to work.
 
 Use the command 'make uml' to regenerate the UML diagrams from our code. Again we suggest using Gitbash if this does not work in your usual terminal.
+```
 
 ## How to run our tests
 Just use the command 'make unittest' in the terminal to just run the tests and use 'make coverage' to get the coverage report of the tests. 
-You can also do 'make test' to run a full test which will both do a coverage test and lint test on the code. This should work on any terminal, given you are in the correct directory. However if it does not work on your usual terminal we again suggest using Gitbash.
+You can also do 'make test' to run a full test which will both do a coverage test and lint test on the code.
+
+## If the commands does not work
+If the commands does not work using your usual terminal we suggest using GitBash which you get from downloading git, if you do not already have it you can get it here: https://git-scm.com/downloads
