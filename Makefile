@@ -6,11 +6,6 @@ PYTHON = py
 
 all:
 
-venv:
-	[ -d .venv ] || $(PYTHON) -m venv .venv
-	@echo "Now activate the Python virtual environment:\n. .venv/bin/activate"
-	@echo "Type 'deactivate' to deactivate."
-
 install:
 	$(PYTHON) -m pip install -r requirements.txt
 
@@ -25,9 +20,6 @@ clean:
 
 clean-doc:
 	rm -rf doc
-
-clean-all: clean clean-doc
-	rm -rf .venv
 
 unittest:
 	 $(PYTHON) -m unittest discover Tests "*_test.py"
@@ -61,21 +53,6 @@ uml:
 	dot -Tpng packages.dot -o doc/uml/packages.png
 	rm -f classes.dot packages.dot
 	ls -l doc/uml
-
-radon-cc:
-	radon cc . -a
-
-radon-mi:
-	radon mi .
-
-radon-raw:
-	radon raw .
-
-radon-hal:
-	radon hal .
-
-bandit:
-	bandit -r .
 
 lint: flake8 pylint
 
