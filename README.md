@@ -21,6 +21,7 @@ exit                        Exit the game
 cheat                       Gives you 100 points and you win the game immediately
 intelligence (number)       Changes the intelligence of the computer (Only numbers between 1 - 3 will work.)
 leaderboard                 Shows the leaderboard/highscore
+resetlb                     Reset the leaderboard
 ```
 
 ## Computer Logic
@@ -59,7 +60,6 @@ Note that you need to run the terminal as administrator for it to work.
 Use the command 'make doc' in the terminal to generate html documentation.
 
 ## Generate UML diagrams
-```
 First you need to make sure you have Graphviz installed.
 
 Install Graphviz by chocolatey, to get access to chocolatey follow the instructions here: https://chocolatey.org/install
@@ -68,7 +68,6 @@ When you have access to chocolatey you can run the command: 'choco install graph
 Note that you need to run the terminal as administrator for it to work.
 
 Use the command 'make uml' to regenerate the UML diagrams from our code. Again we suggest using Gitbash if this does not work in your usual terminal.
-```
 
 ## How to run our tests
 Just use the command 'make unittest' in the terminal to just run the tests and use 'make coverage' to get the coverage report of the tests. 

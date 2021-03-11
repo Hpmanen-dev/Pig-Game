@@ -102,3 +102,10 @@ class Commands(cmd.Cmd):
             leaderboard.show_leaderboard()
         except FileNotFoundError:
             print("You have not played any games yet!")
+
+    def do_resetlb(self, _):
+        """Clear leaderboard file."""
+        try:
+            leaderboard.reset_leaderboard()
+        except FileNotFoundError:
+            print("Can't find leaderboard file.")
