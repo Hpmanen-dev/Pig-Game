@@ -1,5 +1,12 @@
 # Pig Game Release Notes
 
+## v1.0
+2021-03-11
+
+* Finalizing touches.
+* Added Instructions in README.
+* Updated Unittest.
+
 ## v0.6
 2021-03-03
 
