@@ -104,6 +104,7 @@ class Commands(cmd.Cmd):
             print("You have not played any games yet!")
 
     def do_resetlb(self, _):
+        # pylint: disable=no-self-use
         """Clear leaderboard file."""
         try:
             leaderboard.reset_leaderboard()
