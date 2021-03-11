@@ -35,56 +35,76 @@ class Computer:
 
     def __init__(self, intelligence):
         &#34;&#34;&#34;Initiate Computer.&#34;&#34;&#34;
-        self.score = 0
-        self.intelligence = intelligence
-        self.name = &#34;CPU&#34;
-        self.greediness = 7
-        self.rolls = 0
+        self._score = 0
+        self._intelligence = intelligence
+        self._name = &#34;CPU&#34;
+        self._greediness = 7
+        self._rolls = 0
 
     def reset_computer(self):
         &#34;&#34;&#34;Reset the computer rolls and greediness.&#34;&#34;&#34;
-        self.greediness = 7
-        self.rolls = 0
+        self._greediness = 7
+        self._rolls = 0
 
-    def get_score(self):
+    @property
+    def score(self):
         &#34;&#34;&#34;Get Score.&#34;&#34;&#34;
-        return self.score
+        return self._score
+
+    @score.setter
+    def score(self, score):
+        &#34;&#34;&#34;Set Score.&#34;&#34;&#34;
+        self._score = score
 
     def add_score(self, score):
         &#34;&#34;&#34;Add to Computer&#39;s score.&#34;&#34;&#34;
-        self.score += score
+        self._score += score
 
-    def get_name(self):
+    @property
+    def name(self):
         &#34;&#34;&#34;Get Computer Name.&#34;&#34;&#34;
-        return self.name
+        return self._name
 
-    def get_intelligence(self):
+    @property
+    def intelligence(self):
         &#34;&#34;&#34;Get intelligence.&#34;&#34;&#34;
-        return self.intelligence
+        return self._intelligence
 
-    def set_intelligence(self, intelligence):
+    @intelligence.setter
+    def intelligence(self, intelligence):
         &#34;&#34;&#34;Change intelligence.&#34;&#34;&#34;
-        self.intelligence = intelligence
+        if 1 &lt;= intelligence &lt;= 3:
+            msg = (f&#34;Intelligence has been set to {intelligence}&#34;)
+            print(msg)
+            self._intelligence = intelligence
+            return intelligence
 
-    def get_greediness(self):
+        msg = (&#34;Intelligence can only be set between 1 - 3&#34;)
+        print(msg)
+        return msg
+
+    @property
+    def greediness(self):
         &#34;&#34;&#34;Get the greediness of the computer.&#34;&#34;&#34;
-        return self.greediness
+        return self._greediness
 
     def dec_greediness(self):
         &#34;&#34;&#34;Decrease greediness by 1.&#34;&#34;&#34;
-        self.greediness -= 1
+        self._greediness -= 1
 
-    def get_rolls(self):
+    @property
+    def rolls(self):
         &#34;&#34;&#34;Get the rolls.&#34;&#34;&#34;
-        return self.rolls
+        return self._rolls
 
-    def set_rolls(self, rolls):
+    @rolls.setter
+    def rolls(self, rolls):
         &#34;&#34;&#34;Set the amount of rolls.&#34;&#34;&#34;
-        self.rolls = rolls
+        self._rolls = rolls
 
     def inc_rolls(self):
         &#34;&#34;&#34;Increase rolls by one.&#34;&#34;&#34;
-        self.rolls += 1</code></pre>
+        self._rolls += 1</code></pre>
 </details>
 </section>
 <section>
@@ -112,57 +132,145 @@ class Computer:
 
     def __init__(self, intelligence):
         &#34;&#34;&#34;Initiate Computer.&#34;&#34;&#34;
-        self.score = 0
-        self.intelligence = intelligence
-        self.name = &#34;CPU&#34;
-        self.greediness = 7
-        self.rolls = 0
+        self._score = 0
+        self._intelligence = intelligence
+        self._name = &#34;CPU&#34;
+        self._greediness = 7
+        self._rolls = 0
 
     def reset_computer(self):
         &#34;&#34;&#34;Reset the computer rolls and greediness.&#34;&#34;&#34;
-        self.greediness = 7
-        self.rolls = 0
+        self._greediness = 7
+        self._rolls = 0
 
-    def get_score(self):
+    @property
+    def score(self):
         &#34;&#34;&#34;Get Score.&#34;&#34;&#34;
-        return self.score
+        return self._score
+
+    @score.setter
+    def score(self, score):
+        &#34;&#34;&#34;Set Score.&#34;&#34;&#34;
+        self._score = score
 
     def add_score(self, score):
         &#34;&#34;&#34;Add to Computer&#39;s score.&#34;&#34;&#34;
-        self.score += score
+        self._score += score
 
-    def get_name(self):
+    @property
+    def name(self):
         &#34;&#34;&#34;Get Computer Name.&#34;&#34;&#34;
-        return self.name
+        return self._name
 
-    def get_intelligence(self):
+    @property
+    def intelligence(self):
         &#34;&#34;&#34;Get intelligence.&#34;&#34;&#34;
-        return self.intelligence
+        return self._intelligence
 
-    def set_intelligence(self, intelligence):
+    @intelligence.setter
+    def intelligence(self, intelligence):
         &#34;&#34;&#34;Change intelligence.&#34;&#34;&#34;
-        self.intelligence = intelligence
+        if 1 &lt;= intelligence &lt;= 3:
+            msg = (f&#34;Intelligence has been set to {intelligence}&#34;)
+            print(msg)
+            self._intelligence = intelligence
+            return intelligence
 
-    def get_greediness(self):
+        msg = (&#34;Intelligence can only be set between 1 - 3&#34;)
+        print(msg)
+        return msg
+
+    @property
+    def greediness(self):
         &#34;&#34;&#34;Get the greediness of the computer.&#34;&#34;&#34;
-        return self.greediness
+        return self._greediness
 
     def dec_greediness(self):
         &#34;&#34;&#34;Decrease greediness by 1.&#34;&#34;&#34;
-        self.greediness -= 1
+        self._greediness -= 1
 
-    def get_rolls(self):
+    @property
+    def rolls(self):
         &#34;&#34;&#34;Get the rolls.&#34;&#34;&#34;
-        return self.rolls
+        return self._rolls
 
-    def set_rolls(self, rolls):
+    @rolls.setter
+    def rolls(self, rolls):
         &#34;&#34;&#34;Set the amount of rolls.&#34;&#34;&#34;
-        self.rolls = rolls
+        self._rolls = rolls
 
     def inc_rolls(self):
         &#34;&#34;&#34;Increase rolls by one.&#34;&#34;&#34;
-        self.rolls += 1</code></pre>
+        self._rolls += 1</code></pre>
 </details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Pig-Game.computer.Computer.greediness"><code class="name">var <span class="ident">greediness</span></code></dt>
+<dd>
+<div class="desc"><p>Get the greediness of the computer.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def greediness(self):
+    &#34;&#34;&#34;Get the greediness of the computer.&#34;&#34;&#34;
+    return self._greediness</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.computer.Computer.intelligence"><code class="name">var <span class="ident">intelligence</span></code></dt>
+<dd>
+<div class="desc"><p>Get intelligence.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def intelligence(self):
+    &#34;&#34;&#34;Get intelligence.&#34;&#34;&#34;
+    return self._intelligence</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.computer.Computer.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"><p>Get Computer Name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def name(self):
+    &#34;&#34;&#34;Get Computer Name.&#34;&#34;&#34;
+    return self._name</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.computer.Computer.rolls"><code class="name">var <span class="ident">rolls</span></code></dt>
+<dd>
+<div class="desc"><p>Get the rolls.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def rolls(self):
+    &#34;&#34;&#34;Get the rolls.&#34;&#34;&#34;
+    return self._rolls</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.computer.Computer.score"><code class="name">var <span class="ident">score</span></code></dt>
+<dd>
+<div class="desc"><p>Get Score.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def score(self):
+    &#34;&#34;&#34;Get Score.&#34;&#34;&#34;
+    return self._score</code></pre>
+</details>
+</dd>
+</dl>
 <h3>Methods</h3>
 <dl>
 <dt id="Pig-Game.computer.Computer.add_score"><code class="name flex">
@@ -176,7 +284,7 @@ class Computer:
 </summary>
 <pre><code class="python">def add_score(self, score):
     &#34;&#34;&#34;Add to Computer&#39;s score.&#34;&#34;&#34;
-    self.score += score</code></pre>
+    self._score += score</code></pre>
 </details>
 </dd>
 <dt id="Pig-Game.computer.Computer.dec_greediness"><code class="name flex">
@@ -190,77 +298,7 @@ class Computer:
 </summary>
 <pre><code class="python">def dec_greediness(self):
     &#34;&#34;&#34;Decrease greediness by 1.&#34;&#34;&#34;
-    self.greediness -= 1</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.computer.Computer.get_greediness"><code class="name flex">
-<span>def <span class="ident">get_greediness</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Get the greediness of the computer.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_greediness(self):
-    &#34;&#34;&#34;Get the greediness of the computer.&#34;&#34;&#34;
-    return self.greediness</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.computer.Computer.get_intelligence"><code class="name flex">
-<span>def <span class="ident">get_intelligence</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Get intelligence.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_intelligence(self):
-    &#34;&#34;&#34;Get intelligence.&#34;&#34;&#34;
-    return self.intelligence</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.computer.Computer.get_name"><code class="name flex">
-<span>def <span class="ident">get_name</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Get Computer Name.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_name(self):
-    &#34;&#34;&#34;Get Computer Name.&#34;&#34;&#34;
-    return self.name</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.computer.Computer.get_rolls"><code class="name flex">
-<span>def <span class="ident">get_rolls</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Get the rolls.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_rolls(self):
-    &#34;&#34;&#34;Get the rolls.&#34;&#34;&#34;
-    return self.rolls</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.computer.Computer.get_score"><code class="name flex">
-<span>def <span class="ident">get_score</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Get Score.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_score(self):
-    &#34;&#34;&#34;Get Score.&#34;&#34;&#34;
-    return self.score</code></pre>
+    self._greediness -= 1</code></pre>
 </details>
 </dd>
 <dt id="Pig-Game.computer.Computer.inc_rolls"><code class="name flex">
@@ -274,7 +312,7 @@ class Computer:
 </summary>
 <pre><code class="python">def inc_rolls(self):
     &#34;&#34;&#34;Increase rolls by one.&#34;&#34;&#34;
-    self.rolls += 1</code></pre>
+    self._rolls += 1</code></pre>
 </details>
 </dd>
 <dt id="Pig-Game.computer.Computer.reset_computer"><code class="name flex">
@@ -288,36 +326,8 @@ class Computer:
 </summary>
 <pre><code class="python">def reset_computer(self):
     &#34;&#34;&#34;Reset the computer rolls and greediness.&#34;&#34;&#34;
-    self.greediness = 7
-    self.rolls = 0</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.computer.Computer.set_intelligence"><code class="name flex">
-<span>def <span class="ident">set_intelligence</span></span>(<span>self, intelligence)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Change intelligence.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def set_intelligence(self, intelligence):
-    &#34;&#34;&#34;Change intelligence.&#34;&#34;&#34;
-    self.intelligence = intelligence</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.computer.Computer.set_rolls"><code class="name flex">
-<span>def <span class="ident">set_rolls</span></span>(<span>self, rolls)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Set the amount of rolls.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def set_rolls(self, rolls):
-    &#34;&#34;&#34;Set the amount of rolls.&#34;&#34;&#34;
-    self.rolls = rolls</code></pre>
+    self._greediness = 7
+    self._rolls = 0</code></pre>
 </details>
 </dd>
 </dl>
@@ -343,15 +353,13 @@ class Computer:
 <ul class="two-column">
 <li><code><a title="Pig-Game.computer.Computer.add_score" href="#Pig-Game.computer.Computer.add_score">add_score</a></code></li>
 <li><code><a title="Pig-Game.computer.Computer.dec_greediness" href="#Pig-Game.computer.Computer.dec_greediness">dec_greediness</a></code></li>
-<li><code><a title="Pig-Game.computer.Computer.get_greediness" href="#Pig-Game.computer.Computer.get_greediness">get_greediness</a></code></li>
-<li><code><a title="Pig-Game.computer.Computer.get_intelligence" href="#Pig-Game.computer.Computer.get_intelligence">get_intelligence</a></code></li>
-<li><code><a title="Pig-Game.computer.Computer.get_name" href="#Pig-Game.computer.Computer.get_name">get_name</a></code></li>
-<li><code><a title="Pig-Game.computer.Computer.get_rolls" href="#Pig-Game.computer.Computer.get_rolls">get_rolls</a></code></li>
-<li><code><a title="Pig-Game.computer.Computer.get_score" href="#Pig-Game.computer.Computer.get_score">get_score</a></code></li>
+<li><code><a title="Pig-Game.computer.Computer.greediness" href="#Pig-Game.computer.Computer.greediness">greediness</a></code></li>
 <li><code><a title="Pig-Game.computer.Computer.inc_rolls" href="#Pig-Game.computer.Computer.inc_rolls">inc_rolls</a></code></li>
+<li><code><a title="Pig-Game.computer.Computer.intelligence" href="#Pig-Game.computer.Computer.intelligence">intelligence</a></code></li>
+<li><code><a title="Pig-Game.computer.Computer.name" href="#Pig-Game.computer.Computer.name">name</a></code></li>
 <li><code><a title="Pig-Game.computer.Computer.reset_computer" href="#Pig-Game.computer.Computer.reset_computer">reset_computer</a></code></li>
-<li><code><a title="Pig-Game.computer.Computer.set_intelligence" href="#Pig-Game.computer.Computer.set_intelligence">set_intelligence</a></code></li>
-<li><code><a title="Pig-Game.computer.Computer.set_rolls" href="#Pig-Game.computer.Computer.set_rolls">set_rolls</a></code></li>
+<li><code><a title="Pig-Game.computer.Computer.rolls" href="#Pig-Game.computer.Computer.rolls">rolls</a></code></li>
+<li><code><a title="Pig-Game.computer.Computer.score" href="#Pig-Game.computer.Computer.score">score</a></code></li>
 </ul>
 </li>
 </ul>

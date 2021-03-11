@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
-<title>Pig-Game.Tests.computer_test API documentation</title>
+<title>Pig-Game.computer_test API documentation</title>
 <meta name="description" content="Test Computer." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>Pig-Game.Tests.computer_test</code></h1>
+<h1 class="title">Module <code>Pig-Game.computer_test</code></h1>
 </header>
 <section id="section-intro">
 <p>Test Computer.</p>
@@ -44,14 +44,14 @@ class TestComputerClass(unittest.TestCase):
     def test_name(self):
         &#34;&#34;&#34;Test creating computer and check its name.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_name()
+        res = computer1.name
         exp = &#34;CPU&#34;
         self.assertEqual(res, exp)
 
     def test_getscore(self):
         &#34;&#34;&#34;Test if player score works.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_score()
+        res = computer1.score
         exp = 0
         self.assertEqual(res, exp)
 
@@ -59,37 +59,51 @@ class TestComputerClass(unittest.TestCase):
         &#34;&#34;&#34;Test if adding score works.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
         computer1.add_score(10)
-        res = computer1.get_score()
+        res = computer1.score
         exp = 10
         self.assertEqual(res, exp)
 
     def test_rolls(self):
         &#34;&#34;&#34;Test if computer rolls correctly.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_rolls()
+        res = computer1.rolls
         exp = 0
         self.assertEqual(res, exp)
 
     def test_get_intelligence(self):
         &#34;&#34;&#34;Test computers intelligence.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_intelligence()
+        res = computer1.intelligence
         exp = 1
         self.assertEqual(res, exp)
 
     def test_set_intelligence(self):
         &#34;&#34;&#34;Test computers intelligence is set correctly.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        computer1.set_intelligence(2)
-        res = computer1.get_intelligence()
+        computer1.intelligence = 4
+        exp = 1
+        res = computer1.intelligence
+        self.assertEqual(res, exp)
+
+        computer1.intelligence = 2
+        res = computer1.intelligence
         exp = 2
         self.assertEqual(res, exp)
 
     def test_get_greediness(self):
         &#34;&#34;&#34;Test computers greediness.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_greediness()
+        res = computer1.greediness
         exp = 7
+        self.assertEqual(res, exp)
+
+    def test_set_rolls(self):
+        &#34;&#34;&#34;Test if computers rolls is set correctly.&#34;&#34;&#34;
+        computer1 = computer.Computer(1)
+        computer1.rolls = 5
+
+        res = computer1.rolls
+        exp = 5
         self.assertEqual(res, exp)</code></pre>
 </details>
 </section>
@@ -102,7 +116,7 @@ class TestComputerClass(unittest.TestCase):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="Pig-Game.Tests.computer_test.TestComputerClass"><code class="flex name class">
+<dt id="Pig-Game.computer_test.TestComputerClass"><code class="flex name class">
 <span>class <span class="ident">TestComputerClass</span></span>
 <span>(</span><span>methodName='runTest')</span>
 </code></dt>
@@ -127,14 +141,14 @@ not have a method with the specified name.</p></div>
     def test_name(self):
         &#34;&#34;&#34;Test creating computer and check its name.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_name()
+        res = computer1.name
         exp = &#34;CPU&#34;
         self.assertEqual(res, exp)
 
     def test_getscore(self):
         &#34;&#34;&#34;Test if player score works.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_score()
+        res = computer1.score
         exp = 0
         self.assertEqual(res, exp)
 
@@ -142,37 +156,51 @@ not have a method with the specified name.</p></div>
         &#34;&#34;&#34;Test if adding score works.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
         computer1.add_score(10)
-        res = computer1.get_score()
+        res = computer1.score
         exp = 10
         self.assertEqual(res, exp)
 
     def test_rolls(self):
         &#34;&#34;&#34;Test if computer rolls correctly.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_rolls()
+        res = computer1.rolls
         exp = 0
         self.assertEqual(res, exp)
 
     def test_get_intelligence(self):
         &#34;&#34;&#34;Test computers intelligence.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_intelligence()
+        res = computer1.intelligence
         exp = 1
         self.assertEqual(res, exp)
 
     def test_set_intelligence(self):
         &#34;&#34;&#34;Test computers intelligence is set correctly.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        computer1.set_intelligence(2)
-        res = computer1.get_intelligence()
+        computer1.intelligence = 4
+        exp = 1
+        res = computer1.intelligence
+        self.assertEqual(res, exp)
+
+        computer1.intelligence = 2
+        res = computer1.intelligence
         exp = 2
         self.assertEqual(res, exp)
 
     def test_get_greediness(self):
         &#34;&#34;&#34;Test computers greediness.&#34;&#34;&#34;
         computer1 = computer.Computer(1)
-        res = computer1.get_greediness()
+        res = computer1.greediness
         exp = 7
+        self.assertEqual(res, exp)
+
+    def test_set_rolls(self):
+        &#34;&#34;&#34;Test if computers rolls is set correctly.&#34;&#34;&#34;
+        computer1 = computer.Computer(1)
+        computer1.rolls = 5
+
+        res = computer1.rolls
+        exp = 5
         self.assertEqual(res, exp)</code></pre>
 </details>
 <h3>Ancestors</h3>
@@ -181,7 +209,7 @@ not have a method with the specified name.</p></div>
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="Pig-Game.Tests.computer_test.TestComputerClass.test_addscore"><code class="name flex">
+<dt id="Pig-Game.computer_test.TestComputerClass.test_addscore"><code class="name flex">
 <span>def <span class="ident">test_addscore</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -194,12 +222,12 @@ not have a method with the specified name.</p></div>
     &#34;&#34;&#34;Test if adding score works.&#34;&#34;&#34;
     computer1 = computer.Computer(1)
     computer1.add_score(10)
-    res = computer1.get_score()
+    res = computer1.score
     exp = 10
     self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.computer_test.TestComputerClass.test_get_greediness"><code class="name flex">
+<dt id="Pig-Game.computer_test.TestComputerClass.test_get_greediness"><code class="name flex">
 <span>def <span class="ident">test_get_greediness</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -211,12 +239,12 @@ not have a method with the specified name.</p></div>
 <pre><code class="python">def test_get_greediness(self):
     &#34;&#34;&#34;Test computers greediness.&#34;&#34;&#34;
     computer1 = computer.Computer(1)
-    res = computer1.get_greediness()
+    res = computer1.greediness
     exp = 7
     self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.computer_test.TestComputerClass.test_get_intelligence"><code class="name flex">
+<dt id="Pig-Game.computer_test.TestComputerClass.test_get_intelligence"><code class="name flex">
 <span>def <span class="ident">test_get_intelligence</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -228,12 +256,12 @@ not have a method with the specified name.</p></div>
 <pre><code class="python">def test_get_intelligence(self):
     &#34;&#34;&#34;Test computers intelligence.&#34;&#34;&#34;
     computer1 = computer.Computer(1)
-    res = computer1.get_intelligence()
+    res = computer1.intelligence
     exp = 1
     self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.computer_test.TestComputerClass.test_getscore"><code class="name flex">
+<dt id="Pig-Game.computer_test.TestComputerClass.test_getscore"><code class="name flex">
 <span>def <span class="ident">test_getscore</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -245,12 +273,12 @@ not have a method with the specified name.</p></div>
 <pre><code class="python">def test_getscore(self):
     &#34;&#34;&#34;Test if player score works.&#34;&#34;&#34;
     computer1 = computer.Computer(1)
-    res = computer1.get_score()
+    res = computer1.score
     exp = 0
     self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.computer_test.TestComputerClass.test_init"><code class="name flex">
+<dt id="Pig-Game.computer_test.TestComputerClass.test_init"><code class="name flex">
 <span>def <span class="ident">test_init</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -266,7 +294,7 @@ not have a method with the specified name.</p></div>
     self.assertIsInstance(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.computer_test.TestComputerClass.test_name"><code class="name flex">
+<dt id="Pig-Game.computer_test.TestComputerClass.test_name"><code class="name flex">
 <span>def <span class="ident">test_name</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -278,12 +306,12 @@ not have a method with the specified name.</p></div>
 <pre><code class="python">def test_name(self):
     &#34;&#34;&#34;Test creating computer and check its name.&#34;&#34;&#34;
     computer1 = computer.Computer(1)
-    res = computer1.get_name()
+    res = computer1.name
     exp = &#34;CPU&#34;
     self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.computer_test.TestComputerClass.test_rolls"><code class="name flex">
+<dt id="Pig-Game.computer_test.TestComputerClass.test_rolls"><code class="name flex">
 <span>def <span class="ident">test_rolls</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -295,12 +323,12 @@ not have a method with the specified name.</p></div>
 <pre><code class="python">def test_rolls(self):
     &#34;&#34;&#34;Test if computer rolls correctly.&#34;&#34;&#34;
     computer1 = computer.Computer(1)
-    res = computer1.get_rolls()
+    res = computer1.rolls
     exp = 0
     self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.computer_test.TestComputerClass.test_set_intelligence"><code class="name flex">
+<dt id="Pig-Game.computer_test.TestComputerClass.test_set_intelligence"><code class="name flex">
 <span>def <span class="ident">test_set_intelligence</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -312,9 +340,33 @@ not have a method with the specified name.</p></div>
 <pre><code class="python">def test_set_intelligence(self):
     &#34;&#34;&#34;Test computers intelligence is set correctly.&#34;&#34;&#34;
     computer1 = computer.Computer(1)
-    computer1.set_intelligence(2)
-    res = computer1.get_intelligence()
+    computer1.intelligence = 4
+    exp = 1
+    res = computer1.intelligence
+    self.assertEqual(res, exp)
+
+    computer1.intelligence = 2
+    res = computer1.intelligence
     exp = 2
+    self.assertEqual(res, exp)</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.computer_test.TestComputerClass.test_set_rolls"><code class="name flex">
+<span>def <span class="ident">test_set_rolls</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test if computers rolls is set correctly.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_set_rolls(self):
+    &#34;&#34;&#34;Test if computers rolls is set correctly.&#34;&#34;&#34;
+    computer1 = computer.Computer(1)
+    computer1.rolls = 5
+
+    res = computer1.rolls
+    exp = 5
     self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
@@ -331,22 +383,23 @@ not have a method with the specified name.</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="Pig-Game.Tests" href="index.html">Pig-Game.Tests</a></code></li>
+<li><code><a title="Pig-Game" href="index.html">Pig-Game</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="Pig-Game.Tests.computer_test.TestComputerClass" href="#Pig-Game.Tests.computer_test.TestComputerClass">TestComputerClass</a></code></h4>
+<h4><code><a title="Pig-Game.computer_test.TestComputerClass" href="#Pig-Game.computer_test.TestComputerClass">TestComputerClass</a></code></h4>
 <ul class="">
-<li><code><a title="Pig-Game.Tests.computer_test.TestComputerClass.test_addscore" href="#Pig-Game.Tests.computer_test.TestComputerClass.test_addscore">test_addscore</a></code></li>
-<li><code><a title="Pig-Game.Tests.computer_test.TestComputerClass.test_get_greediness" href="#Pig-Game.Tests.computer_test.TestComputerClass.test_get_greediness">test_get_greediness</a></code></li>
-<li><code><a title="Pig-Game.Tests.computer_test.TestComputerClass.test_get_intelligence" href="#Pig-Game.Tests.computer_test.TestComputerClass.test_get_intelligence">test_get_intelligence</a></code></li>
-<li><code><a title="Pig-Game.Tests.computer_test.TestComputerClass.test_getscore" href="#Pig-Game.Tests.computer_test.TestComputerClass.test_getscore">test_getscore</a></code></li>
-<li><code><a title="Pig-Game.Tests.computer_test.TestComputerClass.test_init" href="#Pig-Game.Tests.computer_test.TestComputerClass.test_init">test_init</a></code></li>
-<li><code><a title="Pig-Game.Tests.computer_test.TestComputerClass.test_name" href="#Pig-Game.Tests.computer_test.TestComputerClass.test_name">test_name</a></code></li>
-<li><code><a title="Pig-Game.Tests.computer_test.TestComputerClass.test_rolls" href="#Pig-Game.Tests.computer_test.TestComputerClass.test_rolls">test_rolls</a></code></li>
-<li><code><a title="Pig-Game.Tests.computer_test.TestComputerClass.test_set_intelligence" href="#Pig-Game.Tests.computer_test.TestComputerClass.test_set_intelligence">test_set_intelligence</a></code></li>
+<li><code><a title="Pig-Game.computer_test.TestComputerClass.test_addscore" href="#Pig-Game.computer_test.TestComputerClass.test_addscore">test_addscore</a></code></li>
+<li><code><a title="Pig-Game.computer_test.TestComputerClass.test_get_greediness" href="#Pig-Game.computer_test.TestComputerClass.test_get_greediness">test_get_greediness</a></code></li>
+<li><code><a title="Pig-Game.computer_test.TestComputerClass.test_get_intelligence" href="#Pig-Game.computer_test.TestComputerClass.test_get_intelligence">test_get_intelligence</a></code></li>
+<li><code><a title="Pig-Game.computer_test.TestComputerClass.test_getscore" href="#Pig-Game.computer_test.TestComputerClass.test_getscore">test_getscore</a></code></li>
+<li><code><a title="Pig-Game.computer_test.TestComputerClass.test_init" href="#Pig-Game.computer_test.TestComputerClass.test_init">test_init</a></code></li>
+<li><code><a title="Pig-Game.computer_test.TestComputerClass.test_name" href="#Pig-Game.computer_test.TestComputerClass.test_name">test_name</a></code></li>
+<li><code><a title="Pig-Game.computer_test.TestComputerClass.test_rolls" href="#Pig-Game.computer_test.TestComputerClass.test_rolls">test_rolls</a></code></li>
+<li><code><a title="Pig-Game.computer_test.TestComputerClass.test_set_intelligence" href="#Pig-Game.computer_test.TestComputerClass.test_set_intelligence">test_set_intelligence</a></code></li>
+<li><code><a title="Pig-Game.computer_test.TestComputerClass.test_set_rolls" href="#Pig-Game.computer_test.TestComputerClass.test_set_rolls">test_set_rolls</a></code></li>
 </ul>
 </li>
 </ul>

@@ -112,21 +112,17 @@ class Commands(cmd.Cmd):
 
     def do_intelligence(self, arg):
         &#34;&#34;&#34;Change the intelligence of the computer.&#34;&#34;&#34;
+        if not arg:
+            print(&#34;Try to type &#39;intelligence (number)&#39;&#34;)
         try:
             int_arg = int(arg)
-            self.game.computer.set_intelligence(int_arg)
+            self.game.computer.intelligence = int_arg
         except ValueError:
             print(&#34;Please enter an integer&#34;)
             return
         except AttributeError:
             print(&#34;You have to start a singleplayer game first.&#34;)
             return
-        if not arg:
-            print(&#34;Try to type &#39;intelligence (number)&#39;&#34;)
-        elif int_arg &lt; 1 or int_arg &gt; 3:
-            print(&#34;The intelligence can only be between 1-3&#34;)
-        else:
-            print(f&#34;The computer&#39;s intelligence is now set to {int_arg}&#34;)
 
     def do_leaderboard(self, _):
         # pylint: disable=no-self-use
@@ -134,7 +130,15 @@ class Commands(cmd.Cmd):
         try:
             leaderboard.show_leaderboard()
         except FileNotFoundError:
-            print(&#34;You have not played any games yet!&#34;)</code></pre>
+            print(&#34;You have not played any games yet!&#34;)
+
+    def do_resetlb(self, _):
+        # pylint: disable=no-self-use
+        &#34;&#34;&#34;Clear leaderboard file.&#34;&#34;&#34;
+        try:
+            leaderboard.reset_leaderboard()
+        except FileNotFoundError:
+            print(&#34;Can&#39;t find leaderboard file.&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -233,21 +237,17 @@ class Commands(cmd.Cmd):
 
     def do_intelligence(self, arg):
         &#34;&#34;&#34;Change the intelligence of the computer.&#34;&#34;&#34;
+        if not arg:
+            print(&#34;Try to type &#39;intelligence (number)&#39;&#34;)
         try:
             int_arg = int(arg)
-            self.game.computer.set_intelligence(int_arg)
+            self.game.computer.intelligence = int_arg
         except ValueError:
             print(&#34;Please enter an integer&#34;)
             return
         except AttributeError:
             print(&#34;You have to start a singleplayer game first.&#34;)
             return
-        if not arg:
-            print(&#34;Try to type &#39;intelligence (number)&#39;&#34;)
-        elif int_arg &lt; 1 or int_arg &gt; 3:
-            print(&#34;The intelligence can only be between 1-3&#34;)
-        else:
-            print(f&#34;The computer&#39;s intelligence is now set to {int_arg}&#34;)
 
     def do_leaderboard(self, _):
         # pylint: disable=no-self-use
@@ -255,7 +255,15 @@ class Commands(cmd.Cmd):
         try:
             leaderboard.show_leaderboard()
         except FileNotFoundError:
-            print(&#34;You have not played any games yet!&#34;)</code></pre>
+            print(&#34;You have not played any games yet!&#34;)
+
+    def do_resetlb(self, _):
+        # pylint: disable=no-self-use
+        &#34;&#34;&#34;Clear leaderboard file.&#34;&#34;&#34;
+        try:
+            leaderboard.reset_leaderboard()
+        except FileNotFoundError:
+            print(&#34;Can&#39;t find leaderboard file.&#34;)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -354,21 +362,17 @@ class Commands(cmd.Cmd):
 </summary>
 <pre><code class="python">def do_intelligence(self, arg):
     &#34;&#34;&#34;Change the intelligence of the computer.&#34;&#34;&#34;
+    if not arg:
+        print(&#34;Try to type &#39;intelligence (number)&#39;&#34;)
     try:
         int_arg = int(arg)
-        self.game.computer.set_intelligence(int_arg)
+        self.game.computer.intelligence = int_arg
     except ValueError:
         print(&#34;Please enter an integer&#34;)
         return
     except AttributeError:
         print(&#34;You have to start a singleplayer game first.&#34;)
-        return
-    if not arg:
-        print(&#34;Try to type &#39;intelligence (number)&#39;&#34;)
-    elif int_arg &lt; 1 or int_arg &gt; 3:
-        print(&#34;The intelligence can only be between 1-3&#34;)
-    else:
-        print(f&#34;The computer&#39;s intelligence is now set to {int_arg}&#34;)</code></pre>
+        return</code></pre>
 </details>
 </dd>
 <dt id="Pig-Game.commands.Commands.do_leaderboard"><code class="name flex">
@@ -401,6 +405,24 @@ class Commands(cmd.Cmd):
 <pre><code class="python">def do_r(self, _):
     &#34;&#34;&#34;Roll the dice.&#34;&#34;&#34;
     self.do_roll(_)</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.commands.Commands.do_resetlb"><code class="name flex">
+<span>def <span class="ident">do_resetlb</span></span>(<span>self, _)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Clear leaderboard file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_resetlb(self, _):
+    # pylint: disable=no-self-use
+    &#34;&#34;&#34;Clear leaderboard file.&#34;&#34;&#34;
+    try:
+        leaderboard.reset_leaderboard()
+    except FileNotFoundError:
+        print(&#34;Can&#39;t find leaderboard file.&#34;)</code></pre>
 </details>
 </dd>
 <dt id="Pig-Game.commands.Commands.do_restart"><code class="name flex">
@@ -502,6 +524,7 @@ class Commands(cmd.Cmd):
 <li><code><a title="Pig-Game.commands.Commands.do_intelligence" href="#Pig-Game.commands.Commands.do_intelligence">do_intelligence</a></code></li>
 <li><code><a title="Pig-Game.commands.Commands.do_leaderboard" href="#Pig-Game.commands.Commands.do_leaderboard">do_leaderboard</a></code></li>
 <li><code><a title="Pig-Game.commands.Commands.do_r" href="#Pig-Game.commands.Commands.do_r">do_r</a></code></li>
+<li><code><a title="Pig-Game.commands.Commands.do_resetlb" href="#Pig-Game.commands.Commands.do_resetlb">do_resetlb</a></code></li>
 <li><code><a title="Pig-Game.commands.Commands.do_restart" href="#Pig-Game.commands.Commands.do_restart">do_restart</a></code></li>
 <li><code><a title="Pig-Game.commands.Commands.do_roll" href="#Pig-Game.commands.Commands.do_roll">do_roll</a></code></li>
 <li><code><a title="Pig-Game.commands.Commands.do_rules" href="#Pig-Game.commands.Commands.do_rules">do_rules</a></code></li>

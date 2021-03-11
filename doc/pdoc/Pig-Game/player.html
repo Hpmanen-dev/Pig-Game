@@ -35,20 +35,22 @@ class Player:
 
     def __init__(self, name):
         &#34;&#34;&#34;Initiate the player.&#34;&#34;&#34;
-        self.name = name
-        self.score = 0
+        self._name = name
+        self._score = 0
 
-    def get_name(self):
+    @property
+    def name(self):
         &#34;&#34;&#34;Get player&#39;s name.&#34;&#34;&#34;
-        return self.name
+        return self._name
 
-    def get_score(self):
+    @property
+    def score(self):
         &#34;&#34;&#34;Get player&#39;s score.&#34;&#34;&#34;
-        return self.score
+        return self._score
 
-    def add_score(self, score):
+    def add_score(self, add):
         &#34;&#34;&#34;Add to player&#39;s score.&#34;&#34;&#34;
-        self.score += score</code></pre>
+        self._score += add</code></pre>
 </details>
 </section>
 <section>
@@ -76,25 +78,56 @@ class Player:
 
     def __init__(self, name):
         &#34;&#34;&#34;Initiate the player.&#34;&#34;&#34;
-        self.name = name
-        self.score = 0
+        self._name = name
+        self._score = 0
 
-    def get_name(self):
+    @property
+    def name(self):
         &#34;&#34;&#34;Get player&#39;s name.&#34;&#34;&#34;
-        return self.name
+        return self._name
 
-    def get_score(self):
+    @property
+    def score(self):
         &#34;&#34;&#34;Get player&#39;s score.&#34;&#34;&#34;
-        return self.score
+        return self._score
 
-    def add_score(self, score):
+    def add_score(self, add):
         &#34;&#34;&#34;Add to player&#39;s score.&#34;&#34;&#34;
-        self.score += score</code></pre>
+        self._score += add</code></pre>
 </details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Pig-Game.player.Player.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"><p>Get player's name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def name(self):
+    &#34;&#34;&#34;Get player&#39;s name.&#34;&#34;&#34;
+    return self._name</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.player.Player.score"><code class="name">var <span class="ident">score</span></code></dt>
+<dd>
+<div class="desc"><p>Get player's score.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def score(self):
+    &#34;&#34;&#34;Get player&#39;s score.&#34;&#34;&#34;
+    return self._score</code></pre>
+</details>
+</dd>
+</dl>
 <h3>Methods</h3>
 <dl>
 <dt id="Pig-Game.player.Player.add_score"><code class="name flex">
-<span>def <span class="ident">add_score</span></span>(<span>self, score)</span>
+<span>def <span class="ident">add_score</span></span>(<span>self, add)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Add to player's score.</p></div>
@@ -102,37 +135,9 @@ class Player:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_score(self, score):
+<pre><code class="python">def add_score(self, add):
     &#34;&#34;&#34;Add to player&#39;s score.&#34;&#34;&#34;
-    self.score += score</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.player.Player.get_name"><code class="name flex">
-<span>def <span class="ident">get_name</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Get player's name.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_name(self):
-    &#34;&#34;&#34;Get player&#39;s name.&#34;&#34;&#34;
-    return self.name</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.player.Player.get_score"><code class="name flex">
-<span>def <span class="ident">get_score</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Get player's score.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_score(self):
-    &#34;&#34;&#34;Get player&#39;s score.&#34;&#34;&#34;
-    return self.score</code></pre>
+    self._score += add</code></pre>
 </details>
 </dd>
 </dl>
@@ -157,8 +162,8 @@ class Player:
 <h4><code><a title="Pig-Game.player.Player" href="#Pig-Game.player.Player">Player</a></code></h4>
 <ul class="">
 <li><code><a title="Pig-Game.player.Player.add_score" href="#Pig-Game.player.Player.add_score">add_score</a></code></li>
-<li><code><a title="Pig-Game.player.Player.get_name" href="#Pig-Game.player.Player.get_name">get_name</a></code></li>
-<li><code><a title="Pig-Game.player.Player.get_score" href="#Pig-Game.player.Player.get_score">get_score</a></code></li>
+<li><code><a title="Pig-Game.player.Player.name" href="#Pig-Game.player.Player.name">name</a></code></li>
+<li><code><a title="Pig-Game.player.Player.score" href="#Pig-Game.player.Player.score">score</a></code></li>
 </ul>
 </li>
 </ul>

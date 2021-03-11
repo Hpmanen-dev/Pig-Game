@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
-<title>Pig-Game.Tests.dice_test API documentation</title>
-<meta name="description" content="Test dice." />
+<title>Pig-Game.player_test API documentation</title>
+<meta name="description" content="Test the player class." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,40 +19,50 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>Pig-Game.Tests.dice_test</code></h1>
+<h1 class="title">Module <code>Pig-Game.player_test</code></h1>
 </header>
 <section id="section-intro">
-<p>Test dice.</p>
+<p>Test the player class.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;Test dice.&#34;&#34;&#34;
+<pre><code class="python">&#34;&#34;&#34;Test the player class.&#34;&#34;&#34;
 import unittest
-import dice
+import player
 
 
-class TestDiceClass(unittest.TestCase):
-    &#34;&#34;&#34;Test game class.&#34;&#34;&#34;
+class TestPlayerClass(unittest.TestCase):
+    &#34;&#34;&#34;Player testclass.&#34;&#34;&#34;
 
     def test_init(self):
-        &#34;&#34;&#34;Test initiating the die.&#34;&#34;&#34;
-        res = dice.Dice()
-        exp = dice.Dice
+        &#34;&#34;&#34;Test initiating the player.&#34;&#34;&#34;
+        res = player.Player(&#34;name&#34;)
+        exp = player.Player
+
         self.assertIsInstance(res, exp)
 
-    def test_roll(self):
-        &#34;&#34;&#34;Test if the die rolls correctly.&#34;&#34;&#34;
-        die = dice.Dice()
-        res = 1 &lt;= die.roll() &lt;= 6
-        self.assertTrue(res)
+    def test_name(self):
+        &#34;&#34;&#34;Test creating a player and check players name.&#34;&#34;&#34;
+        player1 = player.Player(&#34;name&#34;)
+        res = player1.name
+        exp = &#34;name&#34;
+        self.assertEqual(res, exp)
 
-    def test_sides(self):
-        &#34;&#34;&#34;Test if the die have the specified amount of sides.&#34;&#34;&#34;
-        die = dice.Dice()
-        side = die.get_sides()
-        exp = 6
-        self.assertEqual(side, exp)</code></pre>
+    def test_getscore(self):
+        &#34;&#34;&#34;Test if player score works.&#34;&#34;&#34;
+        player1 = player.Player(&#34;name&#34;)
+        res = player1.score
+        exp = 0
+        self.assertEqual(res, exp)
+
+    def test_addscore(self):
+        &#34;&#34;&#34;Test if adding score works.&#34;&#34;&#34;
+        player1 = player.Player(&#34;name&#34;)
+        player1.add_score(10)
+        res = player1.score
+        exp = 10
+        self.assertEqual(res, exp)</code></pre>
 </details>
 </section>
 <section>
@@ -64,12 +74,12 @@ class TestDiceClass(unittest.TestCase):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="Pig-Game.Tests.dice_test.TestDiceClass"><code class="flex name class">
-<span>class <span class="ident">TestDiceClass</span></span>
+<dt id="Pig-Game.player_test.TestPlayerClass"><code class="flex name class">
+<span>class <span class="ident">TestPlayerClass</span></span>
 <span>(</span><span>methodName='runTest')</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Test game class.</p>
+<div class="desc"><p>Player testclass.</p>
 <p>Create an instance of the class that will use the named test
 method when executed. Raises a ValueError if the instance does
 not have a method with the specified name.</p></div>
@@ -77,27 +87,37 @@ not have a method with the specified name.</p></div>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class TestDiceClass(unittest.TestCase):
-    &#34;&#34;&#34;Test game class.&#34;&#34;&#34;
+<pre><code class="python">class TestPlayerClass(unittest.TestCase):
+    &#34;&#34;&#34;Player testclass.&#34;&#34;&#34;
 
     def test_init(self):
-        &#34;&#34;&#34;Test initiating the die.&#34;&#34;&#34;
-        res = dice.Dice()
-        exp = dice.Dice
+        &#34;&#34;&#34;Test initiating the player.&#34;&#34;&#34;
+        res = player.Player(&#34;name&#34;)
+        exp = player.Player
+
         self.assertIsInstance(res, exp)
 
-    def test_roll(self):
-        &#34;&#34;&#34;Test if the die rolls correctly.&#34;&#34;&#34;
-        die = dice.Dice()
-        res = 1 &lt;= die.roll() &lt;= 6
-        self.assertTrue(res)
+    def test_name(self):
+        &#34;&#34;&#34;Test creating a player and check players name.&#34;&#34;&#34;
+        player1 = player.Player(&#34;name&#34;)
+        res = player1.name
+        exp = &#34;name&#34;
+        self.assertEqual(res, exp)
 
-    def test_sides(self):
-        &#34;&#34;&#34;Test if the die have the specified amount of sides.&#34;&#34;&#34;
-        die = dice.Dice()
-        side = die.get_sides()
-        exp = 6
-        self.assertEqual(side, exp)</code></pre>
+    def test_getscore(self):
+        &#34;&#34;&#34;Test if player score works.&#34;&#34;&#34;
+        player1 = player.Player(&#34;name&#34;)
+        res = player1.score
+        exp = 0
+        self.assertEqual(res, exp)
+
+    def test_addscore(self):
+        &#34;&#34;&#34;Test if adding score works.&#34;&#34;&#34;
+        player1 = player.Player(&#34;name&#34;)
+        player1.add_score(10)
+        res = player1.score
+        exp = 10
+        self.assertEqual(res, exp)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -105,53 +125,73 @@ not have a method with the specified name.</p></div>
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="Pig-Game.Tests.dice_test.TestDiceClass.test_init"><code class="name flex">
+<dt id="Pig-Game.player_test.TestPlayerClass.test_addscore"><code class="name flex">
+<span>def <span class="ident">test_addscore</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test if adding score works.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_addscore(self):
+    &#34;&#34;&#34;Test if adding score works.&#34;&#34;&#34;
+    player1 = player.Player(&#34;name&#34;)
+    player1.add_score(10)
+    res = player1.score
+    exp = 10
+    self.assertEqual(res, exp)</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.player_test.TestPlayerClass.test_getscore"><code class="name flex">
+<span>def <span class="ident">test_getscore</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test if player score works.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_getscore(self):
+    &#34;&#34;&#34;Test if player score works.&#34;&#34;&#34;
+    player1 = player.Player(&#34;name&#34;)
+    res = player1.score
+    exp = 0
+    self.assertEqual(res, exp)</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.player_test.TestPlayerClass.test_init"><code class="name flex">
 <span>def <span class="ident">test_init</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Test initiating the die.</p></div>
+<div class="desc"><p>Test initiating the player.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def test_init(self):
-    &#34;&#34;&#34;Test initiating the die.&#34;&#34;&#34;
-    res = dice.Dice()
-    exp = dice.Dice
+    &#34;&#34;&#34;Test initiating the player.&#34;&#34;&#34;
+    res = player.Player(&#34;name&#34;)
+    exp = player.Player
+
     self.assertIsInstance(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.dice_test.TestDiceClass.test_roll"><code class="name flex">
-<span>def <span class="ident">test_roll</span></span>(<span>self)</span>
+<dt id="Pig-Game.player_test.TestPlayerClass.test_name"><code class="name flex">
+<span>def <span class="ident">test_name</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Test if the die rolls correctly.</p></div>
+<div class="desc"><p>Test creating a player and check players name.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def test_roll(self):
-    &#34;&#34;&#34;Test if the die rolls correctly.&#34;&#34;&#34;
-    die = dice.Dice()
-    res = 1 &lt;= die.roll() &lt;= 6
-    self.assertTrue(res)</code></pre>
-</details>
-</dd>
-<dt id="Pig-Game.Tests.dice_test.TestDiceClass.test_sides"><code class="name flex">
-<span>def <span class="ident">test_sides</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Test if the die have the specified amount of sides.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def test_sides(self):
-    &#34;&#34;&#34;Test if the die have the specified amount of sides.&#34;&#34;&#34;
-    die = dice.Dice()
-    side = die.get_sides()
-    exp = 6
-    self.assertEqual(side, exp)</code></pre>
+<pre><code class="python">def test_name(self):
+    &#34;&#34;&#34;Test creating a player and check players name.&#34;&#34;&#34;
+    player1 = player.Player(&#34;name&#34;)
+    res = player1.name
+    exp = &#34;name&#34;
+    self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
 </dl>
@@ -167,17 +207,18 @@ not have a method with the specified name.</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="Pig-Game.Tests" href="index.html">Pig-Game.Tests</a></code></li>
+<li><code><a title="Pig-Game" href="index.html">Pig-Game</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="Pig-Game.Tests.dice_test.TestDiceClass" href="#Pig-Game.Tests.dice_test.TestDiceClass">TestDiceClass</a></code></h4>
+<h4><code><a title="Pig-Game.player_test.TestPlayerClass" href="#Pig-Game.player_test.TestPlayerClass">TestPlayerClass</a></code></h4>
 <ul class="">
-<li><code><a title="Pig-Game.Tests.dice_test.TestDiceClass.test_init" href="#Pig-Game.Tests.dice_test.TestDiceClass.test_init">test_init</a></code></li>
-<li><code><a title="Pig-Game.Tests.dice_test.TestDiceClass.test_roll" href="#Pig-Game.Tests.dice_test.TestDiceClass.test_roll">test_roll</a></code></li>
-<li><code><a title="Pig-Game.Tests.dice_test.TestDiceClass.test_sides" href="#Pig-Game.Tests.dice_test.TestDiceClass.test_sides">test_sides</a></code></li>
+<li><code><a title="Pig-Game.player_test.TestPlayerClass.test_addscore" href="#Pig-Game.player_test.TestPlayerClass.test_addscore">test_addscore</a></code></li>
+<li><code><a title="Pig-Game.player_test.TestPlayerClass.test_getscore" href="#Pig-Game.player_test.TestPlayerClass.test_getscore">test_getscore</a></code></li>
+<li><code><a title="Pig-Game.player_test.TestPlayerClass.test_init" href="#Pig-Game.player_test.TestPlayerClass.test_init">test_init</a></code></li>
+<li><code><a title="Pig-Game.player_test.TestPlayerClass.test_name" href="#Pig-Game.player_test.TestPlayerClass.test_name">test_name</a></code></li>
 </ul>
 </li>
 </ul>

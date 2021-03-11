@@ -76,13 +76,14 @@ class Game():
                 msg = (&#34;Choose either &#39;singleplayer&#39; or &#39;multiplayer&#39;&#34;)
                 print(msg)
         print(f&#34;{msg}\n&#34;)
-        print(f&#34;{self.curplayer.get_name()} starts.&#34;)
+        print(f&#34;{self.curplayer.name} starts.&#34;)
         print(&#34;Do you want to roll or hold?&#34;)
         return msg
 
     def choose_starter(self, player1, player2):
         &#34;&#34;&#34;Choose which player starts.&#34;&#34;&#34;
         select_player = random.randint(1, 2)
+        print(select_player)
         if select_player == 1:
             self.curplayer = player.Player(player1)
             self.otherplayer = player.Player(player2)
@@ -97,13 +98,13 @@ class Game():
         &#34;&#34;&#34;Player rolls a die and adds the number to the dice score.&#34;&#34;&#34;
         roll = self.die.roll()
         if roll != 1:
-            msg = (f&#34;{self.curplayer.get_name()} rolled a {roll}&#34;)
+            msg = (f&#34;{self.curplayer.name} rolled a {roll}&#34;)
             self.dice_score += roll
             print(msg)
             self.check_computer_turn()
         else:
-            msg = (f&#34;{self.curplayer.get_name()} rolled a 1 and &#34;
-                   &#34;got 0 points this round!&#34;)
+            msg = (f&#34;\n{self.curplayer.name} rolled a 1 and &#34;
+                   &#34;got 0 points this round!\n&#34;)
             print(msg)
             if isinstance(self.curplayer, computer.Computer):
                 self.curplayer.reset_computer()
@@ -113,46 +114,48 @@ class Game():
     def hold(self):
         &#34;&#34;&#34;Hold and add the dice score to players total score.&#34;&#34;&#34;
         self.curplayer.add_score(self.dice_score)
-        msg = (f&#34;{self.curplayer.get_name()} decided to hold\n&#34;
-               f&#34;{self.curplayer.get_name()} received &#34;
+        msg = (f&#34;\n{self.curplayer.name} decided to hold\n&#34;
+               f&#34;{self.curplayer.name} received &#34;
                f&#34;{self.dice_score} points\n&#34;
-               f&#34;{self.curplayer.get_name()} now have &#34;
-               f&#34;{self.curplayer.get_score()} points in total!&#34;)
+               f&#34;{self.curplayer.name} now have &#34;
+               f&#34;{self.curplayer.score} points in total!\n&#34;)
         print(msg)
-        self.switch_player()
         self.check_winner_condition()
+        self.switch_player()
         return msg
 
     def cheat(self):
         &#34;&#34;&#34;Give the player 100 points to win the game.&#34;&#34;&#34;
         self.curplayer.add_score(100)
-        msg = (f&#34;{self.curplayer.get_name()}&#34;
+        msg = (f&#34;{self.curplayer.name}&#34;
                &#34; has gained 100 points from cheating!&#34;)
         print(msg)
-        self.check_winner_condition()
+        self.hold()
         return &#39;cheater&#39;
 
     def check_winner_condition(self):
         &#34;&#34;&#34;Check if the current player has 100 or more points.&#34;&#34;&#34;
-        if self.curplayer.get_score() &gt;= 100:
-            print(f&#34;Congratulations {self.curplayer.get_name()}, You won!&#34;)
+        if self.curplayer.score &gt;= 100:
+            print(f&#34;Congratulations {self.curplayer.name}, You won!&#34;)
+            print(&#34;Type &#39;restart&#39; to play again!&#34;)
             winner = self.curplayer
             self.update_leaderboard(winner)
             self.curplayer = None
             self.otherplayer = None
-            return winner
+            return winner.name
         return None
 
     def computer_logic(self):
         &#34;&#34;&#34;How the computer works.&#34;&#34;&#34;
-        intelligence = self.computer.get_intelligence()
-        greediness = self.computer.get_greediness()
-        rolls = self.computer.get_rolls()
+        intelligence = self.computer.intelligence
+        greediness = self.computer.greediness
+        rolls = self.computer.rolls
         if rolls == 0:
             self.computer.inc_rolls()
+            self.computer.dec_greediness()
             self.roll()
             return_msg = &#34;auto roll&#34;
-        elif self.computer.get_score() + self.dice_score &gt;= 100:
+        elif self.computer.score + self.dice_score &gt;= 100:
             self.hold()
             return_msg = &#34;calculated&#34;
         else:
@@ -173,23 +176,25 @@ class Game():
         &#34;&#34;&#34;Change player turn.&#34;&#34;&#34;
         self.curplayer, self.otherplayer = self.otherplayer, self.curplayer
         self.dice_score = 0
-        msg = (f&#34;It is {self.curplayer.get_name()}&#39;s turn.&#34;)
-        print(msg)
-        print(&#34;Do you want to roll or hold?&#34;)
-        self.check_computer_turn()
-        return &#39;Player switched&#39;
+        if self.curplayer is not None:
+            msg = (f&#34;It is {self.curplayer.name}&#39;s turn.&#34;)
+            print(msg)
+            print(&#34;Do you want to roll or hold?&#34;)
+            self.check_computer_turn()
 
     def check_computer_turn(self):
         &#34;&#34;&#34;Check if it is computers turn.&#34;&#34;&#34;
         if isinstance(self.curplayer, computer.Computer):
             sleep(1)
             self.computer_logic()
+            return &#34;Computer turn&#34;
+        return None
 
     def update_leaderboard(self, winner):
         &#34;&#34;&#34;Update leaderboard.&#34;&#34;&#34;
-        win = winner.get_name()
-        pl1 = self.curplayer.get_name()
-        pl2 = self.otherplayer.get_name()
+        win = winner.name
+        pl1 = self.curplayer.name
+        pl2 = self.otherplayer.name
         leaderboard.update_leaderboard(pl1, pl2, win)</code></pre>
 </details>
 </section>
@@ -251,13 +256,14 @@ class Game():
                 msg = (&#34;Choose either &#39;singleplayer&#39; or &#39;multiplayer&#39;&#34;)
                 print(msg)
         print(f&#34;{msg}\n&#34;)
-        print(f&#34;{self.curplayer.get_name()} starts.&#34;)
+        print(f&#34;{self.curplayer.name} starts.&#34;)
         print(&#34;Do you want to roll or hold?&#34;)
         return msg
 
     def choose_starter(self, player1, player2):
         &#34;&#34;&#34;Choose which player starts.&#34;&#34;&#34;
         select_player = random.randint(1, 2)
+        print(select_player)
         if select_player == 1:
             self.curplayer = player.Player(player1)
             self.otherplayer = player.Player(player2)
@@ -272,13 +278,13 @@ class Game():
         &#34;&#34;&#34;Player rolls a die and adds the number to the dice score.&#34;&#34;&#34;
         roll = self.die.roll()
         if roll != 1:
-            msg = (f&#34;{self.curplayer.get_name()} rolled a {roll}&#34;)
+            msg = (f&#34;{self.curplayer.name} rolled a {roll}&#34;)
             self.dice_score += roll
             print(msg)
             self.check_computer_turn()
         else:
-            msg = (f&#34;{self.curplayer.get_name()} rolled a 1 and &#34;
-                   &#34;got 0 points this round!&#34;)
+            msg = (f&#34;\n{self.curplayer.name} rolled a 1 and &#34;
+                   &#34;got 0 points this round!\n&#34;)
             print(msg)
             if isinstance(self.curplayer, computer.Computer):
                 self.curplayer.reset_computer()
@@ -288,46 +294,48 @@ class Game():
     def hold(self):
         &#34;&#34;&#34;Hold and add the dice score to players total score.&#34;&#34;&#34;
         self.curplayer.add_score(self.dice_score)
-        msg = (f&#34;{self.curplayer.get_name()} decided to hold\n&#34;
-               f&#34;{self.curplayer.get_name()} received &#34;
+        msg = (f&#34;\n{self.curplayer.name} decided to hold\n&#34;
+               f&#34;{self.curplayer.name} received &#34;
                f&#34;{self.dice_score} points\n&#34;
-               f&#34;{self.curplayer.get_name()} now have &#34;
-               f&#34;{self.curplayer.get_score()} points in total!&#34;)
+               f&#34;{self.curplayer.name} now have &#34;
+               f&#34;{self.curplayer.score} points in total!\n&#34;)
         print(msg)
-        self.switch_player()
         self.check_winner_condition()
+        self.switch_player()
         return msg
 
     def cheat(self):
         &#34;&#34;&#34;Give the player 100 points to win the game.&#34;&#34;&#34;
         self.curplayer.add_score(100)
-        msg = (f&#34;{self.curplayer.get_name()}&#34;
+        msg = (f&#34;{self.curplayer.name}&#34;
                &#34; has gained 100 points from cheating!&#34;)
         print(msg)
-        self.check_winner_condition()
+        self.hold()
         return &#39;cheater&#39;
 
     def check_winner_condition(self):
         &#34;&#34;&#34;Check if the current player has 100 or more points.&#34;&#34;&#34;
-        if self.curplayer.get_score() &gt;= 100:
-            print(f&#34;Congratulations {self.curplayer.get_name()}, You won!&#34;)
+        if self.curplayer.score &gt;= 100:
+            print(f&#34;Congratulations {self.curplayer.name}, You won!&#34;)
+            print(&#34;Type &#39;restart&#39; to play again!&#34;)
             winner = self.curplayer
             self.update_leaderboard(winner)
             self.curplayer = None
             self.otherplayer = None
-            return winner
+            return winner.name
         return None
 
     def computer_logic(self):
         &#34;&#34;&#34;How the computer works.&#34;&#34;&#34;
-        intelligence = self.computer.get_intelligence()
-        greediness = self.computer.get_greediness()
-        rolls = self.computer.get_rolls()
+        intelligence = self.computer.intelligence
+        greediness = self.computer.greediness
+        rolls = self.computer.rolls
         if rolls == 0:
             self.computer.inc_rolls()
+            self.computer.dec_greediness()
             self.roll()
             return_msg = &#34;auto roll&#34;
-        elif self.computer.get_score() + self.dice_score &gt;= 100:
+        elif self.computer.score + self.dice_score &gt;= 100:
             self.hold()
             return_msg = &#34;calculated&#34;
         else:
@@ -348,23 +356,25 @@ class Game():
         &#34;&#34;&#34;Change player turn.&#34;&#34;&#34;
         self.curplayer, self.otherplayer = self.otherplayer, self.curplayer
         self.dice_score = 0
-        msg = (f&#34;It is {self.curplayer.get_name()}&#39;s turn.&#34;)
-        print(msg)
-        print(&#34;Do you want to roll or hold?&#34;)
-        self.check_computer_turn()
-        return &#39;Player switched&#39;
+        if self.curplayer is not None:
+            msg = (f&#34;It is {self.curplayer.name}&#39;s turn.&#34;)
+            print(msg)
+            print(&#34;Do you want to roll or hold?&#34;)
+            self.check_computer_turn()
 
     def check_computer_turn(self):
         &#34;&#34;&#34;Check if it is computers turn.&#34;&#34;&#34;
         if isinstance(self.curplayer, computer.Computer):
             sleep(1)
             self.computer_logic()
+            return &#34;Computer turn&#34;
+        return None
 
     def update_leaderboard(self, winner):
         &#34;&#34;&#34;Update leaderboard.&#34;&#34;&#34;
-        win = winner.get_name()
-        pl1 = self.curplayer.get_name()
-        pl2 = self.otherplayer.get_name()
+        win = winner.name
+        pl1 = self.curplayer.name
+        pl2 = self.otherplayer.name
         leaderboard.update_leaderboard(pl1, pl2, win)</code></pre>
 </details>
 <h3>Methods</h3>
@@ -381,10 +391,10 @@ class Game():
 <pre><code class="python">def cheat(self):
     &#34;&#34;&#34;Give the player 100 points to win the game.&#34;&#34;&#34;
     self.curplayer.add_score(100)
-    msg = (f&#34;{self.curplayer.get_name()}&#34;
+    msg = (f&#34;{self.curplayer.name}&#34;
            &#34; has gained 100 points from cheating!&#34;)
     print(msg)
-    self.check_winner_condition()
+    self.hold()
     return &#39;cheater&#39;</code></pre>
 </details>
 </dd>
@@ -401,7 +411,9 @@ class Game():
     &#34;&#34;&#34;Check if it is computers turn.&#34;&#34;&#34;
     if isinstance(self.curplayer, computer.Computer):
         sleep(1)
-        self.computer_logic()</code></pre>
+        self.computer_logic()
+        return &#34;Computer turn&#34;
+    return None</code></pre>
 </details>
 </dd>
 <dt id="Pig-Game.game.Game.check_winner_condition"><code class="name flex">
@@ -415,13 +427,14 @@ class Game():
 </summary>
 <pre><code class="python">def check_winner_condition(self):
     &#34;&#34;&#34;Check if the current player has 100 or more points.&#34;&#34;&#34;
-    if self.curplayer.get_score() &gt;= 100:
-        print(f&#34;Congratulations {self.curplayer.get_name()}, You won!&#34;)
+    if self.curplayer.score &gt;= 100:
+        print(f&#34;Congratulations {self.curplayer.name}, You won!&#34;)
+        print(&#34;Type &#39;restart&#39; to play again!&#34;)
         winner = self.curplayer
         self.update_leaderboard(winner)
         self.curplayer = None
         self.otherplayer = None
-        return winner
+        return winner.name
     return None</code></pre>
 </details>
 </dd>
@@ -437,6 +450,7 @@ class Game():
 <pre><code class="python">def choose_starter(self, player1, player2):
     &#34;&#34;&#34;Choose which player starts.&#34;&#34;&#34;
     select_player = random.randint(1, 2)
+    print(select_player)
     if select_player == 1:
         self.curplayer = player.Player(player1)
         self.otherplayer = player.Player(player2)
@@ -459,14 +473,15 @@ class Game():
 </summary>
 <pre><code class="python">def computer_logic(self):
     &#34;&#34;&#34;How the computer works.&#34;&#34;&#34;
-    intelligence = self.computer.get_intelligence()
-    greediness = self.computer.get_greediness()
-    rolls = self.computer.get_rolls()
+    intelligence = self.computer.intelligence
+    greediness = self.computer.greediness
+    rolls = self.computer.rolls
     if rolls == 0:
         self.computer.inc_rolls()
+        self.computer.dec_greediness()
         self.roll()
         return_msg = &#34;auto roll&#34;
-    elif self.computer.get_score() + self.dice_score &gt;= 100:
+    elif self.computer.score + self.dice_score &gt;= 100:
         self.hold()
         return_msg = &#34;calculated&#34;
     else:
@@ -496,14 +511,14 @@ class Game():
 <pre><code class="python">def hold(self):
     &#34;&#34;&#34;Hold and add the dice score to players total score.&#34;&#34;&#34;
     self.curplayer.add_score(self.dice_score)
-    msg = (f&#34;{self.curplayer.get_name()} decided to hold\n&#34;
-           f&#34;{self.curplayer.get_name()} received &#34;
+    msg = (f&#34;\n{self.curplayer.name} decided to hold\n&#34;
+           f&#34;{self.curplayer.name} received &#34;
            f&#34;{self.dice_score} points\n&#34;
-           f&#34;{self.curplayer.get_name()} now have &#34;
-           f&#34;{self.curplayer.get_score()} points in total!&#34;)
+           f&#34;{self.curplayer.name} now have &#34;
+           f&#34;{self.curplayer.score} points in total!\n&#34;)
     print(msg)
-    self.switch_player()
     self.check_winner_condition()
+    self.switch_player()
     return msg</code></pre>
 </details>
 </dd>
@@ -520,13 +535,13 @@ class Game():
     &#34;&#34;&#34;Player rolls a die and adds the number to the dice score.&#34;&#34;&#34;
     roll = self.die.roll()
     if roll != 1:
-        msg = (f&#34;{self.curplayer.get_name()} rolled a {roll}&#34;)
+        msg = (f&#34;{self.curplayer.name} rolled a {roll}&#34;)
         self.dice_score += roll
         print(msg)
         self.check_computer_turn()
     else:
-        msg = (f&#34;{self.curplayer.get_name()} rolled a 1 and &#34;
-               &#34;got 0 points this round!&#34;)
+        msg = (f&#34;\n{self.curplayer.name} rolled a 1 and &#34;
+               &#34;got 0 points this round!\n&#34;)
         print(msg)
         if isinstance(self.curplayer, computer.Computer):
             self.curplayer.reset_computer()
@@ -571,7 +586,7 @@ class Game():
             msg = (&#34;Choose either &#39;singleplayer&#39; or &#39;multiplayer&#39;&#34;)
             print(msg)
     print(f&#34;{msg}\n&#34;)
-    print(f&#34;{self.curplayer.get_name()} starts.&#34;)
+    print(f&#34;{self.curplayer.name} starts.&#34;)
     print(&#34;Do you want to roll or hold?&#34;)
     return msg</code></pre>
 </details>
@@ -589,11 +604,11 @@ class Game():
     &#34;&#34;&#34;Change player turn.&#34;&#34;&#34;
     self.curplayer, self.otherplayer = self.otherplayer, self.curplayer
     self.dice_score = 0
-    msg = (f&#34;It is {self.curplayer.get_name()}&#39;s turn.&#34;)
-    print(msg)
-    print(&#34;Do you want to roll or hold?&#34;)
-    self.check_computer_turn()
-    return &#39;Player switched&#39;</code></pre>
+    if self.curplayer is not None:
+        msg = (f&#34;It is {self.curplayer.name}&#39;s turn.&#34;)
+        print(msg)
+        print(&#34;Do you want to roll or hold?&#34;)
+        self.check_computer_turn()</code></pre>
 </details>
 </dd>
 <dt id="Pig-Game.game.Game.update_leaderboard"><code class="name flex">
@@ -607,9 +622,9 @@ class Game():
 </summary>
 <pre><code class="python">def update_leaderboard(self, winner):
     &#34;&#34;&#34;Update leaderboard.&#34;&#34;&#34;
-    win = winner.get_name()
-    pl1 = self.curplayer.get_name()
-    pl2 = self.otherplayer.get_name()
+    win = winner.name
+    pl1 = self.curplayer.name
+    pl2 = self.otherplayer.name
     leaderboard.update_leaderboard(pl1, pl2, win)</code></pre>
 </details>
 </dd>

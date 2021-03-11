@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
-<title>Pig-Game.Tests.game_test API documentation</title>
+<title>Pig-Game.game_test API documentation</title>
 <meta name="description" content="Unit test for the game logic." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>Pig-Game.Tests.game_test</code></h1>
+<h1 class="title">Module <code>Pig-Game.game_test</code></h1>
 </header>
 <section id="section-intro">
 <p>Unit test for the game logic.</p>
@@ -88,12 +88,12 @@ class TestGameClass(unittest.TestCase):
             the_game.start()
             mocked_randint.return_value = 1
             res = the_game.roll()
-            exp = (f&#34;{the_game.otherplayer.get_name()} rolled a 1 and &#34;
-                   &#34;got 0 points this round!&#34;)
+            exp = (f&#34;\n{the_game.otherplayer.name} rolled a 1 and &#34;
+                   &#34;got 0 points this round!\n&#34;)
             self.assertEqual(res, exp)
             mocked_randint.return_value = 5
             res = the_game.roll()
-            exp = (f&#34;{the_game.curplayer.get_name()} rolled a 5&#34;)
+            exp = (f&#34;{the_game.curplayer.name} rolled a 5&#34;)
             self.assertEqual(res, exp)
 
     def test_hold(self):
@@ -102,11 +102,11 @@ class TestGameClass(unittest.TestCase):
             the_game = game.Game()
             the_game.start()
             res = the_game.hold()
-            exp = (f&#34;{the_game.curplayer.get_name()} decided to hold\n&#34;
-                   f&#34;{the_game.curplayer.get_name()} received &#34;
+            exp = (f&#34;\n{the_game.curplayer.name} decided to hold\n&#34;
+                   f&#34;{the_game.curplayer.name} received &#34;
                    f&#34;{the_game.dice_score} points\n&#34;
-                   f&#34;{the_game.curplayer.get_name()} now have &#34;
-                   f&#34;{the_game.curplayer.get_score()} points in total!&#34;)
+                   f&#34;{the_game.curplayer.name} now have &#34;
+                   f&#34;{the_game.curplayer.score} points in total!\n&#34;)
             self.assertEqual(res, exp)
 
     def test_computer(self):
@@ -127,11 +127,7 @@ class TestGameClass(unittest.TestCase):
                 the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), &#34;rolled&#34;)
 
-            with mock.patch(&#39;random.randint&#39;, return_value=1):
-                the_game.computer.set_rolls(0)
-                self.assertEqual(the_game.computer_logic(), &#34;auto roll&#34;)
-
-            computer_int = the_game.computer.get_intelligence()
+            computer_int = the_game.computer.intelligence
             with mock.patch(&#39;random.randint&#39;, return_value=computer_int):
                 the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), &#34;hold&#34;)
@@ -162,7 +158,41 @@ class TestGameClass(unittest.TestCase):
         mocked_randint.return_value = 2
         res = the_game.choose_starter(player1, player2)
         exp = &#34;Player 2 starts&#34;
-        self.assertEqual(res, exp)</code></pre>
+        self.assertEqual(res, exp)
+
+    def test_check_winner(self):
+        &#34;&#34;&#34;Test checking for a winner.&#34;&#34;&#34;
+        the_game = game.Game()
+        with mock.patch(&#39;builtins.input&#39;, side_effect=[&#39;single&#39;, &#39;n1&#39;]):
+            the_game.start()
+            res = the_game.check_winner_condition()
+            self.assertIsNone(res)
+
+            the_game.curplayer.add_score(100)
+            res = the_game.check_winner_condition()
+            exp = &#34;n1&#34;
+            self.assertEqual(res, exp)
+
+    def test_switch_player(self):
+        &#34;&#34;&#34;Test switching player turn.&#34;&#34;&#34;
+        the_game = game.Game()
+
+        with mock.patch(&#39;builtins.input&#39;, side_effect=[&#39;multi&#39;, &#39;n1&#39;, &#39;n2&#39;]):
+            the_game.start()
+            second_player = the_game.otherplayer.name
+            the_game.switch_player()
+            res = second_player
+            exp = the_game.curplayer.name
+            self.assertEqual(res, exp)
+
+    def test_check_computer_turn(self):
+        &#34;&#34;&#34;Test checking if it is computers turn.&#34;&#34;&#34;
+        the_game = game.Game()
+
+        with mock.patch(&#39;builtins.input&#39;, side_effect=[&#39;single&#39;, &#39;n1&#39;]):
+            the_game.start()
+            res = the_game.check_computer_turn()
+            self.assertIsNone(res)</code></pre>
 </details>
 </section>
 <section>
@@ -174,7 +204,7 @@ class TestGameClass(unittest.TestCase):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="Pig-Game.Tests.game_test.TestGameClass"><code class="flex name class">
+<dt id="Pig-Game.game_test.TestGameClass"><code class="flex name class">
 <span>class <span class="ident">TestGameClass</span></span>
 <span>(</span><span>methodName='runTest')</span>
 </code></dt>
@@ -239,12 +269,12 @@ not have a method with the specified name.</p></div>
             the_game.start()
             mocked_randint.return_value = 1
             res = the_game.roll()
-            exp = (f&#34;{the_game.otherplayer.get_name()} rolled a 1 and &#34;
-                   &#34;got 0 points this round!&#34;)
+            exp = (f&#34;\n{the_game.otherplayer.name} rolled a 1 and &#34;
+                   &#34;got 0 points this round!\n&#34;)
             self.assertEqual(res, exp)
             mocked_randint.return_value = 5
             res = the_game.roll()
-            exp = (f&#34;{the_game.curplayer.get_name()} rolled a 5&#34;)
+            exp = (f&#34;{the_game.curplayer.name} rolled a 5&#34;)
             self.assertEqual(res, exp)
 
     def test_hold(self):
@@ -253,11 +283,11 @@ not have a method with the specified name.</p></div>
             the_game = game.Game()
             the_game.start()
             res = the_game.hold()
-            exp = (f&#34;{the_game.curplayer.get_name()} decided to hold\n&#34;
-                   f&#34;{the_game.curplayer.get_name()} received &#34;
+            exp = (f&#34;\n{the_game.curplayer.name} decided to hold\n&#34;
+                   f&#34;{the_game.curplayer.name} received &#34;
                    f&#34;{the_game.dice_score} points\n&#34;
-                   f&#34;{the_game.curplayer.get_name()} now have &#34;
-                   f&#34;{the_game.curplayer.get_score()} points in total!&#34;)
+                   f&#34;{the_game.curplayer.name} now have &#34;
+                   f&#34;{the_game.curplayer.score} points in total!\n&#34;)
             self.assertEqual(res, exp)
 
     def test_computer(self):
@@ -278,11 +308,7 @@ not have a method with the specified name.</p></div>
                 the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), &#34;rolled&#34;)
 
-            with mock.patch(&#39;random.randint&#39;, return_value=1):
-                the_game.computer.set_rolls(0)
-                self.assertEqual(the_game.computer_logic(), &#34;auto roll&#34;)
-
-            computer_int = the_game.computer.get_intelligence()
+            computer_int = the_game.computer.intelligence
             with mock.patch(&#39;random.randint&#39;, return_value=computer_int):
                 the_game.computer.inc_rolls()
                 self.assertEqual(the_game.computer_logic(), &#34;hold&#34;)
@@ -313,7 +339,41 @@ not have a method with the specified name.</p></div>
         mocked_randint.return_value = 2
         res = the_game.choose_starter(player1, player2)
         exp = &#34;Player 2 starts&#34;
-        self.assertEqual(res, exp)</code></pre>
+        self.assertEqual(res, exp)
+
+    def test_check_winner(self):
+        &#34;&#34;&#34;Test checking for a winner.&#34;&#34;&#34;
+        the_game = game.Game()
+        with mock.patch(&#39;builtins.input&#39;, side_effect=[&#39;single&#39;, &#39;n1&#39;]):
+            the_game.start()
+            res = the_game.check_winner_condition()
+            self.assertIsNone(res)
+
+            the_game.curplayer.add_score(100)
+            res = the_game.check_winner_condition()
+            exp = &#34;n1&#34;
+            self.assertEqual(res, exp)
+
+    def test_switch_player(self):
+        &#34;&#34;&#34;Test switching player turn.&#34;&#34;&#34;
+        the_game = game.Game()
+
+        with mock.patch(&#39;builtins.input&#39;, side_effect=[&#39;multi&#39;, &#39;n1&#39;, &#39;n2&#39;]):
+            the_game.start()
+            second_player = the_game.otherplayer.name
+            the_game.switch_player()
+            res = second_player
+            exp = the_game.curplayer.name
+            self.assertEqual(res, exp)
+
+    def test_check_computer_turn(self):
+        &#34;&#34;&#34;Test checking if it is computers turn.&#34;&#34;&#34;
+        the_game = game.Game()
+
+        with mock.patch(&#39;builtins.input&#39;, side_effect=[&#39;single&#39;, &#39;n1&#39;]):
+            the_game.start()
+            res = the_game.check_computer_turn()
+            self.assertIsNone(res)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -321,7 +381,7 @@ not have a method with the specified name.</p></div>
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="Pig-Game.Tests.game_test.TestGameClass.test_cheat"><code class="name flex">
+<dt id="Pig-Game.game_test.TestGameClass.test_cheat"><code class="name flex">
 <span>def <span class="ident">test_cheat</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -338,7 +398,49 @@ not have a method with the specified name.</p></div>
     self.assertEqual(the_game.cheat(), &#39;cheater&#39;)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.game_test.TestGameClass.test_choose_starter"><code class="name flex">
+<dt id="Pig-Game.game_test.TestGameClass.test_check_computer_turn"><code class="name flex">
+<span>def <span class="ident">test_check_computer_turn</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test checking if it is computers turn.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_check_computer_turn(self):
+    &#34;&#34;&#34;Test checking if it is computers turn.&#34;&#34;&#34;
+    the_game = game.Game()
+
+    with mock.patch(&#39;builtins.input&#39;, side_effect=[&#39;single&#39;, &#39;n1&#39;]):
+        the_game.start()
+        res = the_game.check_computer_turn()
+        self.assertIsNone(res)</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.game_test.TestGameClass.test_check_winner"><code class="name flex">
+<span>def <span class="ident">test_check_winner</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test checking for a winner.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_check_winner(self):
+    &#34;&#34;&#34;Test checking for a winner.&#34;&#34;&#34;
+    the_game = game.Game()
+    with mock.patch(&#39;builtins.input&#39;, side_effect=[&#39;single&#39;, &#39;n1&#39;]):
+        the_game.start()
+        res = the_game.check_winner_condition()
+        self.assertIsNone(res)
+
+        the_game.curplayer.add_score(100)
+        res = the_game.check_winner_condition()
+        exp = &#34;n1&#34;
+        self.assertEqual(res, exp)</code></pre>
+</details>
+</dd>
+<dt id="Pig-Game.game_test.TestGameClass.test_choose_starter"><code class="name flex">
 <span>def <span class="ident">test_choose_starter</span></span>(<span>self, mocked_randint)</span>
 </code></dt>
 <dd>
@@ -365,7 +467,7 @@ def test_choose_starter(self, mocked_randint):
     self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.game_test.TestGameClass.test_computer"><code class="name flex">
+<dt id="Pig-Game.game_test.TestGameClass.test_computer"><code class="name flex">
 <span>def <span class="ident">test_computer</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -396,11 +498,7 @@ Test if the computer calculated works.</p></div>
             the_game.computer.inc_rolls()
             self.assertEqual(the_game.computer_logic(), &#34;rolled&#34;)
 
-        with mock.patch(&#39;random.randint&#39;, return_value=1):
-            the_game.computer.set_rolls(0)
-            self.assertEqual(the_game.computer_logic(), &#34;auto roll&#34;)
-
-        computer_int = the_game.computer.get_intelligence()
+        computer_int = the_game.computer.intelligence
         with mock.patch(&#39;random.randint&#39;, return_value=computer_int):
             the_game.computer.inc_rolls()
             self.assertEqual(the_game.computer_logic(), &#34;hold&#34;)
@@ -410,7 +508,7 @@ Test if the computer calculated works.</p></div>
         self.assertEqual(the_game.computer_logic(), &#34;calculated&#34;)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.game_test.TestGameClass.test_hold"><code class="name flex">
+<dt id="Pig-Game.game_test.TestGameClass.test_hold"><code class="name flex">
 <span>def <span class="ident">test_hold</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -425,15 +523,15 @@ Test if the computer calculated works.</p></div>
         the_game = game.Game()
         the_game.start()
         res = the_game.hold()
-        exp = (f&#34;{the_game.curplayer.get_name()} decided to hold\n&#34;
-               f&#34;{the_game.curplayer.get_name()} received &#34;
+        exp = (f&#34;\n{the_game.curplayer.name} decided to hold\n&#34;
+               f&#34;{the_game.curplayer.name} received &#34;
                f&#34;{the_game.dice_score} points\n&#34;
-               f&#34;{the_game.curplayer.get_name()} now have &#34;
-               f&#34;{the_game.curplayer.get_score()} points in total!&#34;)
+               f&#34;{the_game.curplayer.name} now have &#34;
+               f&#34;{the_game.curplayer.score} points in total!\n&#34;)
         self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.game_test.TestGameClass.test_init_default_object"><code class="name flex">
+<dt id="Pig-Game.game_test.TestGameClass.test_init_default_object"><code class="name flex">
 <span>def <span class="ident">test_init_default_object</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -449,7 +547,7 @@ Test if the computer calculated works.</p></div>
     self.assertIsInstance(the_game, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.game_test.TestGameClass.test_roll"><code class="name flex">
+<dt id="Pig-Game.game_test.TestGameClass.test_roll"><code class="name flex">
 <span>def <span class="ident">test_roll</span></span>(<span>self, mocked_randint)</span>
 </code></dt>
 <dd>
@@ -472,16 +570,16 @@ def test_roll(self, mocked_randint):
         the_game.start()
         mocked_randint.return_value = 1
         res = the_game.roll()
-        exp = (f&#34;{the_game.otherplayer.get_name()} rolled a 1 and &#34;
-               &#34;got 0 points this round!&#34;)
+        exp = (f&#34;\n{the_game.otherplayer.name} rolled a 1 and &#34;
+               &#34;got 0 points this round!\n&#34;)
         self.assertEqual(res, exp)
         mocked_randint.return_value = 5
         res = the_game.roll()
-        exp = (f&#34;{the_game.curplayer.get_name()} rolled a 5&#34;)
+        exp = (f&#34;{the_game.curplayer.name} rolled a 5&#34;)
         self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
-<dt id="Pig-Game.Tests.game_test.TestGameClass.test_start"><code class="name flex">
+<dt id="Pig-Game.game_test.TestGameClass.test_start"><code class="name flex">
 <span>def <span class="ident">test_start</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -528,6 +626,28 @@ tries to name themselves the same as player1.</p></div>
         self.assertEqual(res, exp)</code></pre>
 </details>
 </dd>
+<dt id="Pig-Game.game_test.TestGameClass.test_switch_player"><code class="name flex">
+<span>def <span class="ident">test_switch_player</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Test switching player turn.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_switch_player(self):
+    &#34;&#34;&#34;Test switching player turn.&#34;&#34;&#34;
+    the_game = game.Game()
+
+    with mock.patch(&#39;builtins.input&#39;, side_effect=[&#39;multi&#39;, &#39;n1&#39;, &#39;n2&#39;]):
+        the_game.start()
+        second_player = the_game.otherplayer.name
+        the_game.switch_player()
+        res = second_player
+        exp = the_game.curplayer.name
+        self.assertEqual(res, exp)</code></pre>
+</details>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -541,21 +661,24 @@ tries to name themselves the same as player1.</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="Pig-Game.Tests" href="index.html">Pig-Game.Tests</a></code></li>
+<li><code><a title="Pig-Game" href="index.html">Pig-Game</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="Pig-Game.Tests.game_test.TestGameClass" href="#Pig-Game.Tests.game_test.TestGameClass">TestGameClass</a></code></h4>
+<h4><code><a title="Pig-Game.game_test.TestGameClass" href="#Pig-Game.game_test.TestGameClass">TestGameClass</a></code></h4>
 <ul class="">
-<li><code><a title="Pig-Game.Tests.game_test.TestGameClass.test_cheat" href="#Pig-Game.Tests.game_test.TestGameClass.test_cheat">test_cheat</a></code></li>
-<li><code><a title="Pig-Game.Tests.game_test.TestGameClass.test_choose_starter" href="#Pig-Game.Tests.game_test.TestGameClass.test_choose_starter">test_choose_starter</a></code></li>
-<li><code><a title="Pig-Game.Tests.game_test.TestGameClass.test_computer" href="#Pig-Game.Tests.game_test.TestGameClass.test_computer">test_computer</a></code></li>
-<li><code><a title="Pig-Game.Tests.game_test.TestGameClass.test_hold" href="#Pig-Game.Tests.game_test.TestGameClass.test_hold">test_hold</a></code></li>
-<li><code><a title="Pig-Game.Tests.game_test.TestGameClass.test_init_default_object" href="#Pig-Game.Tests.game_test.TestGameClass.test_init_default_object">test_init_default_object</a></code></li>
-<li><code><a title="Pig-Game.Tests.game_test.TestGameClass.test_roll" href="#Pig-Game.Tests.game_test.TestGameClass.test_roll">test_roll</a></code></li>
-<li><code><a title="Pig-Game.Tests.game_test.TestGameClass.test_start" href="#Pig-Game.Tests.game_test.TestGameClass.test_start">test_start</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_cheat" href="#Pig-Game.game_test.TestGameClass.test_cheat">test_cheat</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_check_computer_turn" href="#Pig-Game.game_test.TestGameClass.test_check_computer_turn">test_check_computer_turn</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_check_winner" href="#Pig-Game.game_test.TestGameClass.test_check_winner">test_check_winner</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_choose_starter" href="#Pig-Game.game_test.TestGameClass.test_choose_starter">test_choose_starter</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_computer" href="#Pig-Game.game_test.TestGameClass.test_computer">test_computer</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_hold" href="#Pig-Game.game_test.TestGameClass.test_hold">test_hold</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_init_default_object" href="#Pig-Game.game_test.TestGameClass.test_init_default_object">test_init_default_object</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_roll" href="#Pig-Game.game_test.TestGameClass.test_roll">test_roll</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_start" href="#Pig-Game.game_test.TestGameClass.test_start">test_start</a></code></li>
+<li><code><a title="Pig-Game.game_test.TestGameClass.test_switch_player" href="#Pig-Game.game_test.TestGameClass.test_switch_player">test_switch_player</a></code></li>
 </ul>
 </li>
 </ul>
