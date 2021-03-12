@@ -83,10 +83,10 @@ class TestGameClass(unittest.TestCase):
     def test_computer(self):
         """Test Computer Logic.
 
-        Test if the computer auto roll works.
-        Test if the computer normal roll works.
-        Test if the computer hold works.
-        Test if the computer calculated works.
+        Test if the computer auto roll works as intended.
+        Test if the computer normal roll works as intended.
+        Test if the computer hold works as intended.
+        Test if the computer calculated works as intended.
         """
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['single', 'n1']):
@@ -112,7 +112,9 @@ class TestGameClass(unittest.TestCase):
         the_game = game.Game()
         with mock.patch('builtins.input', side_effect=['single', 'n1']):
             the_game.start()
-        self.assertEqual(the_game.cheat(), 'cheater')
+            the_game.cheat()
+            res = the_game.curplayer.score == 100
+        self.assertTrue(res)
 
     @patch('random.randint')
     def test_choose_starter(self, mocked_randint):

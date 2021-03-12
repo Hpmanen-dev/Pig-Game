@@ -98,11 +98,10 @@ class Game():
     def cheat(self):
         """Give the player 100 points to win the game."""
         self.curplayer.add_score(100)
-        msg = (f"{self.curplayer.name}"
-               " has gained 100 points from cheating!")
+        msg = (f"\n{self.curplayer.name}"
+               " has gained 100 points from cheating!"
+               " Type 'hold' to win the game.\n")
         print(msg)
-        self.hold()
-        return 'cheater'
 
     def check_winner_condition(self):
         """Check if the current player has 100 or more points."""
