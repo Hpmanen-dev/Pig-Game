@@ -31,7 +31,6 @@ def update_leaderboard(player1, player2, winner):
                         for line1 in lines:
                             file1.write(line1)
             count += 1
-    return 'Updated'
 
 
 def add_new_user(name, winner):
@@ -43,7 +42,6 @@ def add_new_user(name, winner):
             file.write("Wins: 1\n")
         else:
             file.write("Wins: 0\n")
-        return 'done'
 
 
 def show_leaderboard():
