@@ -1,5 +1,13 @@
 # Pig Game Release Notes
 
+## v1.1
+2021-03-12
+
+* Many bugfixes
+* Added HTML for UML
+* Updated Makefile
+* Ready for submission yay!!! :^)
+
 ## v1.0
 2021-03-11
 
