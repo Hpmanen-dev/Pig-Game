@@ -34,13 +34,6 @@ class TestComputerClass(unittest.TestCase):
         exp = 10
         self.assertEqual(res, exp)
 
-    def test_rolls(self):
-        """Test if computer rolls correctly."""
-        computer1 = computer.Computer(1)
-        res = computer1.rolls
-        exp = 0
-        self.assertEqual(res, exp)
-
     def test_get_intelligence(self):
         """Test computers intelligence."""
         computer1 = computer.Computer(1)
@@ -68,6 +61,21 @@ class TestComputerClass(unittest.TestCase):
         exp = 7
         self.assertEqual(res, exp)
 
+    def test_dec_greediness(self):
+        """Test if decreasing greediness works correctly."""
+        computer1 = computer.Computer(1)
+        computer1.dec_greediness()
+        res = computer1.greediness
+        exp = 6
+        self.assertEqual(res, exp)
+
+    def test_rolls(self):
+        """Test if computer rolls correctly."""
+        computer1 = computer.Computer(1)
+        res = computer1.rolls
+        exp = 0
+        self.assertEqual(res, exp)
+
     def test_set_rolls(self):
         """Test if computers rolls is set correctly."""
         computer1 = computer.Computer(1)
@@ -76,3 +84,18 @@ class TestComputerClass(unittest.TestCase):
         res = computer1.rolls
         exp = 5
         self.assertEqual(res, exp)
+
+    def test_inc_rolls(self):
+        """Test if computer increase rolls works correctly."""
+        computer1 = computer.Computer(1)
+        computer1.inc_rolls()
+        res = computer1.rolls
+        exp = 1
+        self.assertEqual(res, exp)
+
+    def test_reset_computer(self):
+        """Test if computer reset works correctly."""
+        computer1 = computer.Computer(1)
+        computer1.reset_computer()
+        res = computer1.greediness == 7 and computer1.rolls == 0
+        self.assertTrue(res)
