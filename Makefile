@@ -51,18 +51,7 @@ flake8:
 
 pydoc:
 	install -d doc/pydoc
-	$(PYTHON) -m pydoc -w game
-	$(PYTHON) -m pydoc -w player
-	$(PYTHON) -m pydoc -w dice
-	$(PYTHON) -m pydoc -w computer
-	$(PYTHON) -m pydoc -w leaderboard
-	$(PYTHON) -m pydoc -w game_test
-	$(PYTHON) -m pydoc -w player_test
-	$(PYTHON) -m pydoc -w dice_test
-	$(PYTHON) -m pydoc -w computer_test
-	$(PYTHON) -m pydoc -w leaderboard_test
-	$(PYTHON) -m pydoc -w commands
-	$(PYTHON) -m pydoc -w main
+	$(PYTHON) -m pydoc -w game player dice computer leaderboard game_test player_test dice_test computer_test leaderboard_test commands main
 	mv *.html doc/pydoc
 
 pdoc:
@@ -73,7 +62,7 @@ doc: pdoc uml pydoc #pydoc sphinx
 
 uml:
 	install -d doc/uml
-	pyreverse *.py
+	pyreverse game.py dice.py player.py leaderboard.py computer.py commands.py
 	dot -Tpng classes.dot -o doc/uml/classes.png
 	dot -Tpng packages.dot -o doc/uml/packages.png
 	rm -f classes.dot packages.dot
