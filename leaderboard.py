@@ -35,17 +35,17 @@ def update_leaderboard(player1, player2, winner):
 
 def add_new_user(name, winner):
     """Add new user to leaderboard."""
-    with open('log.txt', 'a+') as test:
-        test.seek(0)
-        lol = []
-        lol.append(f"Name: {name}")
-        lol.append("\nGames: 1\n")
+    with open('log.txt', 'a+') as file:
+        file.seek(0)
+        new_lines = []
+        new_lines.append(f"Name: {name}")
+        new_lines.append("\nGames: 1\n")
         if name == winner:
-            lol.append("Wins: 1\n")
+            new_lines.append("Wins: 1\n")
         else:
-            lol.append("Wins: 0\n")
-        test.close()
-        return lol
+            new_lines.append("Wins: 0\n")
+        file.close()
+        return new_lines
 
 
 def show_leaderboard():

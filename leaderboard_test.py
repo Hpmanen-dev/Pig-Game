@@ -37,23 +37,21 @@ class TestDiceClass(unittest.TestCase):
         """Test adding a new user to leaderboard."""
         leaderboard.reset_leaderboard()
 
-        leaderboard.add_new_user("n1", "n2")
-        with open("log.txt", "r") as file:
-            lines = file.readlines()
-            check1 = lines[0] == "Name: n1\n"
-            check2 = lines[1] == "Games: 1\n"
-            check3 = lines[2] == "Wins: 0\n"
+        lines = leaderboard.add_new_user("n1", "n2")
+        print(lines)
+        check1 = lines[0] == "Name: n1"
+        check2 = lines[1] == "\nGames: 1\n"
+        check3 = lines[2] == "Wins: 0\n"
 
         exp = check1 is True and check2 is True and check3 is True
 
         self.assertTrue(exp)
 
-        leaderboard.add_new_user("n2", "n2")
-        with open("log.txt", "r") as file:
-            lines = file.readlines()
-            check1 = lines[3] == "Name: n2\n"
-            check2 = lines[4] == "Games: 1\n"
-            check3 = lines[5] == "Wins: 1\n"
+        lines = leaderboard.add_new_user("n2", "n2")
+        print(lines)
+        check1 = lines[0] == "Name: n2"
+        check2 = lines[1] == "\nGames: 1\n"
+        check3 = lines[2] == "Wins: 1\n"
 
         exp = check1 is True and check2 is True and check3 is True
 
