@@ -49,8 +49,6 @@ class TestDiceClass(unittest.TestCase):
         self.assertTrue(exp)
 
         leaderboard.add_new_user("n2", "n2")
-
-        leaderboard.add_new_user("n1", "n2")
         with open("log.txt", "r") as file:
             lines = file.readlines()
             check1 = lines[3] == "Name: n2\n"
