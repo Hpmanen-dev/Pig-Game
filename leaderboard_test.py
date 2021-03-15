@@ -4,8 +4,8 @@ import os
 import leaderboard
 
 
-class TestDiceClass(unittest.TestCase):
-    """Test game class."""
+class TestLeaderboardModule(unittest.TestCase):
+    """Test Leaderboard module."""
 
     def test_update_leaderboard(self):
         """Test update the leaderboard."""

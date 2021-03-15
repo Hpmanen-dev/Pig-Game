@@ -4,7 +4,7 @@ import dice
 
 
 class TestDiceClass(unittest.TestCase):
-    """Test game class."""
+    """Test Dice class."""
 
     def test_init(self):
         """Test initiating the die."""
